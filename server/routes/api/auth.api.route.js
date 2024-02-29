@@ -16,7 +16,6 @@ router.post('/reg', async (req, res) => {
       user = await User.create({
         name, email, password: hash, score,
       });
-      console.log(user);
       const userForSend = {
         id: user.id, name, email, score,
       };
