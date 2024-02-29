@@ -10,3 +10,8 @@
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+.disabled {
+  pointer-events: none;
+  background-color:  #568c9cb8;;
+}
