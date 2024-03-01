@@ -22,7 +22,7 @@ export const checkFetch = async (): Promise<{ user: UserAndId | null }> => {
   return data
 }
 
-export const logFetch = async (obj: UserWithoutName): Promise<{ message: string, user: UserAndId }> => {
+export const logFetch = async (obj: UserWithoutName): Promise<UserAndId> => {
   const res = await fetch('/api/auth/log', {
     method: 'POST',
     headers: {
@@ -30,6 +30,10 @@ export const logFetch = async (obj: UserWithoutName): Promise<{ message: string,
     },
     body: JSON.stringify(obj)
   })
-  const data = await res.json()
-  return data
+  if (res.ok) {
+    const data = await res.json()
+    return data.user
+  }
+  const { message } = await res.json()
+  throw message
 }

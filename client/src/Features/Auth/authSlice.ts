@@ -36,7 +36,7 @@ const authSlice = createSlice({
         state.message = action.error.message
       })
       .addCase(authLogin.fulfilled, (state, action) => {
-        state.user = action.payload.user
+        state.user = action.payload
         state.message = ''
       })
       .addCase(authLogin.rejected, (state, action) => {
