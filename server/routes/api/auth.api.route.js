@@ -4,7 +4,7 @@ const { User } = require('../../db/models');
 const { generateTokens } = require('../../utils/authUtils');
 const cookieConfig = require('../../config/cookiesConfig');
 
-router.post('/reg', async (req, res) => {
+router.post('/registration', async (req, res) => {
   const {
     name, email, password, score,
   } = req.body;
@@ -84,6 +84,15 @@ router.get('/out', async (req, res) => {
     .clearCookie(cookieConfig.access)
     .clearCookie(cookieConfig.refresh);
   res.status(200).json({ message: 'ok', user: null });
+});
+
+router.get('/check', async (req, res) => {
+  if (res.locals.user) {
+    const user = await User.findOne({ where: { id: res.locals.user.id }, attributes: { exclude: ['password'] } });
+    res.json({ user });
+    return;
+  }
+  res.json({ user: null });
 });
 
 router.get('/user', async (req, res) => {

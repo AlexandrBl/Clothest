@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Route, Routes } from 'react-router-dom'
 import Main from '../Features/Main/components/Main'
 import MainPage from '../Features/Main/components/MainPage'
@@ -12,6 +13,7 @@ function App (): JSX.Element {
         </Route>
       </Routes>
     </div>
+
   )
 }
 
