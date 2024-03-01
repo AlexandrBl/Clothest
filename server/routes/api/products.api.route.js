@@ -1,6 +1,5 @@
 const router = require('express').Router();
 
-
 const { Category, Product, ProductImage } = require('../../db/models');
 
 router.get('/', async (req, res) => {
@@ -9,8 +8,8 @@ router.get('/', async (req, res) => {
     res.json(products);
   } catch ({ message }) {
     res.json({ message });
-
-
+  }
+});
 
 router.post('/', async (req, res) => {
   try {
@@ -40,7 +39,6 @@ router.post('/', async (req, res) => {
     res.status(201).json({ message: 'Confirm', product, productImg });
   } catch ({ message }) {
     res.status(500).json({ message });
-
   }
 });
 
