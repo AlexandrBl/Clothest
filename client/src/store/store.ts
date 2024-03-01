@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
+import productSlice from '../Features/Products/productSlice'
 // import authSlice from '../features/Auth/authSlice';
 // import booksSlice from '../features/Books/booksSlice';
 
@@ -8,6 +9,7 @@ const store = configureStore({
   reducer: {
   //  auth:authSlice,
   //  books:booksSlice
+    products: productSlice
   }
 })
 
