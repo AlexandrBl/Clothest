@@ -1,5 +1,110 @@
+@property --x{
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+@property --y{
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+@property --a{
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+@property --b{
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
 html {
   font-size: 1.2vw;
+  height: 100vh;
+  animation:gradient 100s infinite;
+  background:radial-gradient(circle at var(--x) var(--y), $pink_color,  $beige_color)
+}
+
+@keyframes gradient {
+  0%{
+    --x: 0%;
+    --y:0%;
+    --a:100%;
+    --b:100%;
+  }
+
+  10% {
+    --x: 15%;
+    --y:90%;
+    --a:43%;
+    --b:64%;
+  }
+
+  20%{
+    --x: 50%;
+    --y:35%;
+    --a:90%;
+    --b:33%;
+  }
+
+  30% {
+    --x: 31%;
+    --y:17%;
+    --a:37%;
+    --b:0%;
+  }
+
+  40% {
+    --x: 15%;
+    --y:63%;
+    --a:54%;
+    --b:72%;
+  }
+
+  50% {
+    --x: 47%;
+    --y:47%;
+    --a:24%;
+    --b:86%;
+  }
+
+  60% {
+    --x: 14%;
+    --y:6%;
+    --a:88%;
+    --b:66%;
+  }
+  70%{
+    --x: 71%;
+    --y:28%;
+    --a:1%;
+    --b:80%;
+  }
+  80%{
+    --x: 53%;
+    --y:100%;
+    --a:62%;
+    --b:84%;
+  }
+  90%{
+    --x: 98%;
+    --y:30%;
+    --a:81%;
+    --b:23%;
+  }
+  100%{
+    --x: 0%;
+    --y:0%;
+    --a:100%;
+    --b:100%;
+  }
+}
+
+body{ 
+  // height: 100vh;
+  // animation:gradient 100s infinite;
+  // background:radial-gradient(circle at var(--a) var(--b), $dark-blue-opacity_color,  $red-opacity)
 }
 
 .visually-hidden {
