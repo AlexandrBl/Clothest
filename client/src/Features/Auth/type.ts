@@ -1,15 +1,16 @@
-// export type User={
-//   name:string;
-//   email:string;
-//   password:string;
-//   cpassword:string
-// }
+export interface User {
+  name: string
+  email: string
+  password: string
+}
 
-// export type UserAndId  = User & {id:number}
+export type UserAndCpassword = User & { cpassword: string }
 
+export type UserAndId = User & { id: number }
 
+export type UserWithoutName = Omit<User, 'name'>
 
-// export type StateAuth={
-//   user:null | User;
-//   message:string | undefined
-// }
+export interface StateAuth {
+  user: null | User
+  message: string | undefined
+}

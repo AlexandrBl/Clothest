@@ -1,10 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-function App(): JSX.Element {
-
+function App (): JSX.Element {
   return (
     <div className="App" />
-  );
+  )
 }
 
-export default App;
+export default App
