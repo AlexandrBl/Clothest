@@ -49,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     userpic: {
       allowNull: false,
       type: DataTypes.TEXT,
+      defaultValue: '/img/placeholder.jpeg',
     },
     createdAt: {
       allowNull: false,

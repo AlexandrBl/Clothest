@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
+import authSlice from '../Features/Auth/authSlice'
 // import authSlice from '../features/Auth/authSlice';
 // import booksSlice from '../features/Books/booksSlice';
 
 const store = configureStore({
   // теперь функция combineReducers не нужна
   reducer: {
-  //  auth:authSlice,
+    auth: authSlice
   //  books:booksSlice
   }
 })
