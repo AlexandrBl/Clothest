@@ -10,6 +10,8 @@ router.get('/', async (req, res) => {
       include: [
         { model: User, include: { model: City } },
       ],
+      // offset: 1,
+      // limit: 1,
     });
     res.json(products);
   } catch ({ message }) {

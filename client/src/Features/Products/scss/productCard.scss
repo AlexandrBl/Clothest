@@ -1,7 +1,11 @@
+.product-card-container{
+  padding: 1rem;
+}
+
 .product-card{
   width: 15rem;
   height: 22rem;
-  margin: 0 0 5rem 0;
+  margin: 0rem 0 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,9 +13,9 @@
   border-radius: 1rem;
   overflow: hidden;
   background-color: $dark-blue-opacity_color;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   flex-shrink: 0;
-  margin-left: 3.32rem;
+  // margin-left: 3.32rem;
 }
 
 .product-card__city {

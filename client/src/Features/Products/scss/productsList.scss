@@ -1,12 +1,17 @@
 .products__list{
   align-items: center;
   display: flex;
-  flex-wrap: nowrap;
-  //  justify-content: space-between;
- width: inherit;
- height: 30rem;
- overflow-x: auto;
- scroll-snap-type: x mandatory;
- border-radius: 1rem;
- height: calc(100vh - 6rem);
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  border-radius: 1rem;
+  height: 24rem;
+}
+
+.products-container{
+  display: flex;
+  align-items: center;
+height: calc(100vh - 6rem);
 }
