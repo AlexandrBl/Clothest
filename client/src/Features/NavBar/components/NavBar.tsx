@@ -29,7 +29,7 @@ function NavBar (): JSX.Element {
             </button>
         </li>
           : <li className="nav__item">
-          <NavLink to={'/auth/out'} className={'nav__link link'}>
+          <NavLink to={'/auth'} className={'nav__link link'}>
 
             AUTH
 

@@ -2,7 +2,6 @@
 html {
   font-size: 1.2vw;
   height: 100vh;
-  // background-color: $blue_color;gi
 }
 
 .visually-hidden {
@@ -27,10 +26,18 @@ a {
   color: inherit;
 }
 
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+}
+
 .center-container {
   width: 70rem;
-  border: 1px solid black;
+  height: auto;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .disabled {
@@ -38,3 +45,17 @@ a {
   background-color:  #568c9cb8;;
 }
 
+::-webkit-scrollbar{
+  height: 0.3rem;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track{
+  border-radius: 2rem;
+  background-color: rgb(0, 0, 0,0.1);
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius: 2rem;
+  background-color: $peach_color;
+}

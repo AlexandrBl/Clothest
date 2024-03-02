@@ -10,7 +10,6 @@ import { useAppDispatch } from '../store/store'
 import AddProductPage from '../Features/AddProduct/components/AddProductPage'
 import IncorrectPage from '../Features/Incorrect/components/IncorrectPage'
 
-
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
   useEffect(() => {

@@ -6,8 +6,9 @@ import { object, ref, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 // import * as api from '../api'
 import { useAppDispatch, type RootState } from '../../../store/store'
-import type { UserAndCpassword} from '../type'
+import type { UserAndCpassword } from '../type'
 import { authRegistration } from '../authSlice'
+import { useNavigate } from 'react-router-dom'
 
 const schema = object().shape({
   name: string().required('Необходимо указать имя'),
@@ -24,6 +25,7 @@ const schema = object().shape({
 })
 
 function RegLog (): JSX.Element {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const message = useSelector((store: RootState) => store.auth.message)
 
@@ -37,6 +39,9 @@ function RegLog (): JSX.Element {
 
   const registration: SubmitHandler<UserAndCpassword> = (data: UserAndCpassword) => {
     dispatch(authRegistration(data)).catch(console.log)
+    if (data !== null) {
+      navigate('/')
+    }
   }
 
   return (

@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { object, ref, string } from 'yup'
 import Log from './Log'
 import Reg from './Reg'
-// import * as api from '../api'
-
 
 const schema = object().shape({
   name: string().required('Необходимо указать имя'),
@@ -30,12 +28,10 @@ function RegLog (): JSX.Element {
  <button onClick={() => { setLogReg(false) }} className={logReg ? '' : 'disabled'} type='button' >log</button>
 
 { logReg &&
-     <Reg></Reg>}
+     <Reg/>}
 
 { !logReg &&
-<Log></Log>
-
-}
+<Log/>}
       </div>
       </div>
 
