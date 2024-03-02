@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { StateProducts } from './type'
 import * as api from './api'
 import { addProductFetch } from '../AddProduct/api'
-import { type Product } from '../AddProduct/type'
 
 const initialState: StateProducts = { products: [], message: '' }
 
@@ -13,7 +12,7 @@ export const initProducts = createAsyncThunk(
 
 export const addProduct = createAsyncThunk(
   'product/add',
-  async (obj: Product) => await addProductFetch(obj)
+  async (obj: FormData) => await addProductFetch(obj)
 )
 
 const productsSlice = createSlice({
@@ -29,7 +28,7 @@ const productsSlice = createSlice({
         state.message = action.error.message
       })
       .addCase(addProduct.fulfilled, (state, action) => {
-        state.message = action.payload.title
+        state.message = action.payload.message
       })
       .addCase(addProduct.rejected, (state, action) => {
         state.message = action.error.message

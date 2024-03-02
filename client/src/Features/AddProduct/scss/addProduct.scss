@@ -1,0 +1,15 @@
+.addProduct-container__form {
+    display: flex;
+    width: 70rem;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.addProduct-container__form>* {
+    width: 50%;
+    height: 3rem;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    border: none;
+}
