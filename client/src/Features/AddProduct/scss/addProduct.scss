@@ -13,3 +13,22 @@
     padding-left: 1rem;
     border: none;
 }
+
+.dropzone {
+    padding: 2rem;
+    background-color: rgba(255, 252, 186, 0.51);
+    display: flex;
+    align-items: center;
+    transition: 1s;
+}
+
+.dropzone:hover {
+    scale: 1.02;
+    background-color: rgba(248, 124, 255, 0.51);
+}
+
+.drag-n-drop-p {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
