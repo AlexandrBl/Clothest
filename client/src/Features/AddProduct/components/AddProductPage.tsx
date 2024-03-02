@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form'
 import { object, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { type Product } from '../type'
-import { addProductFetch } from '../api'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
+import { addProduct } from '../../Products/productSlice'
 
 const schema = object().shape({
   title: string().required('Необходимо указать название')
@@ -30,13 +30,14 @@ function AddProductPage (): JSX.Element {
     resolver: yupResolver(schema)
   })
 
-  const addProduct: SubmitHandler<Product> = (data: Product) => {
-    dispatch(addProductFetch(data)).catch(console.log)
+  const productPost: SubmitHandler<Product> = (data: Product) => {
+    dispatch(addProduct(data))
+      .catch(console.log)
   }
 
   return (
     <div className='center-container'>
-      <form onSubmit={handleSubmit(addProduct)}>
+      <form onSubmit={handleSubmit(productPost)}>
         <input type="text" placeholder='Название' {...register('title')}/>
         <input type="text" placeholder='Описание' {...register('description')} />
         <input type="text" placeholder='Категория' {...register('category')} />
