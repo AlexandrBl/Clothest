@@ -27,12 +27,6 @@ const productsSlice = createSlice({
       .addCase(initProducts.rejected, (state, action) => {
         state.message = action.error.message
       })
-      .addCase(initProducts.fulfilled, (state, action) => {
-        state.products = action.payload
-      })
-      .addCase(initProducts.rejected, (state, action) => {
-        state.message = action.error.message
-      })
   }
 })
 

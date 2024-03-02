@@ -10,7 +10,7 @@ function ProductsList (): JSX.Element {
 
   useEffect(() => {
     dispatch(initProducts()).catch(console.log)
-  })
+  }, [])
 
   const products = useSelector((store: RootState) => store.products.products)
   return (
