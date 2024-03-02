@@ -19,12 +19,14 @@
     background-color: rgba(255, 252, 186, 0.51);
     display: flex;
     align-items: center;
+    border-style: dashed;
+    color: #a7a7a7;
+    outline: none;
     transition: 1s;
 }
 
 .dropzone:hover {
-    scale: 1.02;
-    background-color: rgba(248, 124, 255, 0.51);
+    background-color: rgba(251, 177, 255, 0.264);
 }
 
 .drag-n-drop-p {
