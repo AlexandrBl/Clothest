@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { type Product } from '../type'
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
-  console.log(product)
   const [sellerRate, setSellerRate] = useState('')
 
   useEffect(() => {
@@ -10,6 +9,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
   }, [])
   return (
     <>
+    <div className="product-card-container">
     <div className="product-card">
       <p className="product-card__city">{product.User.City.name}</p>
       <div className="pic-container">
@@ -32,6 +32,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
         </div>
         </div>
       </div>
+    </div>
     </div>
     </>
 

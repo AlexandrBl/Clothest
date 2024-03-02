@@ -5,6 +5,13 @@ import { addProductFetch } from '../AddProduct/api'
 
 const initialState: StateProducts = { products: [], message: '' }
 
+// export const fetchProductData = async (pageNum: number): Promise<AsyncThunk<Product[], number, any>> => {
+//   return createAsyncThunk(
+//     'products/init',
+//     async () => await api.initProductsFetch(pageNum)
+//   )
+// }
+
 export const initProducts = createAsyncThunk(
   'products/init',
   async () => await api.initProductsFetch()
