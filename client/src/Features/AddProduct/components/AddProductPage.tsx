@@ -48,7 +48,7 @@ function AddProductPage (): JSX.Element {
         {errors.images && <span>{errors.images.message}</span>}
 
         <span>{message}</span>
-        <button type='button'>Добавить</button>
+        <button type='submit'>Добавить</button>
       </form>
     </div>
   )
