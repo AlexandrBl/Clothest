@@ -2,13 +2,7 @@
 @import './_reset.scss';
 @import './_common.scss';
 @import './_background.scss';
-@import '../Features/Main/scss/header.scss'
-// @import './blocks/_header.scss';
-// @import './blocks/_post-header.scss';
-// @import './blocks/_intro.scss';
-// @import './blocks/_stock.scss';
-// @import './blocks/_advantages.scss';
-// @import './blocks/_featured.scss';
-// @import './blocks/_subscribe.scss';
-// @import './blocks/_registration.scss';
-// @import './blocks/_copyright.scss';
+@import '../Features/Main/scss/header.scss';
+@import '../Features/Products/scss/productsList.scss';
+@import '../Features/Products/scss/productCard.scss';
+

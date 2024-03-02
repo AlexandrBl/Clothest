@@ -1,0 +1,12 @@
+.products__list{
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  //  justify-content: space-between;
+ width: inherit;
+ height: 30rem;
+ overflow-x: auto;
+ scroll-snap-type: x mandatory;
+ border-radius: 1rem;
+ height: calc(100vh - 6rem);
+}

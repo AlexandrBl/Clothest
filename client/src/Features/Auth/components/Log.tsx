@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import type { UserWithoutName } from '../type'
 import { authLogin } from '../authSlice'
+import { useNavigate } from 'react-router-dom'
 
 const schema = object().shape({
   email: string().required('Необходимо указать электронную почту'),
@@ -16,6 +17,7 @@ const schema = object().shape({
 })
 
 function RegLog (): JSX.Element {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const message = useSelector((store: RootState) => store.auth.message)
 
@@ -29,6 +31,10 @@ function RegLog (): JSX.Element {
 
   const login: SubmitHandler<UserWithoutName> = (data: UserWithoutName) => {
     dispatch(authLogin(data)).catch(console.log)
+
+    if (data !== null) {
+      navigate('/')
+    }
   }
 
   return (
