@@ -4,29 +4,22 @@ import { useAppDispatch } from '../../../store/store'
 import { useSelector } from 'react-redux'
 import { type RootState } from '../../../store/store'
 import ProductCard from '../components/ProductCard'
-import { createAsyncThunk } from '@reduxjs/toolkit'
-
-import * as api from '../api'
+import { initProducts } from '../productSlice'
 
 function ProductsList (): JSX.Element {
-  const initProducts = createAsyncThunk(
-    'products/init',
-    async () => await api.initProductsFetch()
-  )
-
   const products = useSelector((store: RootState) => store.products.products)
+
   const dispatch = useAppDispatch()
 
   const [currentPage, setCurrentPage] = useState(1)
   const [fetching, setFetching] = useState(true)
+  const [scrollCount, setscrollCount] = useState(1)
 
   useEffect(() => {
     if (fetching) {
-      dispatch(initProducts()).catch(console.log)
+      dispatch(initProducts(currentPage)).catch(console.log)
       setFetching(false)
-
-      // dispatch(fetchProductData(currentPage)).catch(console.log)
-      // setFetching(false)
+      setCurrentPage((prev) => prev + 8)
     }
   }, [fetching])
 
@@ -44,11 +37,10 @@ function ProductsList (): JSX.Element {
     }
   }, [])
 
-  const scrollHendler = (e): void => {
-    if ((e.target.scrollHeight * currentPage / 2) < e.target.scrollTop + 100) {
-      console.log('scroll')
-
-      // setFetching(true)
+  const scrollHendler = (e: any): void => {
+    if (e.target.scrollHeight - (e.target.scrollTop + e.target.offsetHeight * scrollCount) <= 1) {
+      setFetching(true)
+      setscrollCount((prev) => prev + 1)
     }
   }
 

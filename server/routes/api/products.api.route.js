@@ -5,13 +5,14 @@ const {
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
+  console.log(req.query);
   try {
     const products = await Product.findAll({
       include: [
         { model: User, include: { model: City } },
       ],
-      // offset: 1,
-      // limit: 1,
+      offset: req.query.page,
+      limit: req.query.pageSize,
     });
     res.json(products);
   } catch ({ message }) {
