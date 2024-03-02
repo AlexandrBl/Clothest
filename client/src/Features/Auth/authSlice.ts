@@ -16,6 +16,10 @@ export const authLogin = createAsyncThunk(
   'auth/login',
   async (obj: UserWithoutName) => await api.logFetch(obj))
 
+export const authLogout = createAsyncThunk(
+  'auth/logout',
+  async () => await api.logoutFetch())
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -40,6 +44,13 @@ const authSlice = createSlice({
         state.message = ''
       })
       .addCase(authLogin.rejected, (state, action) => {
+        state.message = action.error.message
+      })
+      .addCase(authLogout.fulfilled, (state, action) => {
+        state.user = null
+        state.message = ''
+      })
+      .addCase(authLogout.rejected, (state, action) => {
         state.message = action.error.message
       })
   }

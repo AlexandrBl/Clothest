@@ -5,39 +5,45 @@ const { generateTokens } = require('../../utils/authUtils');
 const cookieConfig = require('../../config/cookiesConfig');
 
 router.post('/registration', async (req, res) => {
-  const {
-    name, email, password, score,
-  } = req.body;
+  try {
+    const { name, email, password } = req.body;
 
-  if (name && email && password) {
-    let user = await User.findOne({ where: { email } });
-    if (!user) {
-      const hash = await bcrypt.hash(password, 10);
-      user = await User.create({
-        name, email, password: hash, score,
-      });
-      const userForSend = {
-        id: user.id, name, email, score,
-      };
-      const { accessToken, refreshToken } = generateTokens(
-        { user: { name: user.name, id: user.id, score } },
-      );
-      res.cookie(
-        cookieConfig.access,
-        accessToken,
-        { maxAge: cookieConfig.maxAgeAccess, httpOnly: cookieConfig.httpOnly },
-      );
-      res.cookie(
-        cookieConfig.refresh,
-        refreshToken,
-        { maxAge: cookieConfig.maxAgeRefresh, httpOnly: cookieConfig.httpOnly },
-      );
-      res.status(201).json({ message: 'ok', user: userForSend });
+    if (name && email && password) {
+      const globalRegex = /^[_a-z0-9-\+-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i;
+
+      if (globalRegex.test(email)) {
+        let user = await User.findOne({ where: { email } });
+        if (user) {
+          res.status(400).json({ message: 'Такой пользователь уже существует' });
+        } else {
+          const hash = await bcrypt.hash(password, 10);
+          user = await User.create({
+            name, email, password: hash, cityId: 1,
+          });
+          const { accessToken, refreshToken } = generateTokens(
+            { user: { name: user.name, id: user.id } },
+          );
+
+          res.cookie(
+            cookieConfig.access,
+            accessToken,
+            { maxAge: cookieConfig.maxAgeAccess, httpOnly: true },
+          );
+          res.cookie(
+            cookieConfig.refresh,
+            refreshToken,
+            { maxAge: cookieConfig.maxAgeRefresh, httpOnly: true },
+          );
+          res.status(201).json({ message: 'ok', user: { name: user.name, id: user.id } });
+        }
+      } else {
+        res.status(400).json({ message: 'Ваша почта не соответствует формату' });
+      }
     } else {
-      res.status(200).json({ message: 'Такой пользователь уже существует' });
+      res.status(400).json({ message: 'Заполните все поля' });
     }
-  } else {
-    res.status(200).json({ message: 'Заполните все поля' });
+  } catch ({ message }) {
+    res.status(500).json(message);
   }
 });
 

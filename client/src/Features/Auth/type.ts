@@ -11,6 +11,6 @@ export type UserAndId = User & { id: number }
 export type UserWithoutName = Omit<User, 'name'>
 
 export interface StateAuth {
-  user: null | User
+  user: null | UserAndId
   message: string | undefined
 }

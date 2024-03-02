@@ -40,6 +40,7 @@ module.exports = {
       userpic: {
         allowNull: false,
         type: Sequelize.TEXT,
+        defaultValue: '/img/placeholder.jpeg',
       },
       createdAt: {
         allowNull: false,
