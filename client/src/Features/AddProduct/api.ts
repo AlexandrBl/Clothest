@@ -1,6 +1,6 @@
-import type { ProductAndId } from './type'
+import type { Product, ProductAndId } from './type'
 
-export const addProductFetch = async (obj: FormData): Promise<ProductAndId> => {
+export const addProductFetch = async (obj: Product): Promise<ProductAndId> => {
   const res = await fetch('/api/products/', {
     method: 'POST',
     headers: {
