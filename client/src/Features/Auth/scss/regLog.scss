@@ -1,0 +1,43 @@
+.modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20rem;
+    margin-left: -10rem;
+    margin-top: -1rem;
+    background-color: $beige_color;
+    border-radius: 0.5rem;
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    border-radius: 2rem;
+}
+.form-reg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    border-radius: 2rem;
+}
+.contAuth {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.form-log {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    border-radius: 2rem;
+}
+.form-input {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
@@ -20,6 +20,12 @@ function RegLog (): JSX.Element {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const message = useSelector((store: RootState) => store.auth.message)
+  const [viewMessage, setMessage] = useState('')
+
+  useEffect(() => {
+    setMessage(message)
+    setTimeout(() => { setMessage('') }, 1000)
+  }, [message])
 
   const {
     register,
@@ -47,7 +53,7 @@ function RegLog (): JSX.Element {
  <span>{errors.password?.message}</span>
  <button type='submit' className='form__button form-log__button'>login</button>
  </form>
-      <div className='form__err' >{message}</div>
+      <div className='form__err' >{viewMessage}</div>
 </>
 
   )
