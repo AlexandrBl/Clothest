@@ -49,14 +49,14 @@ router.post('/registration', async (req, res) => {
 });
 
 router.post('/log', async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  if (email && password) {
-    const user = await User.findOne({ where: { email } });
-    if (user) {
-      const isSame = await bcrypt.compare(password, user.password);
 
-      if (isSame) {
+    if (email && password) {
+      const user = await User.findOne({ where: { email } });
+      if (user && (await bcrypt.compare(password, user.password))) {
+
         const { accessToken, refreshToken } = generateTokens(
           { user: { name: user.name, id: user.id } },
         );
@@ -64,22 +64,26 @@ router.post('/log', async (req, res) => {
         res.cookie(
           cookieConfig.access,
           accessToken,
-          { maxAge: cookieConfig.maxAgeAccess, httpOnly: cookieConfig.httpOnly },
+          { maxAge: cookieConfig.maxAgeAccess, httpOnly: true },
         );
-
         res.cookie(
           cookieConfig.refresh,
           refreshToken,
-          { maxAge: cookieConfig.maxAgeRefresh, httpOnly: cookieConfig.httpOnly },
+          { maxAge: cookieConfig.maxAgeRefresh, httpOnly: true },
         );
 
+
         res.status(201).json({ message: 'ok', user });
+
+      } else {
+        res.status(400).json({ message: 'логин или пароль неверный' });
+
       }
     } else {
-      res.json({ message: 'Не существет такого пользователя или введен неверный пароль' });
+      res.status(400).json({ message: 'Заполните все поля' });
     }
-  } else {
-    res.json({ message: 'Заполните все поля' });
+  } catch ({ message }) {
+    res.status(500).json(message);
   }
 });
 
