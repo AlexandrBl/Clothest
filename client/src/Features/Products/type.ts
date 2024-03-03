@@ -8,6 +8,7 @@ export interface FullUser {
   isAdmin: boolean
   userpic: string
   City: City
+  defaultProduct: string
 }
 
 export interface City {
@@ -25,7 +26,10 @@ export interface Product {
   User: FullUser
 }
 
+export type UserProduct = Omit<Product, 'User'>
+
 export interface StateProducts {
+  userProducts: UserProduct[]
   products: Product[]
   message: string | undefined
 }

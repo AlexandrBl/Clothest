@@ -6,7 +6,6 @@ const {
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
-  console.log(req.query);
   try {
     const products = await Product.findAll({
       include: [
@@ -16,6 +15,20 @@ router.get('/', async (req, res) => {
       limit: req.query.pageSize,
     });
     res.json(products);
+  } catch ({ message }) {
+    res.json({ message });
+  }
+});
+
+router.get('/userProducts', async (req, res) => {
+  try {
+    let products = [];
+    if (res.locals.user) {
+      products = await Product.findAll({ where: { userId: res.locals.user.id } });
+      res.json(products);
+    } else {
+      res.json(products);
+    }
   } catch ({ message }) {
     res.json({ message });
   }

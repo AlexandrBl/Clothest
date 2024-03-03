@@ -1,6 +1,7 @@
-import type { UserAndId, UserWithoutName, UserAndCpassword, User } from './type'
+import { FullUser } from '../Products/type'
+import type { UserAndId, UserWithoutName, UserWithProduct, UserAndCpassword, User } from './type'
 
-export const registrationFetch = async (obj: UserAndCpassword): Promise<UserAndId> => {
+export const registrationFetch = async (obj: UserAndCpassword): Promise<FullUser> => {
   const res = await fetch('/api/auth/registration', {
     method: 'POST',
     headers: {
@@ -16,13 +17,13 @@ export const registrationFetch = async (obj: UserAndCpassword): Promise<UserAndI
   throw message
 }
 
-export const checkFetch = async (): Promise<{ user: UserAndId | null }> => {
+export const checkFetch = async (): Promise<{ user: FullUser | null }> => {
   const res = await fetch('/api/auth/check')
   const data = await res.json()
   return data
 }
 
-export const logFetch = async (obj: UserWithoutName): Promise<UserAndId> => {
+export const logFetch = async (obj: UserWithoutName): Promise<FullUser> => {
   const res = await fetch('/api/auth/log', {
     method: 'POST',
     headers: {

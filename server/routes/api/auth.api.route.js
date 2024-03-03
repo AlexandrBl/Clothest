@@ -34,7 +34,8 @@ router.post('/registration', async (req, res) => {
             refreshToken,
             { maxAge: cookieConfig.maxAgeRefresh, httpOnly: true },
           );
-          res.status(201).json({ message: 'ok', user: { name: user.name, id: user.id } });
+          // user.password.delete();
+          res.status(201).json({ message: 'ok', user });
         }
       } else {
         res.status(400).json({ message: 'Ваша почта не соответствует формату' });
@@ -51,9 +52,11 @@ router.post('/log', async (req, res) => {
   try {
     const { email, password } = req.body;
 
+
     if (email && password) {
       const user = await User.findOne({ where: { email } });
       if (user && (await bcrypt.compare(password, user.password))) {
+
         const { accessToken, refreshToken } = generateTokens(
           { user: { name: user.name, id: user.id } },
         );
@@ -68,9 +71,13 @@ router.post('/log', async (req, res) => {
           refreshToken,
           { maxAge: cookieConfig.maxAgeRefresh, httpOnly: true },
         );
-        res.status(200).json({ message: 'ok', user: { name: user.name, id: user.id } });
+
+
+        res.status(201).json({ message: 'ok', user });
+
       } else {
         res.status(400).json({ message: 'логин или пароль неверный' });
+
       }
     } else {
       res.status(400).json({ message: 'Заполните все поля' });

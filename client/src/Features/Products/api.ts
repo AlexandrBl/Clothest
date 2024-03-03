@@ -7,3 +7,11 @@ export const initProductsFetch = async (currentPage: number): Promise<Product[]>
 
   return data
 }
+
+export const initUserProductsFetch = async (): Promise<Product[]> => {
+  const res = await fetch('/api/products/userProducts')
+
+  const data = await res.json()
+
+  return data
+}

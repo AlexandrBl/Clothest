@@ -42,6 +42,11 @@ module.exports = {
         type: Sequelize.TEXT,
         defaultValue: '/img/placeholder.jpeg',
       },
+      defaultProduct: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+        defaultValue: 'same product',
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
