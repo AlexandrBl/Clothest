@@ -1,16 +1,13 @@
 import type { ProductAndId } from './type'
 
-export const addProductFetch = async (obj: FormData): Promise<ProductAndId> => {
+export const addProductFetch = async (obj: FormData): Promise<{ message: string, product: ProductAndId }> => {
   const res = await fetch('/api/products/', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(obj)
+    body: obj
   })
   if (res.ok) {
     const data = await res.json()
-    return data.product
+    return data
   }
   const { message } = await res.json()
   throw message
