@@ -32,7 +32,7 @@ function NavBar (): JSX.Element {
         </li>
           : <li className="nav__item">
                 <button onClick={() => { setModal(true) }}>AUTH</button>
-                <Modal isOpen={modal} onRequestClose={() => { setModal(false) }}>
+                <Modal className='modal' isOpen={modal} onRequestClose={() => { setModal(false) }}>
                   <button onClick={() => { setModal(false) }}>x</button>
                    <RegLog/>
                 </Modal>
