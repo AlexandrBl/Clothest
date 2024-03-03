@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { type FullUser, type Product } from '../type'
-import { type RootState } from '../../../store/store'
+import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
 import Selector from '../../Selector/Selector'
+import { addMatch } from '../matchSlice'
 
 function ProductCard ({ product, user }: { product: Product, user: FullUser }): JSX.Element {
   const [sellerRate, setSellerRate] = useState('')
+  const dispatch = useAppDispatch()
   // const [currentProduct, setCurrentProduct] = useState(user.defaultProduct)
-
   const userProducts = useSelector((store: RootState) => store.products.userProducts)
-  console.log(userProducts, 123123123)
 
   useEffect(() => {
     product.User.rating === 'Нет отзывов' ? setSellerRate('0') : setSellerRate(`${product.User.rating}`)
   }, [])
+
+  const matchPost = (): void => {
+    dispatch(addMatch({ productId1: 8, productId2: product.id }))
+      .catch(console.log)
+  }
+
   return (
     <>
     <div className="product-card-container">
@@ -33,7 +39,7 @@ function ProductCard ({ product, user }: { product: Product, user: FullUser }): 
     </div>}
 
       <button type='button' className='product-card__button product-card__fav-button'>Fav</button>
-      <button type='button' className='product-card__button product-card__like-button'>Like</button>
+      <button type='button' className='product-card__button product-card__like-button' onClick={matchPost}>Like</button>
       <button type='button' className='product-card__button product-card__dislike-button'>Dislike</button>
 
       <div className="seller">
