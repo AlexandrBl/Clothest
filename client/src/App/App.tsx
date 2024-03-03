@@ -10,6 +10,7 @@ import { useAppDispatch } from '../store/store'
 import AddProductPage from '../Features/AddProduct/components/AddProductPage'
 import IncorrectPage from '../Features/Incorrect/components/IncorrectPage'
 import DragDrop from '../Features/AddProduct/components/DragDrop'
+import UserProfile from '../Features/userProfile/components/userProfile'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -23,7 +24,7 @@ function App (): JSX.Element {
           <Route index element={<MainPage/>}/>
 
           <Route path='auth' element={<RegLog/>}/>
-
+          <Route path='profile' element={<UserProfile/>}/>
           <Route path='/addproduct' element={<AddProductPage/>}/>
           <Route path='/dragdrop' element={<DragDrop/>}/>
           <Route path='*' element={<IncorrectPage/>}/>
