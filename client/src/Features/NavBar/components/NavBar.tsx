@@ -1,14 +1,16 @@
 import { useAppDispatch, type RootState } from '../../../store/store'
-
-import React from 'react'
+import Modal from 'react-modal'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { logoutFetch } from '../../Auth/api'
+// import { logoutFetch } from '../../Auth/api'
 import { authLogout } from '../../Auth/authSlice'
+import RegLog from '../../Auth/components/RegLog'
 
 function NavBar (): JSX.Element {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [modal, setModal] = useState(false)
 
   const user = useSelector((store: RootState) => store.auth.user)
 
@@ -29,12 +31,12 @@ function NavBar (): JSX.Element {
             </button>
         </li>
           : <li className="nav__item">
-          <NavLink to={'/auth'} className={'nav__link link'}>
-
-            AUTH
-
-            </NavLink>
-        </li>
+                <button onClick={() => { setModal(true) }}>AUTH</button>
+                <Modal isOpen={modal} onRequestClose={() => { setModal(false) }}>
+                  <button onClick={() => { setModal(false) }}>x</button>
+                   <RegLog/>
+                </Modal>
+            </li>
       }
       </ul>
     </nav>
