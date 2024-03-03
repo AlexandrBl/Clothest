@@ -9,9 +9,6 @@ import { initProducts, userProducts } from '../productSlice'
 function ProductsList (): JSX.Element {
   const products = useSelector((store: RootState) => store.products.products)
 
-  const user = useSelector((store: RootState) => store.auth.user
-  )
-
   const dispatch = useAppDispatch()
 
   const [currentPage, setCurrentPage] = useState(1)
@@ -55,7 +52,7 @@ function ProductsList (): JSX.Element {
     <section className='products'>
       <div className="products-container">
       <div className="products__list">{
-        products.map(el => <ProductCard user={user} product={el} key={el.id}/>)
+        products.map(el => <ProductCard product={el} key={el.id}/>)
       }</div>
       </div>
     </section>

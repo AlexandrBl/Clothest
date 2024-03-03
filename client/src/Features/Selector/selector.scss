@@ -1,0 +1,77 @@
+.selector-modal {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70rem;
+  height: calc(100vh - 6rem);
+  background-color: $beige_color;
+  border-radius: 1rem;
+  padding: 2rem 0 2rem 0;
+  overflow: hidden;
+  z-index: 2;
+  animation: select-anim 1s ;
+  transition: animation 1s;
+}
+
+@keyframes select-container-anim {
+  from{
+    scale:  0;
+    opacity: 0;
+  }
+  to{
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+@keyframes select-anim {
+  from{
+    
+    opacity: 0;
+  }
+  to{
+    
+    opacity: 1;
+  }
+}
+
+.selector-button{
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: $dark-blue-opacity_color;
+  border-radius: 0.5rem;
+  
+}
+
+.selector-container {
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 6rem);
+  animation: select-container-anim 1s 
+}
+
+.selector__list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  border-radius: 1rem;
+  height: 24rem;
+}
+
+.product-card__switch-button {
+  background-color: $peach_color;
+  position: absolute;
+  bottom: 1rem;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  width: 4rem;
+}
