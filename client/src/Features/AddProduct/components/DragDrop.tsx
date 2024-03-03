@@ -28,10 +28,12 @@ function DragDrop (): JSX.Element {
   })
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setImages(acceptedFiles)
-    setPreviews(acceptedFiles.map(file => Object.assign(file, {
-      pic: URL.createObjectURL(file)
-    })))
+    setImages((images) => [...images, ...acceptedFiles])
+    setPreviews((previewfiles) => {
+      const newFiles = acceptedFiles.map(file => Object.assign(file, { pic: URL.createObjectURL(file) }))
+      return [...previewfiles, ...newFiles]
+    }
+    )
   }, [images])
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
@@ -47,6 +49,11 @@ function DragDrop (): JSX.Element {
 
     dispatch(addProduct(formData))
       .catch(console.log)
+  }
+
+  const deleteImage = (preview: File): void => {
+    setImages((images) => images.filter((image) => image.path !== preview.path))
+    setPreviews((previewfiles) => previewfiles.filter((file) => file.path !== preview.path))
   }
 
   return (
@@ -65,13 +72,16 @@ function DragDrop (): JSX.Element {
         {images.length > 0 && (
           <div className='previews-container'>
             <p className='previews-container-p'>Прикрепленные файлы:</p>
+              <div className='preview-common-container'>
               {previews.map(preview => (
-                <div className='preview-container' key={preview.name}>
+                <div className='preview-container' key={preview.name} onClick={() => { deleteImage(preview) }}>
                   <div className='preview-container__inner'>
                     <img src={preview.pic} className='preview-container__image' onLoad={() => { URL.revokeObjectURL(preview.pic) }}/>
+                    <div className='preview-container__image-delete'><p className='preview-container__image-delete-p'>Удалить фотографию</p></div>
                   </div>
                 </div>
               ))}
+              </div>
           </div>
         )}
         <span>{message}</span>
