@@ -13,9 +13,11 @@ import DragDrop from '../Features/AddProduct/components/DragDrop'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
+
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
   }, [])
+
   return (
     <div className="App">
       <Routes>

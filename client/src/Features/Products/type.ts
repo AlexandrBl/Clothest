@@ -33,3 +33,17 @@ export interface StateProducts {
   products: Product[]
   message: string | undefined
 }
+
+export interface Match {
+  id: number
+  productId1: number
+  productId2: number
+  isMutual: boolean
+}
+
+export type MatchWithoutIdAndMutual = Omit<Match, 'id' | 'isMutual'>
+
+export interface StateMatches {
+  matches: Match[]
+  message: string | undefined
+}
