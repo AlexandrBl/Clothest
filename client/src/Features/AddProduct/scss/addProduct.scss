@@ -45,21 +45,29 @@
 
 .previews-container {
     display: flex;
-    min-height: 10rem;
     flex-direction: column;
+    min-height: 8rem;
     margin-top: 2rem;
 }
 
+.preview-common-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+}
+
 .preview-container {
-    display: inline-flex;
+    display: flex;
+    position: relative;
     border-radius: 1rem;
     border: 1px solid #eaeaea;
-    margin-bottom: 1rem;
     margin-right: 1rem;
-    width: 8rem;
-    height: 8rem;
-    padding: 0.2rem;
-    box-sizing: border-box;
+    width: 7rem;
+    height: 7rem;
+    overflow: hidden;
+    scroll-snap-align: center;
 }
 
 .preview-container__inner {
@@ -68,7 +76,28 @@
 }
 
 .preview-container__image {
-    display:block;
-    width: auto;
+    position: absolute; 
+    top: 0;
+    display: block;
+    width: 100%;
     height: 100%;
+    object-fit:cover;
+}
+
+.preview-container__image-delete {
+    width: 7rem;
+    height: 7rem;
+}
+
+.preview-container:hover .preview-container__image-delete{
+    top: 0;
+    float: left;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 1000;
+    background-color: rgba(240, 248, 255, 0.522);
+    border-radius: 1rem;
+    text-align: center;
+    cursor: pointer;
 }
