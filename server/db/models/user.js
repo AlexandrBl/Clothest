@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate({
-      City, Review, Chat, ChatMessage, Product,
+      City, Review, Chat, ChatMessage, Product, UserProductLike,
     }) {
       this.belongsTo(City, { foreignKey: 'cityId' });
       this.hasMany(Review, { foreignKey: 'authorId' });
@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(Chat, { foreignKey: 'userId2' });
       this.hasMany(ChatMessage, { foreignKey: 'authorId' });
       this.hasMany(Product, { foreignKey: 'userId' });
+      this.hasMany(UserProductLike, { foreignKey: 'userId' });
     }
   }
   User.init({
@@ -54,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
     defaultProduct: {
       allowNull: false,
       type: DataTypes.TEXT,
-      defaultValue: 'same product',
+      defaultValue: 'Добавьте продукт',
     },
     createdAt: {
       allowNull: false,

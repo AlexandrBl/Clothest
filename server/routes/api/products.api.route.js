@@ -1,19 +1,29 @@
+/* eslint-disable radix */
 const router = require('express').Router();
 const fileupload = require('../../utils/fileUpload');
 
 const {
-  Category, Product, ProductImage, User, City,
+  Category, Product, ProductImage, User, City, UserProductLike,
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
   try {
-    const products = await Product.findAll({
+    let products = await Product.findAll({
       include: [
         { model: User, include: { model: City } },
       ],
       offset: req.query.page,
       limit: req.query.pageSize,
     });
+
+    // надо поправить, – если лайкнуть первые 8 карточек, карточки перестанут загружаться, тк они все отфильтровываются ниже
+    // если делать пагинацию после фильтрации, тогда не загружаются по скроллу
+    const userLikes = await UserProductLike.findAll({ where: { userId: res.locals.user.id } });
+    if (userLikes) {
+      const likedProductIds = userLikes.map((like) => like.productId);
+      products = products.filter((product) => !likedProductIds.includes(product.id));
+    }
+    // до сюда новый функционал
     res.json(products);
   } catch ({ message }) {
     res.json({ message });
@@ -52,6 +62,21 @@ router.post('/', async (req, res) => {
     title = title.trim();
     description = description.trim();
     category = category.trim();
+
+    const userProducts = await Product.findOne({ where: { userId: res.locals.user.id } });
+
+    if (!userProducts) {
+      const dbUser = await User.findOne({ where: { id: res.locals.user.id } });
+      dbUser.defaultProduct = title;
+      await dbUser.save();
+    }
+
+    const prod = await Product.findOne({ where: { userId: res.locals.user.id, title } });
+
+    if (prod) {
+      res.status(400).json({ message: 'У вас уже есть продукт с таким названием' });
+      return;
+    }
 
     const file = req.files.images;
 
