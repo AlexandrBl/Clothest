@@ -1,4 +1,4 @@
-import type { Product } from './type'
+import type { Match, MatchWithoutIdAndMutual, Product } from './type'
 
 export const initProductsFetch = async (currentPage: number): Promise<Product[]> => {
   const res = await fetch(`/api/products?page=${currentPage}&pageSize=8`)
@@ -13,5 +13,17 @@ export const initUserProductsFetch = async (): Promise<Product[]> => {
 
   const data = await res.json()
 
+  return data
+}
+
+export const addMatchFetch = async (obj: MatchWithoutIdAndMutual): Promise<Match> => {
+  const res = await fetch('/api/matches/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  })
+  const data = await res.json()
   return data
 }
