@@ -34,7 +34,8 @@ router.post('/registration', async (req, res) => {
             refreshToken,
             { maxAge: cookieConfig.maxAgeRefresh, httpOnly: true },
           );
-          res.status(201).json({ message: 'ok', user: { name: user.name, id: user.id } });
+          // user.password.delete();
+          res.status(201).json({ message: 'ok', user });
         }
       } else {
         res.status(400).json({ message: 'Ваша почта не соответствует формату' });
@@ -56,9 +57,6 @@ router.post('/log', async (req, res) => {
       const isSame = await bcrypt.compare(password, user.password);
 
       if (isSame) {
-        const userForSend = {
-          id: user.id, name: user.name, email, score: user.score,
-        };
         const { accessToken, refreshToken } = generateTokens(
           { user: { name: user.name, id: user.id } },
         );
@@ -75,7 +73,7 @@ router.post('/log', async (req, res) => {
           { maxAge: cookieConfig.maxAgeRefresh, httpOnly: cookieConfig.httpOnly },
         );
 
-        res.status(201).json({ message: 'ok', user: userForSend });
+        res.status(201).json({ message: 'ok', user });
       }
     } else {
       res.json({ message: 'Не существет такого пользователя или введен неверный пароль' });
