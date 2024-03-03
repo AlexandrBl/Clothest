@@ -52,11 +52,9 @@ router.post('/log', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-
     if (email && password) {
       const user = await User.findOne({ where: { email } });
       if (user && (await bcrypt.compare(password, user.password))) {
-
         const { accessToken, refreshToken } = generateTokens(
           { user: { name: user.name, id: user.id } },
         );
@@ -72,12 +70,9 @@ router.post('/log', async (req, res) => {
           { maxAge: cookieConfig.maxAgeRefresh, httpOnly: true },
         );
 
-
         res.status(201).json({ message: 'ok', user });
-
       } else {
         res.status(400).json({ message: 'логин или пароль неверный' });
-
       }
     } else {
       res.status(400).json({ message: 'Заполните все поля' });
