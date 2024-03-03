@@ -4,18 +4,12 @@ import { type Product } from '../type'
 import Selector from '../../Selector/Components/Selector'
 import Modal from 'react-modal'
 import { useSelector } from 'react-redux'
-import { type RootState } from '../../../store/store'
-import { type FullUser, type Product } from '../type'
-import { useAppDispatch, type RootState } from '../../../store/store'
-import { useSelector } from 'react-redux'
-import Selector from '../../Selector/Selector'
+import { type RootState, useAppDispatch } from '../../../store/store'
+
 import { addMatch } from '../matchSlice'
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.user)
-
-
-
 
   const [sellerRate, setSellerRate] = useState('')
 
@@ -33,14 +27,10 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
   }
 
   const dispatch = useAppDispatch()
- 
-  const userProducts = useSelector((store: RootState) => store.products.userProducts)
-
 
   useEffect(() => {
     product.User.rating === 'Нет отзывов' ? setSellerRate('0') : setSellerRate(`${product.User.rating}`)
   }, [])
-
 
   const [modal, setModal] = useState(false)
 
@@ -48,7 +38,6 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
     dispatch(addMatch({ productId1: 8, productId2: product.id }))
       .catch(console.log)
   }
-
 
   return (
     <>
