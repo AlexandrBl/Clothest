@@ -34,6 +34,18 @@ router.get('/userProducts', async (req, res) => {
   }
 });
 
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await Product.destroy({ where: { id } });
+    if (data) {
+      res.status(201).json({ message: 'ok', id: +id });
+    }
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
 router.post('/', async (req, res) => {
   try {
     let {

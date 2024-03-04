@@ -6,7 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 // import { logoutFetch } from '../../Auth/api'
 import { authLogout } from '../../Auth/authSlice'
 import RegLog from '../../Auth/components/RegLog'
-import UserProfile from '../../userProfile/components/userProfile'
+import UserProfile from '../../userProfile/components/UserPage'
 
 function NavBar (): JSX.Element {
   const dispatch = useAppDispatch()
