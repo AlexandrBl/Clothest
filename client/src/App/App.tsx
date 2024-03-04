@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { authCheck } from '../Features/Auth/authSlice'
 import { Route, Routes } from 'react-router-dom'
@@ -13,7 +13,7 @@ import IncorrectPage from '../Features/Incorrect/components/IncorrectPage'
 import DragDrop from '../Features/AddProduct/components/DragDrop'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
-import { userProducts } from '../Features/Products/productSlice'
+import { userProducts, initProducts } from '../Features/Products/productSlice'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -22,8 +22,42 @@ function App (): JSX.Element {
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
     dispatch(userProducts()).catch(console.log)
-
   }, [message])
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [fetching, setFetching] = useState(true)
+  const [scrollCount, setscrollCount] = useState(1)
+
+  useEffect(() => {
+    if (fetching) {
+      dispatch(initProducts(currentPage)).catch(console.log)
+      setFetching(false)
+      setCurrentPage((prev) => prev + 8)
+    }
+  }, [fetching])
+
+  useEffect(() => {
+    const container = document.querySelector('.products__list')
+
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    if (container) {
+      container.addEventListener('scroll', scrollHendler)
+    }
+
+    return function () {
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      if (container) {
+        container.removeEventListener('scroll', scrollHendler)
+      }
+    }
+  }, [])
+
+  const scrollHendler = (e: any): void => {
+    if (e.target.scrollHeight - (e.target.scrollTop + e.target.offsetHeight * scrollCount) <= 1) {
+      setFetching(true)
+      setscrollCount((prev) => prev + 1)
+    }
+  }
 
   return (
     <div className="App">
