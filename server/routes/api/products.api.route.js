@@ -1,5 +1,6 @@
 /* eslint-disable radix */
 const router = require('express').Router();
+const { Op } = require('sequelize');
 const fileupload = require('../../utils/fileUpload');
 
 const {
@@ -8,23 +9,33 @@ const {
 
 router.get('/', async (req, res) => {
   try {
-    let products = await Product.findAll({
-      include: [
-        { model: User, include: { model: City } },
-      ],
-      offset: req.query.page,
-      limit: req.query.pageSize,
-    });
+    if (res.locals.user) {
+      const userLikes = await UserProductLike.findAll({ where: { userId: res.locals.user.id } });
 
-    // надо поправить, – если лайкнуть первые 8 карточек, карточки перестанут загружаться, тк они все отфильтровываются ниже
-    // если делать пагинацию после фильтрации, тогда не загружаются по скроллу
-    const userLikes = await UserProductLike.findAll({ where: { userId: res.locals.user.id } });
-    if (userLikes) {
-      const likedProductIds = userLikes.map((like) => like.productId);
-      products = products.filter((product) => !likedProductIds.includes(product.id));
+      const likesArr = userLikes.map((el) => el.productId);
+
+      const products = await Product.findAll({
+        offset: req.query.page,
+        limit: req.query.pageSize,
+        include: [
+          { model: User, include: { model: City } },
+        ],
+        where: {
+          id: { [Op.notIn]: likesArr },
+          userId: { [Op.ne]: res.locals.user.id },
+        },
+      });
+      res.json(products);
+    } else {
+      const products = await Product.findAll({
+        offset: req.query.page,
+        limit: req.query.pageSize,
+        include: [
+          { model: User, include: { model: City } },
+        ],
+      });
+      res.json(products);
     }
-    // до сюда новый функционал
-    res.json(products);
   } catch ({ message }) {
     res.json({ message });
   }
