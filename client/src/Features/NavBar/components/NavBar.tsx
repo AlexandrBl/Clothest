@@ -3,10 +3,8 @@ import Modal from 'react-modal'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
-// import { logoutFetch } from '../../Auth/api'
 import { authLogout } from '../../Auth/authSlice'
 import RegLog from '../../Auth/components/RegLog'
-import UserProfile from '../../userProfile/components/UserPage'
 
 function NavBar (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -25,7 +23,11 @@ function NavBar (): JSX.Element {
       <ul className="nav__list list">
 
         {(user != null)
-          ? <><li>
+          ? <>
+          <li>
+          <NavLink to={'/newproduct'}>Разместить объявление</NavLink>
+          </li>
+          <li>
           <NavLink to={'/profile'} >Profile</NavLink>
           </li>
           <li className="nav__item">
@@ -33,6 +35,7 @@ function NavBar (): JSX.Element {
             LOGOUT
             </button>
         </li>
+
         </>
           : <li className="nav__item">
                 <button onClick={() => { setModal(true) }}>AUTH</button>
@@ -43,6 +46,7 @@ function NavBar (): JSX.Element {
             </li>
 
       }
+
       </ul>
     </nav>
   )
