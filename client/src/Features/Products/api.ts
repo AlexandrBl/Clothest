@@ -1,8 +1,10 @@
 import type { Category, Match, MatchWithoutIdAndMutual, Product } from './type'
 
 export const initProductsFetch = async (currentPage: number): Promise<Product[]> => {
-  const res = await fetch(`/api/products?page=${currentPage}&pageSize=8`)
+  const res = await fetch(`/api/products?page=${currentPage}&pageSize=16`)
   const data = await res.json()
+  console.log(data, 999999999)
+
   return data
 }
 
@@ -36,7 +38,6 @@ export const addMatchFetch = async (obj: MatchWithoutIdAndMutual): Promise<{ mes
   })
   const data = await res.json()
 
-
   return data
 }
 
@@ -49,7 +50,6 @@ export const addDislikefetch = async (id: number): Promise<{ message: string }> 
     body: JSON.stringify({ id })
   })
   const data = await res.json()
-
 
   return data
 }

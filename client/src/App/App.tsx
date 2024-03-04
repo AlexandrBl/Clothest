@@ -16,10 +16,16 @@ import UserProducts from '../Features/userProfile/components/UserProductsList'
 import { userProducts, initProducts, initCategories } from '../Features/Products/productSlice'
 import FavoritesList from '../Features/Favorite/components/FavoritesList'
 
-
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
   const message = useSelector((store: RootState) => store.products.message)
+  const products = useSelector((store: RootState) => store.products.products)
+
+  useEffect(() => {
+    if (products.length < 9) {
+      setFetching(true)
+    }
+  }, [products])
 
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
@@ -27,15 +33,13 @@ function App (): JSX.Element {
     dispatch(initCategories()).catch(console.log)
   }, [message])
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [fetching, setFetching] = useState(true)
+  const [fetching, setFetching] = useState(false)
   const [scrollCount, setscrollCount] = useState(1)
 
   useEffect(() => {
     if (fetching) {
-      dispatch(initProducts(currentPage)).catch(console.log)
+      dispatch(initProducts(products.length)).catch(console.log)
       setFetching(false)
-      setCurrentPage((prev) => prev + 8)
     }
   }, [fetching])
 
@@ -74,9 +78,6 @@ function App (): JSX.Element {
           <Route path='profile/myproducts' element={<UserProducts/>}/>
           <Route path='profile/myproducts/:id/edit' element={<ChangeProduct />}/>
           <Route path='favorites' element={<FavoritesList/>}/>
-
-         
-            
 
           <Route path='/newproduct' element={<AddProduct/>}/>
           <Route path='*' element={<IncorrectPage/>}/>
