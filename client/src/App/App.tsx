@@ -13,9 +13,8 @@ import ChangeProduct from '../Features/ProductForms/components/ChangeProduct'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
 
-import { userProducts, initProducts, initCategories } from '../Features/Products/productSlice'
+import { userProducts, initProducts, initCategories, clearMessage } from '../Features/Products/productSlice'
 import FavoritesList from '../Features/Favorite/components/FavoritesList'
-
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -30,6 +29,17 @@ function App (): JSX.Element {
   const [currentPage, setCurrentPage] = useState(1)
   const [fetching, setFetching] = useState(true)
   const [scrollCount, setscrollCount] = useState(1)
+  const [isNotifyAlive, setNotifyAlive] = useState(false)
+
+  useEffect(() => {
+    if (message !== '') {
+      setNotifyAlive(true)
+      setTimeout(() => {
+        dispatch(clearMessage())
+        setNotifyAlive(false)
+      }, 5000)
+    }
+  }, [message])
 
   useEffect(() => {
     if (fetching) {
@@ -65,7 +75,7 @@ function App (): JSX.Element {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={<Main/>}>
+        <Route path='/' element={<Main isNotifyAlive={isNotifyAlive} />}>
           <Route index element={<MainPage/>}/>
           <Route path='auth' element={<RegLog/>}/>
           <Route path='profile' element={<UserProfile/>}/>
@@ -74,9 +84,6 @@ function App (): JSX.Element {
           <Route path='profile/myproducts' element={<UserProducts/>}/>
           <Route path='profile/myproducts/:id/edit' element={<ChangeProduct />}/>
           <Route path='favorites' element={<FavoritesList/>}/>
-
-         
-            
 
           <Route path='/newproduct' element={<AddProduct/>}/>
           <Route path='*' element={<IncorrectPage/>}/>
