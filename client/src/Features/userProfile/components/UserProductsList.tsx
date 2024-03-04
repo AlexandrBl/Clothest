@@ -5,8 +5,6 @@ import UserProductCard from './UserProductCard'
 
 function UserProductsList (): JSX.Element {
   const userProductsArray = useSelector((store: RootState) => store.products.userProducts)
-  console.log(userProductsArray)
-
   return (
     <>
     {userProductsArray.length > 0

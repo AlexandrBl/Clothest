@@ -8,7 +8,9 @@ import { type RootState, useAppDispatch } from '../../../store/store'
 import { useNavigate } from 'react-router-dom'
 
 import { addMatch } from '../matchSlice'
-import { delProd, newFavoriteProduct } from '../productSlice'
+
+import { delProd, newFavoriteProduct, dislikeProduct } from '../productSlice'
+
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()
@@ -60,6 +62,16 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
     }
   }
 
+  const dislike = (): void => {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    if (user) {
+      const id = product.id
+
+      dispatch(dislikeProduct(id)).catch(console.log)
+      dispatch(delProd(id))
+    }
+  }
+
   return (
     <>
 
@@ -86,7 +98,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
 
       <button type='button' className='product-card__button product-card__fav-button' onClick={newFavorite}>Fav</button>
       <button type='button' className='product-card__button product-card__like-button' onClick={matchPost}>Like</button>
-      <button type='button' className='product-card__button product-card__dislike-button'>Dislike</button>
+      <button type='button' onClick={dislike} className='product-card__button product-card__dislike-button'>Dislike</button>
 
       <div className="seller">
         <div className="seller-container">

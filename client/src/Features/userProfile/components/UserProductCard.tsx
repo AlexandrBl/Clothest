@@ -2,15 +2,19 @@ import React from 'react'
 import { type UserProduct } from '../../Products/type'
 import { useAppDispatch } from '../../../store/store'
 import { userProductDelete } from '../../Products/productSlice'
+import { useNavigate } from 'react-router-dom'
 
 function UserProductCard ({ userProduct }: { userProduct: UserProduct }): JSX.Element {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const deleteProduct = (id: number): void => {
     dispatch(userProductDelete(id)).catch(console.log)
   }
 
-  // const changeProduct =
+  const editProduct = (): void => {
+    navigate(`${userProduct.id}/edit`)
+  }
 
   return (
     <div className="product-card-container">
@@ -22,7 +26,7 @@ function UserProductCard ({ userProduct }: { userProduct: UserProduct }): JSX.El
       <h2 className='product-card__title'>{userProduct.title}</h2>
       <p className="product-card__desc">{userProduct.description}</p>
       <button onClick={() => { deleteProduct(userProduct.id) } } type='button'>Удалить</button>
-      <button >Изменить</button>
+      <button onClick={() => { editProduct() } }>Изменить</button>
       </div>
     </div>
     </div>

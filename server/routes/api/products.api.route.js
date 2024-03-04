@@ -1,18 +1,26 @@
+/* eslint-disable max-len */
 /* eslint-disable radix */
 const router = require('express').Router();
 const { Op } = require('sequelize');
 const fileupload = require('../../utils/fileUpload');
 
 const {
-  Category, Product, ProductImage, User, City, UserProductLike, Favorite,
+
+  Category, Product, ProductImage, User, City, UserProductLike, Favorite,  UserProductDislike
+
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
   try {
     if (res.locals.user) {
       const userLikes = await UserProductLike.findAll({ where: { userId: res.locals.user.id } });
+      const userDislike = await UserProductDislike.findAll({ where: { userId: res.locals.user.id } });
 
       const likesArr = userLikes.map((el) => el.productId);
+      const dislikeArr = userDislike.map((el) => el.productId);
+
+      const newSet = new Set([...likesArr, ...dislikeArr]);
+      const resultArr = Array.from(newSet);
 
       const products = await Product.findAll({
         offset: req.query.page,
@@ -21,7 +29,7 @@ router.get('/', async (req, res) => {
           { model: User, include: { model: City } },
         ],
         where: {
-          id: { [Op.notIn]: likesArr },
+          id: { [Op.notIn]: resultArr },
           userId: { [Op.ne]: res.locals.user.id },
         },
       });
@@ -140,12 +148,32 @@ router.post('/', async (req, res) => {
   }
 });
 
+
 router.post('/favorite', async (req, res) => {
   try {
     const { idProduct, idUser } = req.body;
     const favorite = await Favorite.create({ userId: idUser, productId: idProduct });
     if (favorite) {
       res.status(201).json({ message: 'success' });
+        }
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/dislike', async (req, res) => {
+  try {
+    if (res.locals.user) {
+      const { id } = req.body;
+
+      // eslint-disable-next-line max-len
+      let dislike = await UserProductDislike.findOne({ where: { userId: res.locals.user.id, productId: id } });
+
+      if (!dislike) {
+        dislike = await UserProductDislike.create({ userId: res.locals.user.id, productId: id });
+        res.status(201).json({ message: 'success' });
+      }
+
     }
   } catch ({ message }) {
     res.status(500).json({ message });
