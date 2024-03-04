@@ -4,15 +4,15 @@ import { authCheck } from '../Features/Auth/authSlice'
 import { Route, Routes } from 'react-router-dom'
 import Main from '../Features/Main/components/Main'
 import MainPage from '../Features/Main/components/MainPage'
-
 import RegLog from '../Features/Auth/components/RegLog'
 import { type RootState, useAppDispatch } from '../store/store'
 
 import IncorrectPage from '../Features/Incorrect/components/IncorrectPage'
-import AddProduct from '../Features/AddProduct/components/AddProduct'
+import AddProduct from '../Features/ProductForms/components/AddProduct'
+import ChangeProduct from '../Features/ProductForms/components/ChangeProduct'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
-import { userProducts, initProducts } from '../Features/Products/productSlice'
+import { userProducts, initProducts, initCategories } from '../Features/Products/productSlice'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -21,6 +21,7 @@ function App (): JSX.Element {
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
     dispatch(userProducts()).catch(console.log)
+    dispatch(initCategories()).catch(console.log)
   }, [message])
 
   const [currentPage, setCurrentPage] = useState(1)
@@ -68,7 +69,7 @@ function App (): JSX.Element {
           <Route path='profile' element={<UserProfile/>}/>
             <Route path='profile/edit' element={<UserProducts/>}/>
             <Route path='profile/myproducts' element={<UserProducts/>}/>
-
+            <Route path='profile/myproducts/:id/edit' element={<ChangeProduct />}/>
           <Route path='/newproduct' element={<AddProduct/>}/>
           <Route path='*' element={<IncorrectPage/>}/>
 
