@@ -6,7 +6,7 @@ const fileupload = require('../../utils/fileUpload');
 
 const {
 
-  Category, Product, ProductImage, User, City, UserProductLike, Favorite,  UserProductDislike
+  Category, Product, ProductImage, User, City, UserProductLike, Favorite, UserProductDislike,
 
 } = require('../../db/models');
 
@@ -149,18 +149,6 @@ router.post('/', async (req, res) => {
 });
 
 
-router.post('/favorite', async (req, res) => {
-  try {
-    const { idProduct, idUser } = req.body;
-    const favorite = await Favorite.create({ userId: idUser, productId: idProduct });
-    if (favorite) {
-      res.status(201).json({ message: 'success' });
-        }
-  } catch ({ message }) {
-    res.status(500).json({ message });
-  }
-});
-
 router.post('/dislike', async (req, res) => {
   try {
     if (res.locals.user) {
@@ -173,7 +161,6 @@ router.post('/dislike', async (req, res) => {
         dislike = await UserProductDislike.create({ userId: res.locals.user.id, productId: id });
         res.status(201).json({ message: 'success' });
       }
-
     }
   } catch ({ message }) {
     res.status(500).json({ message });

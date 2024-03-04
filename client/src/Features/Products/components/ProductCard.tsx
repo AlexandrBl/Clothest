@@ -9,8 +9,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { addMatch } from '../matchSlice'
 
-import { delProd, newFavoriteProduct, dislikeProduct } from '../productSlice'
-
+import { delProd, dislikeProduct } from '../productSlice'
+import { newFavoriteProduct } from '../../Favorite/favoriteSlice'
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()
@@ -38,7 +38,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
     if (userProducts.length > 0) {
       setModal(true)
     } else {
-      navigate('dragdrop')
+      navigate('newproduct')
     }
   }
 

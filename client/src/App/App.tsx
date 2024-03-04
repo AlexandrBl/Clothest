@@ -15,7 +15,7 @@ import UserProducts from '../Features/userProfile/components/UserProductsList'
 
 import { userProducts, initProducts, initCategories } from '../Features/Products/productSlice'
 import FavoritesList from '../Features/Favorite/components/FavoritesList'
-
+import { initFavorites } from '../Features/Favorite/favoriteSlice'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -25,6 +25,7 @@ function App (): JSX.Element {
     dispatch(authCheck()).catch(console.log)
     dispatch(userProducts()).catch(console.log)
     dispatch(initCategories()).catch(console.log)
+    dispatch(initFavorites()).catch(console.log)
   }, [message])
 
   const [currentPage, setCurrentPage] = useState(1)
@@ -74,9 +75,6 @@ function App (): JSX.Element {
           <Route path='profile/myproducts' element={<UserProducts/>}/>
           <Route path='profile/myproducts/:id/edit' element={<ChangeProduct />}/>
           <Route path='favorites' element={<FavoritesList/>}/>
-
-         
-            
 
           <Route path='/newproduct' element={<AddProduct/>}/>
           <Route path='*' element={<IncorrectPage/>}/>
