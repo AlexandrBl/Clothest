@@ -3,13 +3,15 @@ import { useDispatch } from 'react-redux'
 import authSlice from '../Features/Auth/authSlice'
 import productSlice from '../Features/Products/productSlice'
 import matchSlice from '../Features/Products/matchSlice'
+import favoriteSlice from '../Features/Favorite/favoriteSlice'
 
 const store = configureStore({
 
   reducer: {
     auth: authSlice,
     products: productSlice,
-    matches: matchSlice
+    matches: matchSlice,
+    favorites: favoriteSlice
   }
 })
 

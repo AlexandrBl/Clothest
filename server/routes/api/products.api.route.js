@@ -149,18 +149,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.post('/favorite', async (req, res) => {
-  try {
-    const { idProduct, idUser } = req.body;
-    const favorite = await Favorite.create({ userId: idUser, productId: idProduct });
-    if (favorite) {
-      res.status(201).json({ message: 'success' });
-    }
-  } catch ({ message }) {
-    res.status(500).json({ message });
-  }
-});
-
 router.post('/dislike', async (req, res) => {
   try {
     if (res.locals.user) {

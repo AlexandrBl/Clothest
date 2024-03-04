@@ -31,10 +31,6 @@ export const addProduct = createAsyncThunk(
   'product/add',
   async (obj: FormData) => await addProductFetch(obj)
 )
-export const newFavoriteProduct = createAsyncThunk(
-  'favorite/add',
-  async (obj: Favorite) => await addFavoriteFetch(obj)
-)
 
 export const dislikeProduct = createAsyncThunk(
   'product/dislike',
@@ -77,12 +73,6 @@ const productsSlice = createSlice({
         state.userProducts = state.userProducts.filter((product) => product.id !== action.payload.id)
       })
       .addCase(userProductDelete.rejected, (state, action) => {
-        state.message = action.error.message
-      })
-      .addCase(newFavoriteProduct.fulfilled, (state, action) => {
-        state.message = action.payload.message
-      })
-      .addCase(newFavoriteProduct.rejected, (state, action) => {
         state.message = action.error.message
       })
       .addCase(dislikeProduct.fulfilled, (state, action) => {
