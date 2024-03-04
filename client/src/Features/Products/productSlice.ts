@@ -3,12 +3,18 @@ import type { StateProducts } from './type'
 import * as api from './api'
 import { addProductFetch } from '../AddProduct/api'
 
-const initialState: StateProducts = { products: [], userProducts: [], message: '' }
+const initialState: StateProducts = { products: [], userProducts: [], categories: [], message: '' }
 
 export const initProducts = createAsyncThunk(
   'products/init',
   async (currentPage: number) => await api.initProductsFetch(currentPage)
 )
+
+export const initCategories = createAsyncThunk(
+  'categories/init',
+  async () => await api.initCategoriesFetch()
+)
+
 export const userProducts = createAsyncThunk(
   'userProducts/init',
   async () => await api.initUserProductsFetch()
@@ -56,6 +62,12 @@ const productsSlice = createSlice({
         state.userProducts = state.userProducts.filter((product) => product.id !== action.payload.id)
       })
       .addCase(userProductDelete.rejected, (state, action) => {
+        state.message = action.error.message
+      })
+      .addCase(initCategories.fulfilled, (state, action) => {
+        state.categories = action.payload
+      })
+      .addCase(initCategories.rejected, (state, action) => {
         state.message = action.error.message
       })
   }

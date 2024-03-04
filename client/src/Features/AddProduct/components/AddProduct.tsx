@@ -22,6 +22,7 @@ function AddProduct (): JSX.Element {
   const [images, setImages] = useState<File[]>([])
   const [previews, setPreviews] = useState<File[]>([])
   const message = useSelector((store: RootState) => store.products.message)
+  const categories = useSelector((store: RootState) => store.products.categories)
 
   const { register, handleSubmit, formState: { errors } } = useForm<Product>({
     resolver: yupResolver(schema)
@@ -63,7 +64,10 @@ function AddProduct (): JSX.Element {
         <span>{errors.title?.message}</span>
         <input type="text" placeholder='Описание' {...register('description')} />
         <span>{errors.description?.message}</span>
-        <input type="text" placeholder='Категория' {...register('category')} />
+        <select defaultValue='default' {...register('category')}>
+                <option value='default'>Выберите категорию</option>
+               {categories.map(el => <option key={el.id} value={el.title}>{el.title}</option>)}
+        </select>
         <span>{errors.category?.message}</span>
         <div {...getRootProps()} className="dropzone">
           <input {...getInputProps()} />

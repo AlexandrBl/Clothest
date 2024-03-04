@@ -28,9 +28,15 @@ export interface Product {
 
 export type UserProduct = Omit<Product, 'User'>
 
+export interface Category {
+  id: number
+  title: string
+}
+
 export interface StateProducts {
   userProducts: UserProduct[]
   products: Product[]
+  categories: Category[]
   message: string | undefined
 }
 
