@@ -1,18 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import { useAppDispatch, type RootState } from '../../../store/store'
+import { type RootState } from '../../../store/store'
 import UserProductCard from './UserProductCard'
-import { userProducts } from '../../Products/productSlice'
 
 function UserProductsList (): JSX.Element {
-  // const dispatch = useAppDispatch()
   const userProductsArray = useSelector((store: RootState) => store.products.userProducts)
   console.log(userProductsArray)
-
-  // useEffect(() => {
-  //   dispatch(userProducts()).catch(console.log)
-  // }, [])
-  //   const user = useSelector((store: RootState) => store.auth.user
 
   return (
     <>
