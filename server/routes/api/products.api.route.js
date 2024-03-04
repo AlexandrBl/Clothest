@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 const fileupload = require('../../utils/fileUpload');
 
 const {
-  Category, Product, ProductImage, User, City, UserProductLike,
+  Category, Product, ProductImage, User, City, UserProductLike, Favorite,
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
@@ -135,6 +135,18 @@ router.post('/', async (req, res) => {
     });
 
     res.status(201).json({ message: 'Продукт успешно добавлен', product });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/favorite', async (req, res) => {
+  try {
+    const { idProduct, idUser } = req.body;
+    const favorite = await Favorite.create({ userId: idUser, productId: idProduct });
+    if (favorite) {
+      res.status(201).json({ message: 'success' });
+    }
   } catch ({ message }) {
     res.status(500).json({ message });
   }

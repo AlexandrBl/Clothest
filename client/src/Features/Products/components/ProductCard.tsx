@@ -8,7 +8,7 @@ import { type RootState, useAppDispatch } from '../../../store/store'
 import { useNavigate } from 'react-router-dom'
 
 import { addMatch } from '../matchSlice'
-import { delProd } from '../productSlice'
+import { delProd, newFavoriteProduct } from '../productSlice'
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()
@@ -54,6 +54,11 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
         .catch(console.log)
     }
   }
+  const newFavorite = (): void => {
+    if (user != null) {
+      dispatch(newFavoriteProduct({ idProduct: product.id, idUser: user.id })).catch(console.log)
+    }
+  }
 
   return (
     <>
@@ -79,7 +84,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
 
     </div>}
 
-      <button type='button' className='product-card__button product-card__fav-button'>Fav</button>
+      <button type='button' className='product-card__button product-card__fav-button' onClick={newFavorite}>Fav</button>
       <button type='button' className='product-card__button product-card__like-button' onClick={matchPost}>Like</button>
       <button type='button' className='product-card__button product-card__dislike-button'>Dislike</button>
 
