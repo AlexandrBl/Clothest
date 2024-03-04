@@ -11,7 +11,8 @@ function Main (): JSX.Element {
   const message = useSelector((store: RootState) => store.matches.message)
 
   useEffect(() => {
-    console.log(message)
+    console.log(message, 123456)
+
     if (message === 'matchanimation') {
       setIsMatchDivShown(true)
     }

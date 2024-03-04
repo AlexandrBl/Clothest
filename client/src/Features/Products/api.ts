@@ -16,7 +16,7 @@ export const initUserProductsFetch = async (): Promise<Product[]> => {
   return data
 }
 
-export const addMatchFetch = async (obj: MatchWithoutIdAndMutual): Promise<Match> => {
+export const addMatchFetch = async (obj: MatchWithoutIdAndMutual): Promise<{ message: string, match: Match }> => {
   const res = await fetch('/api/matches/', {
     method: 'POST',
     headers: {
@@ -25,5 +25,7 @@ export const addMatchFetch = async (obj: MatchWithoutIdAndMutual): Promise<Match
     body: JSON.stringify(obj)
   })
   const data = await res.json()
+  console.log(data, 101010101010)
+
   return data
 }
