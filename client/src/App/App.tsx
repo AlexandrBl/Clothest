@@ -12,11 +12,13 @@ import IncorrectPage from '../Features/Incorrect/components/IncorrectPage'
 import DragDrop from '../Features/AddProduct/components/DragDrop'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
+import { userProducts } from '../Features/Products/productSlice'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
+    dispatch(userProducts()).catch(console.log)
   }, [])
   return (
     <div className="App">

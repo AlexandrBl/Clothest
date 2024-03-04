@@ -5,17 +5,18 @@ import UserProductCard from './UserProductCard'
 import { userProducts } from '../../Products/productSlice'
 
 function UserProductsList (): JSX.Element {
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
   const userProductsArray = useSelector((store: RootState) => store.products.userProducts)
+  console.log(userProductsArray)
 
-  useEffect(() => {
-    dispatch(userProducts()).catch(console.log)
-  }, [])
+  // useEffect(() => {
+  //   dispatch(userProducts()).catch(console.log)
+  // }, [])
   //   const user = useSelector((store: RootState) => store.auth.user
 
   return (
     <>
-    {userProducts.length > 0
+    {userProductsArray.length > 0
       ? userProductsArray.map((userProduct) => <UserProductCard userProduct={userProduct} key={userProduct.id}/>)
       : <p>У вас пока нет товаров</p>
     }
