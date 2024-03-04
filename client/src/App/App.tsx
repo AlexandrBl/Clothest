@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { authCheck } from '../Features/Auth/authSlice'
 import { Route, Routes } from 'react-router-dom'
 import Main from '../Features/Main/components/Main'
 import MainPage from '../Features/Main/components/MainPage'
 
 import RegLog from '../Features/Auth/components/RegLog'
-import { useAppDispatch } from '../store/store'
+import { type RootState, useAppDispatch } from '../store/store'
 
 import AddProductPage from '../Features/AddProduct/components/AddProductPage'
 import IncorrectPage from '../Features/Incorrect/components/IncorrectPage'
@@ -16,10 +17,14 @@ import { userProducts } from '../Features/Products/productSlice'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
+  const message = useSelector((store: RootState) => store.products.message)
+
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
     dispatch(userProducts()).catch(console.log)
-  }, [])
+
+  }, [message])
+
   return (
     <div className="App">
       <Routes>

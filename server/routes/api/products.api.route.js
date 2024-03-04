@@ -1,20 +1,41 @@
+/* eslint-disable radix */
 const router = require('express').Router();
+const { Op } = require('sequelize');
 const fileupload = require('../../utils/fileUpload');
 
 const {
-  Category, Product, ProductImage, User, City,
+  Category, Product, ProductImage, User, City, UserProductLike,
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
   try {
-    const products = await Product.findAll({
-      include: [
-        { model: User, include: { model: City } },
-      ],
-      offset: req.query.page,
-      limit: req.query.pageSize,
-    });
-    res.json(products);
+    if (res.locals.user) {
+      const userLikes = await UserProductLike.findAll({ where: { userId: res.locals.user.id } });
+
+      const likesArr = userLikes.map((el) => el.productId);
+
+      const products = await Product.findAll({
+        offset: req.query.page,
+        limit: req.query.pageSize,
+        include: [
+          { model: User, include: { model: City } },
+        ],
+        where: {
+          id: { [Op.notIn]: likesArr },
+          userId: { [Op.ne]: res.locals.user.id },
+        },
+      });
+      res.json(products);
+    } else {
+      const products = await Product.findAll({
+        offset: req.query.page,
+        limit: req.query.pageSize,
+        include: [
+          { model: User, include: { model: City } },
+        ],
+      });
+      res.json(products);
+    }
   } catch ({ message }) {
     res.json({ message });
   }
@@ -64,6 +85,21 @@ router.post('/', async (req, res) => {
     title = title.trim();
     description = description.trim();
     category = category.trim();
+
+    const userProducts = await Product.findOne({ where: { userId: res.locals.user.id } });
+
+    if (!userProducts) {
+      const dbUser = await User.findOne({ where: { id: res.locals.user.id } });
+      dbUser.defaultProduct = title;
+      await dbUser.save();
+    }
+
+    const prod = await Product.findOne({ where: { userId: res.locals.user.id, title } });
+
+    if (prod) {
+      res.status(400).json({ message: 'У вас уже есть продукт с таким названием' });
+      return;
+    }
 
     const file = req.files.images;
 
