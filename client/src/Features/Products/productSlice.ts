@@ -2,12 +2,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { StateProducts } from './type'
 import * as api from './api'
 
-
 import { addFavoriteFetch } from '../../Features/Favorite/api'
 import { type Favorite } from '../Favorite/type'
 
 import { addProductFetch } from '../ProductForms/api'
-
 
 const initialState: StateProducts = { products: [], userProducts: [], categories: [], message: '' }
 
@@ -86,22 +84,19 @@ const productsSlice = createSlice({
         state.message = action.error.message
       })
 
-
       .addCase(dislikeProduct.fulfilled, (state, action) => {
         state.message = action.payload.message
       })
       .addCase(dislikeProduct.rejected, (state, action) => {
-      state.message = action.error.message
+        state.message = action.error.message
       })
 
       .addCase(initCategories.fulfilled, (state, action) => {
         state.categories = action.payload
       })
       .addCase(initCategories.rejected, (state, action) => {
-  state.message = action.error.message
+        state.message = action.error.message
       })
-
-      
   }
 })
 
