@@ -5,16 +5,19 @@ import Footer from './Footer'
 import { useSelector } from 'react-redux'
 import { type RootState } from '../../../store/store'
 import Match from './Match'
+import MessageNotification from './MessageNotification'
 
-function Main (): JSX.Element {
+function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
   const [isMatchDivShown, setIsMatchDivShown] = useState(false)
-  const message = useSelector((store: RootState) => store.matches.message)
+  const messageMatch = useSelector((store: RootState) => store.matches.message)
+  const messageAuth = useSelector((store: RootState) => store.auth.message)
+  const messageProducts = useSelector((store: RootState) => store.products.message)
 
   useEffect(() => {
-    if (message === 'matchanimation') {
+    if (messageMatch === 'matchanimation') {
       setIsMatchDivShown(true)
     }
-  }, [message])
+  }, [messageMatch])
 
   return (
     <>
@@ -26,6 +29,7 @@ function Main (): JSX.Element {
     <main className="main">
       <Outlet/>
       {isMatchDivShown && <Match />}
+      {isNotifyAlive && <MessageNotification message={messageProducts} />}
     </main>
     </div>
 

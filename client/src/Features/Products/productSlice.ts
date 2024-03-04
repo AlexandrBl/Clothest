@@ -47,6 +47,9 @@ const productsSlice = createSlice({
   reducers: {
     delProd (state, action) {
       state.products = state.products.filter((el) => el.id !== action.payload)
+    },
+    clearMessage (state) {
+      state.message = ''
     }
   },
   extraReducers: (builder) => {
@@ -76,21 +79,18 @@ const productsSlice = createSlice({
       .addCase(userProductDelete.rejected, (state, action) => {
         state.message = action.error.message
       })
-
       .addCase(newFavoriteProduct.fulfilled, (state, action) => {
         state.message = action.payload.message
       })
       .addCase(newFavoriteProduct.rejected, (state, action) => {
         state.message = action.error.message
       })
-
       .addCase(dislikeProduct.fulfilled, (state, action) => {
         state.message = action.payload.message
       })
       .addCase(dislikeProduct.rejected, (state, action) => {
         state.message = action.error.message
       })
-
       .addCase(initCategories.fulfilled, (state, action) => {
         state.categories = action.payload
       })
@@ -100,5 +100,5 @@ const productsSlice = createSlice({
   }
 })
 
-export const { delProd } = productsSlice.actions
+export const { delProd, clearMessage } = productsSlice.actions
 export default productsSlice.reducer
