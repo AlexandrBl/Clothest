@@ -5,15 +5,21 @@ import Selector from '../../Selector/Components/Selector'
 import Modal from 'react-modal'
 import { useSelector } from 'react-redux'
 import { type RootState, useAppDispatch } from '../../../store/store'
+import { useNavigate } from 'react-router-dom'
 
 import { addMatch } from '../matchSlice'
+import { delProd } from '../productSlice'
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
+  const dispatch = useAppDispatch()
+
   const user = useSelector((store: RootState) => store.auth.user)
+  const userProducts = useSelector((store: RootState) => store.products.userProducts)
+  const navigate = useNavigate()
 
   const [sellerRate, setSellerRate] = useState('')
-
   const [currentProduct, setCurrentProduct] = useState('')
+  const [modal, setModal] = useState(false)
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -26,17 +32,27 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
     setCurrentProduct(value)
   }
 
-  const dispatch = useAppDispatch()
+  const defaultProdChange = (): void => {
+    if (userProducts.length > 0) {
+      setModal(true)
+    } else {
+      navigate('dragdrop')
+    }
+  }
 
   useEffect(() => {
     product.User.rating === 'Нет отзывов' ? setSellerRate('0') : setSellerRate(`${product.User.rating}`)
   }, [])
 
-  const [modal, setModal] = useState(false)
-
   const matchPost = (): void => {
-    dispatch(addMatch({ productId1: 8, productId2: product.id }))
-      .catch(console.log)
+    const userProduct = userProducts.find((product) => product.title === currentProduct)
+    if (userProduct) {
+      console.log(product.id)
+      dispatch(delProd(product.id))
+      const id = userProduct.id
+      dispatch(addMatch({ productId1: id, productId2: product.id }))
+        .catch(console.log)
+    }
   }
 
   return (
@@ -59,7 +75,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
       <p className="product-card__desc">{product.description}</p>
       </div>
       {user !== null && <div className='product-card__select-container '>
-      <button onClick={() => { setModal(true) }} type='button' className="selector__button">{`Вы меняете: ${currentProduct}`}</button>
+      <button onClick={() => { defaultProdChange() }} type='button' className="selector__button">{`Вы меняете: ${currentProduct}`}</button>
 
     </div>}
 
