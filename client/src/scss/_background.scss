@@ -1,92 +1,92 @@
-// body {
-//   justify-content: center;
-//   box-sizing: border-box;
-// }
+body {
+  justify-content: center;
+  box-sizing: border-box;
+}
 
-// .root {
-//   position: relative;
-//   z-index: 100;
-// }
+.root {
+  position: relative;
+  z-index: 100;
+}
 
-// .absolute{
-//   position: absolute;
-//   top: 5rem !important;
-//   inset: 0;
-//   justify-content: center;
-//   display: inline-flex;
-//   flex-direction: row;
-//   z-index: -100;
-// }
+.absolute{
+  position: absolute;
+  top: 5rem !important;
+  inset: 0;
+  justify-content: center;
+  display: inline-flex;
+  flex-direction: row;
+  z-index: -100;
+}
 
-// .justify-center{
-//   justify-content: center;
-// }
+.justify-center{
+  justify-content: center;
+}
 
-// .bg-shape1 {
-//   width: 20rem;
-//   height: 20rem;
-//   border-radius:  9999px;
-//   position: relative;
-//   animation: one 10s infinite ;
-// }
+.bg-shape1 {
+  width: 20rem;
+  height: 20rem;
+  border-radius:  9999px;
+  position: relative;
+  animation: one 10s infinite ;
+}
 
-// .bg-shape2 {
-//   width: 25rem;
-//   height: 25rem;
-//   border-radius:  9999px;
-//   position: relative;
-//   animation: two 10s infinite ;
-// }
+.bg-shape2 {
+  width: 25rem;
+  height: 25rem;
+  border-radius:  9999px;
+  position: relative;
+  animation: two 10s infinite ;
+}
 
-// .bg-shape3 {
-//   width: 20rem;
-//   height: 20rem;
-//   border-radius:  9999px;
-//   position: relative;
-//   animation: three 10s infinite ;
-// }
+.bg-shape3 {
+  width: 20rem;
+  height: 20rem;
+  border-radius:  9999px;
+  position: relative;
+  animation: three 10s infinite ;
+}
 
 
-// @keyframes one {
-//   0%{left: -3rem; top: -5rem;}
-//   25%{left: 0rem; top: -2rem;}
-//   50%{left: -3rem; top: 0rem;}
-//   75%{left: -4rem; top: -3rem;}
-//   100%{left: -3rem; top: -5rem;}
-// }
+@keyframes one {
+  0%{left: -3rem; top: -5rem;}
+  25%{left: 0rem; top: -2rem;}
+  50%{left: -3rem; top: 0rem;}
+  75%{left: -4rem; top: -3rem;}
+  100%{left: -3rem; top: -5rem;}
+}
 
-// @keyframes two {
-//   0%{left: 0rem; top: 0rem;}
-//   25%{left: 2rem; top: 2rem;}
-//   50%{left: -3rem; top: -3rem;}
-//   75%{left: 2rem; top: 2rem;}
-//   100%{left: 0rem; top: 0rem;}
-// }
+@keyframes two {
+  0%{left: 0rem; top: 0rem;}
+  25%{left: 2rem; top: 2rem;}
+  50%{left: -3rem; top: -3rem;}
+  75%{left: 2rem; top: 2rem;}
+  100%{left: 0rem; top: 0rem;}
+}
 
-// @keyframes three {
-//   0%{left: -3rem; top: -3rem;}
-//   25%{left: -5rem; top: -5rem;}
-//   50%{left: -10rem; top: -7rem;}
-//   75%{left: -5rem; top: -5rem;}
-//   100%{left: -3rem; top: -3rem;}
-// }
+@keyframes three {
+  0%{left: -3rem; top: -3rem;}
+  25%{left: -5rem; top: -5rem;}
+  50%{left: -10rem; top: -7rem;}
+  75%{left: -5rem; top: -5rem;}
+  100%{left: -3rem; top: -3rem;}
+}
 
-// .opasity-50{
-//   opacity: .5;
-// }
+.opasity-50{
+  opacity: .5;
+}
 
-// .bg-blur{
-//   filter: blur(90px);
-// }
+.bg-blur{
+  filter: blur(90px);
+}
 
-// .bg-1{
-//   background-color: $peach_color;
-// }
+.bg-1{
+  background-color: $peach_color;
+}
 
-// .bg-2{
-//   background-color: $pink_color;
-// }
+.bg-2{
+  background-color: $pink_color;
+}
 
-// .bg-3{
-//   background-color: rgb(140, 0, 215);
-// }
+.bg-3{
+  background-color: rgb(140, 0, 215);
+}

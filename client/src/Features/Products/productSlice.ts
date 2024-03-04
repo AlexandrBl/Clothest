@@ -29,6 +29,11 @@ export const addProduct = createAsyncThunk(
   async (obj: FormData) => await addProductFetch(obj)
 )
 
+export const dislikeProduct = createAsyncThunk(
+  'product/dislike',
+  async (id: number) => await api.addDislikefetch(id)
+)
+
 const productsSlice = createSlice({
   name: 'products',
   initialState,
@@ -64,10 +69,19 @@ const productsSlice = createSlice({
       .addCase(userProductDelete.rejected, (state, action) => {
         state.message = action.error.message
       })
+
+      .addCase(dislikeProduct.fulfilled, (state, action) => {
+        state.message = action.payload.message
+      })
+      .addCase(dislikeProduct.rejected, (state, action) => {
+      state.message = action.error.message
+      })
+
       .addCase(initCategories.fulfilled, (state, action) => {
         state.categories = action.payload
       })
       .addCase(initCategories.rejected, (state, action) => {
+
         state.message = action.error.message
       })
   }
