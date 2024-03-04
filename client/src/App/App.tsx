@@ -8,9 +8,8 @@ import MainPage from '../Features/Main/components/MainPage'
 import RegLog from '../Features/Auth/components/RegLog'
 import { type RootState, useAppDispatch } from '../store/store'
 
-import AddProductPage from '../Features/AddProduct/components/AddProductPage'
 import IncorrectPage from '../Features/Incorrect/components/IncorrectPage'
-import DragDrop from '../Features/AddProduct/components/DragDrop'
+import AddProduct from '../Features/AddProduct/components/AddProduct'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
 import { userProducts, initProducts } from '../Features/Products/productSlice'
@@ -70,8 +69,7 @@ function App (): JSX.Element {
             <Route path='profile/edit' element={<UserProducts/>}/>
             <Route path='profile/myproducts' element={<UserProducts/>}/>
 
-          <Route path='/addproduct' element={<AddProductPage/>}/>
-          <Route path='/dragdrop' element={<DragDrop/>}/>
+          <Route path='/newproduct' element={<AddProduct/>}/>
           <Route path='*' element={<IncorrectPage/>}/>
 
         </Route>

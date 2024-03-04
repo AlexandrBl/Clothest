@@ -17,7 +17,7 @@ const schema = object().shape({
   category: string().required('Необходимо указать категорию')
 })
 
-function DragDrop (): JSX.Element {
+function AddProduct (): JSX.Element {
   const dispatch = useAppDispatch()
   const [images, setImages] = useState<File[]>([])
   const [previews, setPreviews] = useState<File[]>([])
@@ -91,4 +91,4 @@ function DragDrop (): JSX.Element {
   )
 }
 
-export default DragDrop
+export default AddProduct
