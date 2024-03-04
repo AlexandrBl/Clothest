@@ -69,7 +69,7 @@ function App (): JSX.Element {
           <Route path='profile' element={<UserProfile/>}/>
             <Route path='profile/edit' element={<UserProducts/>}/>
             <Route path='profile/myproducts' element={<UserProducts/>}/>
-
+              
           <Route path='/newproduct' element={<AddProduct/>}/>
           <Route path='*' element={<IncorrectPage/>}/>
 
