@@ -12,7 +12,7 @@ import IncorrectPage from '../Features/Incorrect/components/IncorrectPage'
 import AddProduct from '../Features/AddProduct/components/AddProduct'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
-import { userProducts, initProducts } from '../Features/Products/productSlice'
+import { userProducts, initProducts, initCategories } from '../Features/Products/productSlice'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -21,6 +21,7 @@ function App (): JSX.Element {
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
     dispatch(userProducts()).catch(console.log)
+    dispatch(initCategories()).catch(console.log)
   }, [message])
 
   const [currentPage, setCurrentPage] = useState(1)
