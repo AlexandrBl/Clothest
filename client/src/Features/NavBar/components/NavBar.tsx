@@ -25,6 +25,9 @@ function NavBar (): JSX.Element {
         {(user != null)
           ? <>
           <li>
+          <NavLink to={'/favorites'}>Избранное</NavLink>
+          </li>
+          <li>
           <NavLink to={'/newproduct'}>Разместить объявление</NavLink>
           </li>
           <li>

@@ -12,7 +12,10 @@ import AddProduct from '../Features/ProductForms/components/AddProduct'
 import ChangeProduct from '../Features/ProductForms/components/ChangeProduct'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
+
 import { userProducts, initProducts, initCategories } from '../Features/Products/productSlice'
+import FavoritesList from '../Features/Favorite/components/FavoritesList'
+
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -64,12 +67,17 @@ function App (): JSX.Element {
       <Routes>
         <Route path='/' element={<Main/>}>
           <Route index element={<MainPage/>}/>
-
           <Route path='auth' element={<RegLog/>}/>
           <Route path='profile' element={<UserProfile/>}/>
-            <Route path='profile/edit' element={<UserProducts/>}/>
-            <Route path='profile/myproducts' element={<UserProducts/>}/>
-            <Route path='profile/myproducts/:id/edit' element={<ChangeProduct />}/>
+
+          <Route path='profile/edit' element={<UserProducts/>}/>
+          <Route path='profile/myproducts' element={<UserProducts/>}/>
+          <Route path='profile/myproducts/:id/edit' element={<ChangeProduct />}/>
+          <Route path='favorites' element={<FavoritesList/>}/>
+
+         
+            
+
           <Route path='/newproduct' element={<AddProduct/>}/>
           <Route path='*' element={<IncorrectPage/>}/>
 
