@@ -25,7 +25,7 @@ export const addMatchFetch = async (obj: MatchWithoutIdAndMutual): Promise<{ mes
     body: JSON.stringify(obj)
   })
   const data = await res.json()
-  console.log(data, 101010101010)
+  console.log(data)
 
   return data
 }

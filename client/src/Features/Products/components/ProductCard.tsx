@@ -46,8 +46,8 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
 
   const matchPost = (): void => {
     const userProduct = userProducts.find((product) => product.title === currentProduct)
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (userProduct) {
-      console.log(product.id)
       dispatch(delProd(product.id))
       const id = userProduct.id
       dispatch(addMatch({ productId1: id, productId2: product.id }))
@@ -75,7 +75,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
       <p className="product-card__desc">{product.description}</p>
       </div>
       {user !== null && <div className='product-card__select-container '>
-      <button onClick={() => { defaultProdChange() }} type='button' className="selector__button">{`Вы меняете: ${currentProduct}`}</button>
+      <button onClick={() => { defaultProdChange() }} type='button' className="selector__button">{`${currentProduct}`}</button>
 
     </div>}
 

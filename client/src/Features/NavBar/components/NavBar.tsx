@@ -16,7 +16,6 @@ function NavBar (): JSX.Element {
 
   const logOut = (): void => {
     dispatch(authLogout()).catch(console.log)
-    // localStorage.clear()
     navigate('/')
   }
 
@@ -32,7 +31,7 @@ function NavBar (): JSX.Element {
         </li>
           : <li className="nav__item">
                 <button onClick={() => { setModal(true) }}>AUTH</button>
-                <Modal className='modal' isOpen={modal} onRequestClose={() => { setModal(false) }}>
+                <Modal ariaHideApp={false} className='modal' isOpen={modal} onRequestClose={() => { setModal(false) }}>
                   <button onClick={() => { setModal(false) }}>x</button>
                    <RegLog/>
                 </Modal>

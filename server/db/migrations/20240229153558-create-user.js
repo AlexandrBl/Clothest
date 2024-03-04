@@ -45,7 +45,7 @@ module.exports = {
       defaultProduct: {
         allowNull: false,
         type: Sequelize.TEXT,
-        defaultValue: 'same product',
+        defaultValue: 'Добавьте продукт',
       },
       createdAt: {
         allowNull: false,
