@@ -16,8 +16,8 @@ const matchesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addMatch.fulfilled, (state, action) => {
-        state.matches.push(action.payload)
-        if (action.payload.isMutual) {
+        state.matches.push(action.payload.match)
+        if (action.payload.match.isMutual) {
           state.message = 'matchanimation'
         }
       })

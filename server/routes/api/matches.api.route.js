@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
     if (!(firstResult && secondResult)) {
       const newPotentialMatch = await Match.create({ productId1, productId2 });
       await UserProductLike.create({ userId: res.locals.user.id, productId: productId2 });
-      res.status(201).json({ message: 'confirm', newPotentialMatch });
+      res.status(201).json({ message: 'confirm', match: newPotentialMatch });
     } else {
       res.status(404).json({ message: 'Что-то пошло не так' });
     }
