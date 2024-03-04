@@ -13,6 +13,10 @@ export const userProducts = createAsyncThunk(
   'userProducts/init',
   async () => await api.initUserProductsFetch()
 )
+export const userProductDelete = createAsyncThunk(
+  'userProduct/delete',
+  async (id: number) => await api.deleteUserProductsFetch(id)
+)
 
 export const addProduct = createAsyncThunk(
   'product/add',
@@ -36,15 +40,22 @@ const productsSlice = createSlice({
         state.message = action.error.message
       })
       .addCase(userProducts.fulfilled, (state, action) => {
-        if (action.payload.length > 0) { state.userProducts.push(...action.payload) }
+        if (action.payload.length > 0) { state.userProducts = action.payload }
       })
       .addCase(userProducts.rejected, (state, action) => {
         state.message = action.error.message
       })
       .addCase(addProduct.fulfilled, (state, action) => {
+        state.userProducts.push(action.payload.product)
         state.message = action.payload.message
       })
       .addCase(addProduct.rejected, (state, action) => {
+        state.message = action.error.message
+      })
+      .addCase(userProductDelete.fulfilled, (state, action) => {
+        state.userProducts = state.userProducts.filter((product) => product.id !== action.payload.id)
+      })
+      .addCase(userProductDelete.rejected, (state, action) => {
         state.message = action.error.message
       })
   }
