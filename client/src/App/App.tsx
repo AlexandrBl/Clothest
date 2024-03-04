@@ -13,13 +13,22 @@ import ChangeProduct from '../Features/ProductForms/components/ChangeProduct'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
 
-import { userProducts, initProducts, initCategories } from '../Features/Products/productSlice'
+import { userProducts, initProducts, initCategories, clearMessage } from '../Features/Products/productSlice'
 import FavoritesList from '../Features/Favorite/components/FavoritesList'
+
 import { initFavorites } from '../Features/Favorite/favoriteSlice'
+
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
   const message = useSelector((store: RootState) => store.products.message)
+  const products = useSelector((store: RootState) => store.products.products)
+
+  useEffect(() => {
+    if (products.length < 9) {
+      setFetching(true)
+    }
+  }, [products])
 
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
@@ -28,15 +37,24 @@ function App (): JSX.Element {
     dispatch(initFavorites()).catch(console.log)
   }, [message])
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [fetching, setFetching] = useState(true)
+  const [fetching, setFetching] = useState(false)
   const [scrollCount, setscrollCount] = useState(1)
+  const [isNotifyAlive, setNotifyAlive] = useState(false)
+
+  useEffect(() => {
+    if (message !== '') {
+      setNotifyAlive(true)
+      setTimeout(() => {
+        dispatch(clearMessage())
+        setNotifyAlive(false)
+      }, 5000)
+    }
+  }, [message])
 
   useEffect(() => {
     if (fetching) {
-      dispatch(initProducts(currentPage)).catch(console.log)
+      dispatch(initProducts(products.length)).catch(console.log)
       setFetching(false)
-      setCurrentPage((prev) => prev + 8)
     }
   }, [fetching])
 
@@ -66,7 +84,7 @@ function App (): JSX.Element {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={<Main/>}>
+        <Route path='/' element={<Main isNotifyAlive={isNotifyAlive} />}>
           <Route index element={<MainPage/>}/>
           <Route path='auth' element={<RegLog/>}/>
           <Route path='profile' element={<UserProfile/>}/>

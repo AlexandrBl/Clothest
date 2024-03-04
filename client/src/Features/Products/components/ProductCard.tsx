@@ -9,8 +9,10 @@ import { useNavigate } from 'react-router-dom'
 
 import { addMatch } from '../matchSlice'
 
+
 import { delProd, dislikeProduct } from '../productSlice'
 import { newFavoriteProduct } from '../../Favorite/favoriteSlice'
+
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()

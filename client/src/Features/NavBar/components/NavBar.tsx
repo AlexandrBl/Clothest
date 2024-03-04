@@ -24,13 +24,13 @@ function NavBar (): JSX.Element {
 
         {(user != null)
           ? <>
-          <li>
+          <li className="nav__item">
           <NavLink to={'/favorites'}>Избранное</NavLink>
           </li>
-          <li>
+          <li className="nav__item">
           <NavLink to={'/newproduct'}>Разместить объявление</NavLink>
           </li>
-          <li>
+          <li className="nav__item">
           <NavLink to={'/profile'} >Profile</NavLink>
           </li>
           <li className="nav__item">
@@ -41,7 +41,7 @@ function NavBar (): JSX.Element {
 
         </>
           : <li className="nav__item">
-                <button onClick={() => { setModal(true) }}>AUTH</button>
+                <button className='button auth-button' onClick={() => { setModal(true) }}>AUTH</button>
                 <Modal ariaHideApp={false} className='modal' isOpen={modal} onRequestClose={() => { setModal(false) }}>
                   <button onClick={() => { setModal(false) }}>x</button>
                    <RegLog/>

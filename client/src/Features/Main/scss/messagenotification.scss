@@ -1,0 +1,20 @@
+.statemessage-notification {
+    width: 15rem;
+    height: 4rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: rgba(255, 0, 0, 0.246);
+    border-radius: 1.4rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.statemessage-notification__text {
+    width: 100%;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    text-align: center;
+    cursor: pointer;
+}

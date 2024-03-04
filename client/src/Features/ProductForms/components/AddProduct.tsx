@@ -88,7 +88,6 @@ function AddProduct (): JSX.Element {
               </div>
           </div>
         )}
-        <span>{message}</span>
         <button type='submit'>Добавить</button>
       </form>
     </div>

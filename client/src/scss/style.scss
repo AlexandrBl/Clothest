@@ -2,6 +2,7 @@
 @import './_reset.scss';
 @import './_common.scss';
 @import './_background.scss';
+@import '../Features/NavBar/scss/navBar.scss';
 @import '../Features/Main/scss/header.scss';
 @import '../Features/Products/scss/productsList.scss';
 @import '../Features/Products/scss/productCard.scss';
@@ -10,3 +11,4 @@
 @import '../Features/Selector/selector.scss';
 @import '../Features/Main/scss/match.scss';
 @import '../Features/userProfile/scss/userPage.scss';
+@import '../Features/Main/scss/messagenotification.scss';
