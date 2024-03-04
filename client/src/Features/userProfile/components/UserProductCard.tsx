@@ -10,8 +10,6 @@ function UserProductCard ({ userProduct }: { userProduct: UserProduct }): JSX.El
     dispatch(userProductDelete(id)).catch(console.log)
   }
 
-  // const changeProduct =
-
   return (
     <div className="product-card-container">
     <div className="product-card">

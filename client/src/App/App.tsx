@@ -9,7 +9,7 @@ import RegLog from '../Features/Auth/components/RegLog'
 import { type RootState, useAppDispatch } from '../store/store'
 
 import IncorrectPage from '../Features/Incorrect/components/IncorrectPage'
-import AddProduct from '../Features/AddProduct/components/AddProduct'
+import AddProduct from '../Features/ProductForms/components/AddProduct'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
 import { userProducts, initProducts, initCategories } from '../Features/Products/productSlice'
