@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { type CustomFileType, type Product } from '../type'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
-import { addProduct, deleteProductImage } from '../../Products/productSlice'
+import { deleteProductImage, updateProduct } from '../../Products/productSlice'
 import { useParams } from 'react-router-dom'
 import { type ProductImage, type UserProduct } from '../../Products/type'
 
@@ -49,7 +49,7 @@ function ChangeProduct (): JSX.Element {
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
-  const productPost: SubmitHandler<Product> = (data: Product) => {
+  const productUpdate: SubmitHandler<Product> = (data: Product) => {
     const formData = new FormData()
     for (const image of images) {
       formData.append('images', image)
@@ -57,9 +57,10 @@ function ChangeProduct (): JSX.Element {
     formData.append('title', data.title)
     formData.append('description', data.description)
     formData.append('category', data.category)
-    console.log(formData)
-    dispatch(addProduct(formData))
-      .catch(console.log)
+    if (id !== undefined) {
+      dispatch(updateProduct({ obj: formData, id: +id }))
+        .catch(console.log)
+    }
   }
 
   const deleteImage = (preview: CustomFileType): void => {
@@ -68,15 +69,15 @@ function ChangeProduct (): JSX.Element {
   }
 
   const deleteImageFromDb = (image: ProductImage): void => {
-    // if (product?.ProductImages.length > 0) {
-    //   dispatch(deleteProductImage(image.id))
-    //     .catch(console.log)
-    // }
+    if (product?.ProductImages !== undefined && product.ProductImages.length > 0) {
+      dispatch(deleteProductImage(image.id))
+        .catch(console.log)
+    }
   }
 
   return (
     <div className='center-container addProduct-container'>
-      <form className='addProduct-container__form' onSubmit={handleSubmit(productPost)}>
+      <form className='addProduct-container__form' onSubmit={handleSubmit(productUpdate)}>
         <input type="text" placeholder='Название' defaultValue={product?.title} {...register('title')} />
         <span>{errors.title?.message}</span>
         <input type="text" placeholder='Описание' defaultValue={product?.description} {...register('description')} />
