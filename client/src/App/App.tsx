@@ -32,12 +32,15 @@ function App (): JSX.Element {
 
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
+  }, [])
+
+  useEffect(() => {
     dispatch(userProducts()).catch(console.log)
     dispatch(initCategories()).catch(console.log)
-    if (user != null) {
+    if (user !== null) {
       dispatch(initFavorites()).catch(console.log)
     }
-  }, [message])
+  }, [message, user])
 
   const [fetching, setFetching] = useState(false)
   const [scrollCount, setscrollCount] = useState(1)

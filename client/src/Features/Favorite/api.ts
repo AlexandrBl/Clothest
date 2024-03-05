@@ -18,10 +18,11 @@ export const addFavoriteFetch = async (obj: Favorite): Promise<{ message: string
 }
 
 export const initFavoritesFetch = async (): Promise<Product[]> => {
-    const res = await fetch('/api/favorites')
-    const data = await res.json()
-    return data
-  
+  const res = await fetch('/api/favorites')
+  const data = await res.json()
+  console.log(data)
+
+  return data
 }
 
 export const addDislikeFavfetch = async (id: number): Promise<{ message: string }> => {
