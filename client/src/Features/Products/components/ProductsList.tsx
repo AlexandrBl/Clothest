@@ -15,6 +15,7 @@ function ProductsList (): JSX.Element {
       }</div>
       </div>
     </section>
+
   )
 }
 

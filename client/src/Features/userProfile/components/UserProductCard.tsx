@@ -3,6 +3,7 @@ import { type UserProduct } from '../../Products/type'
 import { useAppDispatch } from '../../../store/store'
 import { userProductDelete } from '../../Products/productSlice'
 import { useNavigate } from 'react-router-dom'
+import SwiperComponent from '../../Swiper/Components/Swiper'
 
 function UserProductCard ({ userProduct }: { userProduct: UserProduct }): JSX.Element {
   const dispatch = useAppDispatch()
@@ -20,7 +21,7 @@ function UserProductCard ({ userProduct }: { userProduct: UserProduct }): JSX.El
     <div className="product-card-container">
     <div className="product-card">
     <div className="pic-container">
-      <img src="/img/placeholder.jpeg" alt="placeholder" className="product-pic" />
+    <SwiperComponent img={userProduct.ProductImages}></SwiperComponent>
       </div>
       <div className="product-card__text">
       <h2 className='product-card__title'>{userProduct.title}</h2>

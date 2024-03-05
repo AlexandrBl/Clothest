@@ -6,14 +6,15 @@ const fileupload = require('../../utils/fileUpload');
 
 const {
 
+
   Category, Product, ProductImage, User, City, UserProductLike, UserProductDislike,
+
 
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
   try {
     if (res.locals.user) {
-      console.log(1111111111111);
       const userLikes = await UserProductLike.findAll({ where: { userId: res.locals.user.id } });
       const userDislike = await UserProductDislike.findAll({ where: { userId: res.locals.user.id } });
 
@@ -27,6 +28,7 @@ router.get('/', async (req, res) => {
         offset: req.query.page,
         limit: req.query.pageSize,
         include: [
+          { model: ProductImage },
           { model: User, include: { model: City } },
         ],
         where: {
@@ -34,12 +36,14 @@ router.get('/', async (req, res) => {
           userId: { [Op.ne]: res.locals.user.id },
         },
       });
+
       res.json(products);
     } else {
       const products = await Product.findAll({
         offset: req.query.page,
         limit: req.query.pageSize,
         include: [
+          { model: ProductImage },
           { model: User, include: { model: City } },
         ],
       });
@@ -54,7 +58,7 @@ router.get('/userProducts', async (req, res) => {
   try {
     let products = [];
     if (res.locals.user) {
-      products = await Product.findAll({ where: { userId: res.locals.user.id } });
+      products = await Product.findAll({ where: { userId: res.locals.user.id }, include: [{ model: ProductImage }] });
       res.json(products);
     } else {
       res.json(products);
@@ -95,14 +99,6 @@ router.post('/', async (req, res) => {
     description = description.trim();
     category = category.trim();
 
-    const userProducts = await Product.findOne({ where: { userId: res.locals.user.id } });
-
-    if (!userProducts) {
-      const dbUser = await User.findOne({ where: { id: res.locals.user.id } });
-      dbUser.defaultProduct = title;
-      await dbUser.save();
-    }
-
     const prod = await Product.findOne({ where: { userId: res.locals.user.id, title } });
 
     if (prod) {
@@ -110,10 +106,33 @@ router.post('/', async (req, res) => {
       return;
     }
 
-    const file = req.files.images;
+    let file = [];
+    if (req.files) {
+      file = req.files.images;
+    } else {
+      res.status(400).json({ message: 'Необходимо добавить хотя бы одну фотографию' });
+      return;
+    }
 
     if (!file) {
       res.status(400).json({ message: 'Необходимо добавить хотя бы одну фотографию' });
+      return;
+    }
+
+    let imgPaths = [];
+    if (Array.isArray(file)) {
+      const uploadPromises = file.map(async (el) => fileupload(el, res.locals.user.id));
+      imgPaths = await Promise.allSettled(uploadPromises);
+    } else {
+      const uploadPromises = [];
+      uploadPromises.push(await fileupload(file, res.locals.user.id));
+      imgPaths = await Promise.allSettled(uploadPromises);
+    }
+
+    const rejected = imgPaths.find((el) => el.status === 'rejected');
+
+    if (rejected) {
+      res.status(400).json({ message: rejected.reason });
       return;
     }
 
@@ -125,23 +144,24 @@ router.post('/', async (req, res) => {
     }
 
     const categoryId = categoryFromDb.id;
+
     const product = await Product.create({
       title, description, categoryId, userId: res.locals.user.id,
     });
 
-    const imgPaths = [];
-
-    if (Array.isArray(file)) {
-      file.forEach(async (el) => {
-        imgPaths.push(await fileupload(el, res.locals.user.id));
+    if (imgPaths.length > 0) {
+      imgPaths.forEach(async (img) => {
+        await ProductImage.create({ path: img.value, productId: product.id });
       });
-    } else {
-      imgPaths.push(await fileupload(file, res.locals.user.id));
     }
 
-    imgPaths.forEach(async (path) => {
-      await ProductImage.create({ path, productId: product.id });
-    });
+    const userProducts = await Product.findOne({ where: { userId: res.locals.user.id } });
+
+    if (!userProducts) {
+      const dbUser = await User.findOne({ where: { id: res.locals.user.id } });
+      dbUser.defaultProduct = title;
+      await dbUser.save();
+    }
 
     res.status(201).json({ message: 'Продукт успешно добавлен', product });
   } catch ({ message }) {

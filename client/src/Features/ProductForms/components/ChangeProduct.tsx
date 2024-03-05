@@ -9,9 +9,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { type Product } from '../type'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
-import { addProduct } from '../../Products/productSlice'
+import { addProduct, deleteProductImage } from '../../Products/productSlice'
 import { useParams } from 'react-router-dom'
-import { type UserProduct } from '../../Products/type'
+import { type ProductImage, type UserProduct } from '../../Products/type'
 
 const schema = object().shape({
   title: string().required('Необходимо указать название').max(80, 'Название должно быть не более 80 символов'),
@@ -21,12 +21,16 @@ const schema = object().shape({
 
 function ChangeProduct (): JSX.Element {
   const dispatch = useAppDispatch()
-  //   const [images, setImages] = useState<File[]>([])
-  //   const [previews, setPreviews] = useState<File[]>([])
-  const { id } = useParams()
+
+  const [images, setImages] = useState<File[]>([])
+  const [previews, setPreviews] = useState<File[]>([])
+  console.log(previews)
+
   const userProducts = useSelector((store: RootState) => store.products.userProducts)
   const message = useSelector((store: RootState) => store.products.message)
   const categories = useSelector((store: RootState) => store.products.categories)
+
+  const { id } = useParams()
 
   const product: UserProduct | undefined = id != null ? userProducts.find((prod) => prod.id === +id) : undefined
 
@@ -36,34 +40,41 @@ function ChangeProduct (): JSX.Element {
     resolver: yupResolver(schema)
   })
 
-  //   const onDrop = useCallback((acceptedFiles: File[]) => {
-  //     setImages((images) => [...images, ...acceptedFiles])
-  //     setPreviews((previewfiles) => {
-  //       const newFiles = acceptedFiles.map(file => Object.assign(file, { pic: URL.createObjectURL(file) }))
-  //       return [...previewfiles, ...newFiles]
-  //     }
-  //     )
-  //   }, [images])
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    setImages((images) => [...images, ...acceptedFiles])
+    setPreviews((previewfiles) => {
+      const newFiles = acceptedFiles.map(file => Object.assign(file, { pic: URL.createObjectURL(file) }))
+      return [...previewfiles, ...newFiles]
+    }
+    )
+  }, [images])
 
-  //   const { getRootProps, getInputProps } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
-  //   const productPost: SubmitHandler<Product> = (data: Product) => {
-  //     const formData = new FormData()
-  //     for (const key in images) {
-  //       formData.append('images', images[key])
-  //     }
-  //     formData.append('title', data.title)
-  //     formData.append('description', data.description)
-  //     formData.append('category', data.category)
+  const productPost: SubmitHandler<Product> = (data: Product) => {
+    const formData = new FormData()
+    for (const key in images) {
+      formData.append('images', images[key])
+    }
+    formData.append('title', data.title)
+    formData.append('description', data.description)
+    formData.append('category', data.category)
 
-  //     dispatch(addProduct(formData))
-  //       .catch(console.log)
-  //   }
+    dispatch(addProduct(formData))
+      .catch(console.log)
+  }
 
-  //   const deleteImage = (preview: File): void => {
-  //     setImages((images) => images.filter((image) => image.path !== preview.path))
-  //     setPreviews((previewfiles) => previewfiles.filter((file) => file.path !== preview.path))
-  //   }
+  const deleteImage = (preview: File): void => {
+    setImages((images) => images.filter((image) => image.path !== preview.path))
+    setPreviews((previewfiles) => previewfiles.filter((file) => file.path !== preview.path))
+  }
+
+  const deleteImageFromDb = (image: ProductImage): void => {
+    // if (product?.ProductImages.length > 0) {
+    //   dispatch(deleteProductImage(image.id))
+    //     .catch(console.log)
+    // }
+  }
 
   return (
     <div className='center-container addProduct-container'>
@@ -77,25 +88,31 @@ function ChangeProduct (): JSX.Element {
                {categories.map(el => <option key={el.id} value={el.title}>{el.title}</option>)}
         </select>
         <span>{errors.category?.message}</span>
-        {/* <div {...getRootProps()} className="dropzone">
+        <div {...getRootProps()} className="dropzone">
           <input {...getInputProps()} />
           <p className='drag-n-drop-p'>Drag and drop some files here, or click to select files</p>
-        </div> */}
-        {/* {images.length > 0 && (
+        </div>
           <div className='previews-container'>
             <p className='previews-container-p'>Прикрепленные файлы:</p>
               <div className='preview-common-container'>
-              {previews.map(preview => (
-                <div className='preview-container' key={preview.name} onClick={() => { deleteImage(preview) }}>
-                  <div className='preview-container__inner'>
-                    <img src={preview.pic} className='preview-container__image' onLoad={() => { URL.revokeObjectURL(preview.pic) }}/>
-                    <div className='preview-container__image-delete'><p className='preview-container__image-delete-p'>Удалить фотографию</p></div>
+                {previews.map(preview => (
+                  <div className='preview-container' key={preview.name} onClick={() => { deleteImage(preview) }}>
+                    <div className='preview-container__inner'>
+                      <img src={preview.pic} className='preview-container__image' onLoad={() => { URL.revokeObjectURL(preview.pic) }}/>
+                      <div className='preview-container__image-delete'><p className='preview-container__image-delete-p'>Удалить фотографию</p></div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+                {product?.ProductImages.map((image) => (
+                  <div className='preview-container' key={image.id} onClick={() => { deleteImageFromDb(image) }}>
+                    <div className='preview-container__inner'>
+                      <img className='preview-container__image' src={image.path}></img>
+                      <div className='preview-container__image-delete'><p className='preview-container__image-delete-p'>Удалить фотографию</p></div>
+                    </div>
+                  </div>
+                ))}
               </div>
           </div>
-        )} */}
         <span>{message}</span>
         <button type='submit'>Добавить</button>
       </form>

@@ -16,6 +16,12 @@ export interface City {
   name: string
 }
 
+export interface ProductImage {
+  id: number
+  path: string
+  productId: number
+}
+
 export interface Product {
   id: number
   title: string
@@ -23,6 +29,7 @@ export interface Product {
   userId: number
   categoryId: number
   isModerated: boolean
+  ProductImages: ProductImage[]
   User: FullUser
 }
 

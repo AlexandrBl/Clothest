@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const { Op } = require('sequelize');
 const {
-  Favorite, Product, User, City, UserProductLike, UserProductDislike,
+
+  Favorite, Product, User, City, ProductImage, UserProductLike, UserProductDislike,
+
 } = require('../../db/models');
 
 router.post('/addFavorite', async (req, res) => {
@@ -45,6 +47,7 @@ router.get('/', async (req, res) => {
 
     const products = await Product.findAll({
       include: [
+        { model: ProductImage },
         { model: User, include: { model: City } },
       ],
       where: {
