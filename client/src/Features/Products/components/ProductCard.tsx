@@ -9,10 +9,9 @@ import { useNavigate } from 'react-router-dom'
 
 import { addMatch } from '../matchSlice'
 
-
 import { delProd, dislikeProduct } from '../productSlice'
 import { newFavoriteProduct } from '../../Favorite/favoriteSlice'
-
+import SwiperComponent from '../../Swiper/Components/Swiper'
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()
@@ -73,6 +72,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
       dispatch(delProd(id))
     }
   }
+  console.log(product.ProductImages)
 
   return (
     <>
@@ -87,7 +87,8 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
 
       <p className="product-card__city">{product.User.City.name}</p>
       <div className="pic-container">
-      <img src="/img/placeholder.jpeg" alt="placeholder" className="product-pic" />
+      {/* <img src="/img/placeholder.jpeg" alt="placeholder" className="product-pic" /> */}
+      <SwiperComponent img={product.ProductImages}></SwiperComponent>
       </div>
       <div className="product-card__text">
       <h2 className='product-card__title'>{product.title}</h2>
@@ -106,7 +107,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
         <div className="seller-container">
         <p className="seller__rate">{sellerRate}</p>
         <div className="seller__pic-container">
-          <img src="/img/userpicdefault.jpeg" alt="" className="seller__pic" />
+          <img src="/img/userpicdefault.jpeg" alt="seller" className="seller__pic" />
         </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -8,22 +8,31 @@ import 'swiper/scss/pagination'
 
 import '../scss/swipre.scss'
 
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules'
+import { Navigation, Pagination, Keyboard, EffectCreative } from 'swiper/modules'
+import { type ProductImage } from '../../Products/type'
 
-export default function SwiperComponent (img: ): JSX.Element {
+export default function SwiperComponent ({ img }: { img: ProductImage[] }): JSX.Element {
   return (
     <>
     <Swiper
-        cssMode={true}
-        navigation={true}
-        pagination={true}
-        mousewheel={true}
-        keyboard={true}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        className="mySwiper"
-      >
-        <SwiperSlide>Slide 1</SwiperSlide>
-       
+        // navigation={true}
+        pagination={{ clickable: true }}
+        grabCursor={true}
+        effect={'creative'}
+        creativeEffect={{
+          prev: {
+            shadow: true,
+            translate: ['-20%', 0, -1]
+          },
+          next: {
+            translate: ['100%', 0, 0]
+          }
+        }}
+        modules={[Navigation, Pagination, Keyboard, EffectCreative]}
+        className="mySwiper">
+
+        {img.map(el => <SwiperSlide key={el.id}>{<img src={`/${el.path}`} alt={`photo-${el.id}`} className="product-pic" />}</SwiperSlide>)}
+
       </Swiper>
     </>
   )
