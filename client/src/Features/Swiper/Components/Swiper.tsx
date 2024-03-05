@@ -15,7 +15,7 @@ export default function SwiperComponent ({ img }: { img: ProductImage[] }): JSX.
   return (
     <>
     <Swiper
-        // navigation={true}
+        navigation={true}
         pagination={{ clickable: true }}
         grabCursor={true}
         effect={'creative'}

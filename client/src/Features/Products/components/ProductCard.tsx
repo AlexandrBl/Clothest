@@ -72,7 +72,6 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
       dispatch(delProd(id))
     }
   }
-  console.log(product.ProductImages)
 
   return (
     <>
