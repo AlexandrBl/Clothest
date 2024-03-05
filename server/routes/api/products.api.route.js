@@ -5,9 +5,7 @@ const { Op } = require('sequelize');
 const fileupload = require('../../utils/fileUpload');
 
 const {
-
   Category, Product, ProductImage, User, City, UserProductLike, Favorite, UserProductDislike,
-
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
@@ -26,6 +24,7 @@ router.get('/', async (req, res) => {
         offset: req.query.page,
         limit: req.query.pageSize,
         include: [
+          { model: ProductImage },
           { model: User, include: { model: City } },
         ],
         where: {
@@ -53,7 +52,7 @@ router.get('/userProducts', async (req, res) => {
   try {
     let products = [];
     if (res.locals.user) {
-      products = await Product.findAll({ where: { userId: res.locals.user.id } });
+      products = await Product.findAll({ where: { userId: res.locals.user.id }, include: [{ model: ProductImage }] });
       res.json(products);
     } else {
       res.json(products);
