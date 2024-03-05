@@ -8,4 +8,4 @@ export interface ProductAndId extends Product {
   id: number
 }
 
-export type CustomFileType = File & { path: string, pic: string }
+export type CustomFileType = File & { pic: string }

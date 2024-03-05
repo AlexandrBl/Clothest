@@ -21,7 +21,7 @@ const schema = object().shape({
 function ChangeProduct (): JSX.Element {
   const dispatch = useAppDispatch()
 
-  const [images, setImages] = useState<CustomFileType[]>([])
+  const [images, setImages] = useState<File[]>([])
   const [previews, setPreviews] = useState<CustomFileType[]>([])
 
   const userProducts = useSelector((store: RootState) => store.products.userProducts)
@@ -43,8 +43,7 @@ function ChangeProduct (): JSX.Element {
     setPreviews((previewfiles) => {
       const newFiles = acceptedFiles.map(file => Object.assign(file, { pic: URL.createObjectURL(file) }))
       return [...previewfiles, ...newFiles]
-    }
-    )
+    })
   }, [images])
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
@@ -63,9 +62,9 @@ function ChangeProduct (): JSX.Element {
     }
   }
 
-  const deleteImage = (preview: CustomFileType): void => {
-    setImages((images) => images.filter((image) => image.path !== preview.path))
-    setPreviews((previewfiles) => previewfiles.filter((file) => file.path !== preview.path))
+  const deleteImage = (preview: File): void => {
+    setImages((images) => images.filter((image) => image.name !== preview.name))
+    setPreviews((previewfiles) => previewfiles.filter((file) => file.name !== preview.name))
   }
 
   const deleteImageFromDb = (image: ProductImage): void => {
