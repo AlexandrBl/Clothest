@@ -17,12 +17,18 @@ export const newFavoriteProduct = createAsyncThunk(
 const favoritesSlice = createSlice({
   name: 'favorites',
   initialState,
-  reducers: {},
+  reducers: {
+    delFavProd (state, action) {
+      state.products = state.products.filter((el) => el.id !== action.payload)
+    },
+    clearMessage (state) {
+      state.message = ''
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(newFavoriteProduct.fulfilled, (state, action) => {
-        
-        state.message = action.payload.message
+        state.products.push(action.payload.product)
       })
       .addCase(newFavoriteProduct.rejected, (state, action) => {
         state.message = action.error.message
@@ -36,4 +42,5 @@ const favoritesSlice = createSlice({
   }
 })
 
+export const { delFavProd, clearMessage } = favoritesSlice.actions
 export default favoritesSlice.reducer

@@ -31,7 +31,6 @@ export const addProduct = createAsyncThunk(
   'product/add',
   async (obj: FormData) => await addProductFetch(obj)
 )
-
 export const dislikeProduct = createAsyncThunk(
   'product/dislike',
   async (id: number) => await api.addDislikefetch(id)

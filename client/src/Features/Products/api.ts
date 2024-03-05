@@ -3,7 +3,6 @@ import type { Category, Match, MatchWithoutIdAndMutual, Product } from './type'
 export const initProductsFetch = async (currentPage: number): Promise<Product[]> => {
   const res = await fetch(`/api/products?page=${currentPage}&pageSize=16`)
   const data = await res.json()
-  console.log(data, 999999999)
 
   return data
 }

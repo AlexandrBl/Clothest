@@ -6,7 +6,7 @@ const fileupload = require('../../utils/fileUpload');
 
 const {
 
-  Category, Product, ProductImage, User, City, UserProductLike, Favorite, UserProductDislike,
+  Category, Product, ProductImage, User, City, UserProductLike, UserProductDislike,
 
 } = require('../../db/models');
 

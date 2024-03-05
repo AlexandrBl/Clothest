@@ -1,7 +1,7 @@
 import { type Product } from '../Products/type'
 import { type Favorite } from './type'
 
-export const addFavoriteFetch = async (obj: Favorite): Promise<{ message: string }> => {
+export const addFavoriteFetch = async (obj: Favorite): Promise<{ message: string, product: Product }> => {
   const res = await fetch('/api/favorites/addFavorite', {
     method: 'POST',
     headers: {
@@ -18,7 +18,21 @@ export const addFavoriteFetch = async (obj: Favorite): Promise<{ message: string
 }
 
 export const initFavoritesFetch = async (): Promise<Product[]> => {
-  const res = await fetch('/api/favorites')
+    const res = await fetch('/api/favorites')
+    const data = await res.json()
+    return data
+  
+}
+
+export const addDislikeFavfetch = async (id: number): Promise<{ message: string }> => {
+  const res = await fetch('/api/favorites/dislike', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({ id })
+  })
   const data = await res.json()
+
   return data
 }
