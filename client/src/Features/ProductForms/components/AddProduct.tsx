@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-for-in-array */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState, useCallback, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
@@ -6,7 +5,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { object, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { type Product } from '../type'
+import { type CustomFileType, type Product } from '../type'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
 import { addProduct } from '../../Products/productSlice'
@@ -19,16 +18,16 @@ const schema = object().shape({
 
 function AddProduct (): JSX.Element {
   const dispatch = useAppDispatch()
-  const [images, setImages] = useState<File[]>([])
-  const [previews, setPreviews] = useState<File[]>([])
+  const [images, setImages] = useState<CustomFileType[]>([])
+  const [previews, setPreviews] = useState<CustomFileType[]>([])
   const message = useSelector((store: RootState) => store.products.message)
   const categories = useSelector((store: RootState) => store.products.categories)
-
+  console.log()
   const { register, handleSubmit, reset, formState: { errors } } = useForm<Product>({
     resolver: yupResolver(schema)
   })
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const onDrop = useCallback((acceptedFiles: CustomFileType[]) => {
     setImages((images) => [...images, ...acceptedFiles])
     setPreviews((previewfiles) => {
       const newFiles = acceptedFiles.map(file => Object.assign(file, { pic: URL.createObjectURL(file) }))
@@ -41,13 +40,13 @@ function AddProduct (): JSX.Element {
 
   const productPost: SubmitHandler<Product> = (data: Product) => {
     const formData = new FormData()
-    for (const key in images) {
-      formData.append('images', images[key])
+    for (const image of images) {
+      formData.append('images', image)
     }
     formData.append('title', data.title)
     formData.append('description', data.description)
     formData.append('category', data.category)
-
+    console.log(formData)
     dispatch(addProduct(formData))
       .catch(console.log)
   }
@@ -60,7 +59,7 @@ function AddProduct (): JSX.Element {
     }
   }, [message])
 
-  const deleteImage = (preview: File): void => {
+  const deleteImage = (preview: CustomFileType): void => {
     setImages((images) => images.filter((image) => image.path !== preview.path))
     setPreviews((previewfiles) => previewfiles.filter((file) => file.path !== preview.path))
   }

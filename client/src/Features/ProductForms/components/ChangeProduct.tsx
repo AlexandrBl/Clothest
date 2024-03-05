@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-for-in-array */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
@@ -6,7 +5,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { object, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { type Product } from '../type'
+import { type CustomFileType, type Product } from '../type'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
 import { addProduct, deleteProductImage } from '../../Products/productSlice'
@@ -22,9 +21,8 @@ const schema = object().shape({
 function ChangeProduct (): JSX.Element {
   const dispatch = useAppDispatch()
 
-  const [images, setImages] = useState<File[]>([])
-  const [previews, setPreviews] = useState<File[]>([])
-  console.log(previews)
+  const [images, setImages] = useState<CustomFileType[]>([])
+  const [previews, setPreviews] = useState<CustomFileType[]>([])
 
   const userProducts = useSelector((store: RootState) => store.products.userProducts)
   const message = useSelector((store: RootState) => store.products.message)
@@ -53,18 +51,18 @@ function ChangeProduct (): JSX.Element {
 
   const productPost: SubmitHandler<Product> = (data: Product) => {
     const formData = new FormData()
-    for (const key in images) {
-      formData.append('images', images[key])
+    for (const image of images) {
+      formData.append('images', image)
     }
     formData.append('title', data.title)
     formData.append('description', data.description)
     formData.append('category', data.category)
-
+    console.log(formData)
     dispatch(addProduct(formData))
       .catch(console.log)
   }
 
-  const deleteImage = (preview: File): void => {
+  const deleteImage = (preview: CustomFileType): void => {
     setImages((images) => images.filter((image) => image.path !== preview.path))
     setPreviews((previewfiles) => previewfiles.filter((file) => file.path !== preview.path))
   }
@@ -78,7 +76,7 @@ function ChangeProduct (): JSX.Element {
 
   return (
     <div className='center-container addProduct-container'>
-      <form className='addProduct-container__form'>
+      <form className='addProduct-container__form' onSubmit={handleSubmit(productPost)}>
         <input type="text" placeholder='Название' defaultValue={product?.title} {...register('title')} />
         <span>{errors.title?.message}</span>
         <input type="text" placeholder='Описание' defaultValue={product?.description} {...register('description')} />

@@ -31,7 +31,7 @@ export default function SwiperComponent ({ img }: { img: ProductImage[] }): JSX.
         modules={[Navigation, Pagination, Keyboard, EffectCreative]}
         className="mySwiper">
 
-        {img.map(el => <SwiperSlide key={el.id}>{<img src={`/${el.path}`} alt={`photo-${el.id}`} className="product-pic" />}</SwiperSlide>)}
+        {img.map(el => <SwiperSlide key={el.id}>{<img src={`${el.path}`} alt={`photo-${el.id}`} className="product-pic" />}</SwiperSlide>)}
 
       </Swiper>
     </>

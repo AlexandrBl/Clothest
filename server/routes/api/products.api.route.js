@@ -1,14 +1,11 @@
 /* eslint-disable max-len */
-/* eslint-disable radix */
 const router = require('express').Router();
 const { Op } = require('sequelize');
 const fileupload = require('../../utils/fileUpload');
 
 const {
 
-
   Category, Product, ProductImage, User, City, UserProductLike, UserProductDislike,
-
 
 } = require('../../db/models');
 
@@ -174,7 +171,6 @@ router.post('/dislike', async (req, res) => {
     if (res.locals.user) {
       const { id } = req.body;
 
-      // eslint-disable-next-line max-len
       let dislike = await UserProductDislike.findOne({ where: { userId: res.locals.user.id, productId: id } });
 
       if (!dislike) {
