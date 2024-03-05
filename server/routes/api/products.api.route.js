@@ -5,7 +5,11 @@ const { Op } = require('sequelize');
 const fileupload = require('../../utils/fileUpload');
 
 const {
+
+
   Category, Product, ProductImage, User, City, UserProductLike, UserProductDislike,
+
+
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {

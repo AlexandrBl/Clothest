@@ -18,11 +18,11 @@ import FavoritesList from '../Features/Favorite/components/FavoritesList'
 
 import { initFavorites } from '../Features/Favorite/favoriteSlice'
 
-
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
   const message = useSelector((store: RootState) => store.products.message)
   const products = useSelector((store: RootState) => store.products.products)
+  const user = useSelector((store: RootState) => store.auth.user)
 
   useEffect(() => {
     if (products.length < 9) {
@@ -32,10 +32,15 @@ function App (): JSX.Element {
 
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
+  }, [])
+
+  useEffect(() => {
     dispatch(userProducts()).catch(console.log)
     dispatch(initCategories()).catch(console.log)
-    dispatch(initFavorites()).catch(console.log)
-  }, [message])
+    if (user !== null) {
+      dispatch(initFavorites()).catch(console.log)
+    }
+  }, [message, user])
 
   const [fetching, setFetching] = useState(false)
   const [scrollCount, setscrollCount] = useState(1)

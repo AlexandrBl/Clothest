@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import { type Product } from '../../Products/type'
 import Selector from '../../Selector/Components/Selector'
 import { delProd, dislikeProduct } from '../../Products/productSlice'
+import { delFavProd, dislikeFavProduct, initFavorites } from '../../Favorite/favoriteSlice'
 import { addMatch } from '../../Products/matchSlice'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -13,8 +14,13 @@ function FavoriteCard ({ favorite }: { favorite: Product }): JSX.Element {
   const dispatch = useAppDispatch()
 
   const user = useSelector((store: RootState) => store.auth.user)
-  const userProducts = useSelector((store: RootState) => store.favorites.products)
+  // const message = useSelector((store: RootState) => store.favorites.message)
+  const userProducts = useSelector((store: RootState) => store.products.userProducts)
   const navigate = useNavigate()
+
+  // useEffect(() => {
+  //   dispatch(initFavorites()).catch(console.log)
+  // }, [])
 
   const [sellerRate, setSellerRate] = useState('')
   const [currentProduct, setCurrentProduct] = useState('')
@@ -43,10 +49,12 @@ function FavoriteCard ({ favorite }: { favorite: Product }): JSX.Element {
   }, [])
 
   const matchPost = (): void => {
-    const userProduct = userProducts.find((favorite) => favorite.title === currentProduct)
+    const userProduct = userProducts.find((product) => product.title === currentProduct)
+
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (userProduct) {
       dispatch(delProd(favorite.id))
+      dispatch(delFavProd(favorite.id))
       const id = userProduct.id
       dispatch(addMatch({ productId1: id, productId2: favorite.id }))
         .catch(console.log)
@@ -59,6 +67,7 @@ function FavoriteCard ({ favorite }: { favorite: Product }): JSX.Element {
       const id = favorite.id
 
       dispatch(dislikeProduct(id)).catch(console.log)
+      dispatch(delFavProd(id))
       dispatch(delProd(id))
     }
   }

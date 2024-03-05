@@ -10,8 +10,10 @@ import { useNavigate } from 'react-router-dom'
 import { addMatch } from '../matchSlice'
 
 import { delProd, dislikeProduct } from '../productSlice'
-import { newFavoriteProduct } from '../../Favorite/favoriteSlice'
+
+import { delFavProd, newFavoriteProduct } from '../../Favorite/favoriteSlice'
 import SwiperComponent from '../../Swiper/Components/Swiper'
+
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()
@@ -52,6 +54,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (userProduct) {
       dispatch(delProd(product.id))
+      dispatch(delFavProd(product.id))
       const id = userProduct.id
       dispatch(addMatch({ productId1: id, productId2: product.id }))
         .catch(console.log)
@@ -70,6 +73,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
 
       dispatch(dislikeProduct(id)).catch(console.log)
       dispatch(delProd(id))
+      dispatch(delFavProd(id))
     }
   }
 
