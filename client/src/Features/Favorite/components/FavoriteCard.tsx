@@ -7,6 +7,7 @@ import { addMatch } from '../../Products/matchSlice'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { type RootState, useAppDispatch } from '../../../store/store'
+import SwiperComponent from '../../Swiper/Components/Swiper'
 
 function FavoriteCard ({ favorite }: { favorite: Product }): JSX.Element {
   const dispatch = useAppDispatch()
@@ -61,6 +62,7 @@ function FavoriteCard ({ favorite }: { favorite: Product }): JSX.Element {
       dispatch(delProd(id))
     }
   }
+  console.log(favorite)
 
   return (
     <>
@@ -75,7 +77,7 @@ function FavoriteCard ({ favorite }: { favorite: Product }): JSX.Element {
 
       <p className="product-card__city">{favorite.User.City.name}</p>
       <div className="pic-container">
-      <img src="/img/placeholder.jpeg" alt="placeholder" className="product-pic" />
+      <SwiperComponent img={favorite.ProductImages}></SwiperComponent>
       </div>
       <div className="product-card__text">
       <h2 className='product-card__title'>{favorite.title}</h2>
