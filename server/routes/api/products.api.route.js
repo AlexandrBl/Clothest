@@ -93,14 +93,6 @@ router.post('/', async (req, res) => {
     description = description.trim();
     category = category.trim();
 
-    const userProducts = await Product.findOne({ where: { userId: res.locals.user.id } });
-
-    if (!userProducts) {
-      const dbUser = await User.findOne({ where: { id: res.locals.user.id } });
-      dbUser.defaultProduct = title;
-      await dbUser.save();
-    }
-
     const prod = await Product.findOne({ where: { userId: res.locals.user.id, title } });
 
     if (prod) {
@@ -108,10 +100,33 @@ router.post('/', async (req, res) => {
       return;
     }
 
-    const file = req.files.images;
+    let file = [];
+    if (req.files) {
+      file = req.files.images;
+    } else {
+      res.status(400).json({ message: 'Необходимо добавить хотя бы одну фотографию' });
+      return;
+    }
 
     if (!file) {
       res.status(400).json({ message: 'Необходимо добавить хотя бы одну фотографию' });
+      return;
+    }
+
+    let imgPaths = [];
+    if (Array.isArray(file)) {
+      const uploadPromises = file.map(async (el) => fileupload(el, res.locals.user.id));
+      imgPaths = await Promise.allSettled(uploadPromises);
+    } else {
+      const uploadPromises = [];
+      uploadPromises.push(await fileupload(file, res.locals.user.id));
+      imgPaths = await Promise.allSettled(uploadPromises);
+    }
+
+    const rejected = imgPaths.find((el) => el.status === 'rejected');
+
+    if (rejected) {
+      res.status(400).json({ message: rejected.reason });
       return;
     }
 
@@ -123,23 +138,24 @@ router.post('/', async (req, res) => {
     }
 
     const categoryId = categoryFromDb.id;
+
     const product = await Product.create({
       title, description, categoryId, userId: res.locals.user.id,
     });
 
-    const imgPaths = [];
-
-    if (Array.isArray(file)) {
-      file.forEach(async (el) => {
-        imgPaths.push(await fileupload(el, res.locals.user.id));
+    if (imgPaths.length > 0) {
+      imgPaths.forEach(async (img) => {
+        await ProductImage.create({ path: img.value, productId: product.id });
       });
-    } else {
-      imgPaths.push(await fileupload(file, res.locals.user.id));
     }
 
-    imgPaths.forEach(async (path) => {
-      await ProductImage.create({ path, productId: product.id });
-    });
+    const userProducts = await Product.findOne({ where: { userId: res.locals.user.id } });
+
+    if (!userProducts) {
+      const dbUser = await User.findOne({ where: { id: res.locals.user.id } });
+      dbUser.defaultProduct = title;
+      await dbUser.save();
+    }
 
     res.status(201).json({ message: 'Продукт успешно добавлен', product });
   } catch ({ message }) {

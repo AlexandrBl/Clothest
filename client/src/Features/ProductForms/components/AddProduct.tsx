@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-for-in-array */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
@@ -24,7 +24,7 @@ function AddProduct (): JSX.Element {
   const message = useSelector((store: RootState) => store.products.message)
   const categories = useSelector((store: RootState) => store.products.categories)
 
-  const { register, handleSubmit, formState: { errors } } = useForm<Product>({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<Product>({
     resolver: yupResolver(schema)
   })
 
@@ -51,6 +51,14 @@ function AddProduct (): JSX.Element {
     dispatch(addProduct(formData))
       .catch(console.log)
   }
+
+  useEffect(() => {
+    if (message === 'Продукт успешно добавлен') {
+      reset()
+      setImages([])
+      setPreviews([])
+    }
+  }, [message])
 
   const deleteImage = (preview: File): void => {
     setImages((images) => images.filter((image) => image.path !== preview.path))
