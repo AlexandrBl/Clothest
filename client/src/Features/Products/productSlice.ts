@@ -23,10 +23,12 @@ export const userProducts = createAsyncThunk(
   'userProducts/init',
   async () => await api.initUserProductsFetch()
 )
+
 export const userProductDelete = createAsyncThunk(
   'userProduct/delete',
   async (id: number) => await api.deleteUserProductsFetch(id)
 )
+
 export const addProduct = createAsyncThunk(
   'product/add',
   async (obj: FormData) => await addProductFetch(obj)
@@ -35,6 +37,11 @@ export const addProduct = createAsyncThunk(
 export const dislikeProduct = createAsyncThunk(
   'product/dislike',
   async (id: number) => await api.addDislikefetch(id)
+)
+
+export const deleteProductImage = createAsyncThunk(
+  'userProductImage/delete',
+  async (id: number) => await api.deleteProductImageFetch(id)
 )
 
 const productsSlice = createSlice({
@@ -85,6 +92,15 @@ const productsSlice = createSlice({
         state.categories = action.payload
       })
       .addCase(initCategories.rejected, (state, action) => {
+        state.message = action.error.message
+      })
+      .addCase(deleteProductImage.fulfilled, (state, action) => {
+        state.userProducts = state.userProducts.map((el) => {
+          el.ProductImages = el.ProductImages.filter((el) => el.id !== action.payload.id)
+          return el
+        })
+      })
+      .addCase(deleteProductImage.rejected, (state, action) => {
         state.message = action.error.message
       })
   }

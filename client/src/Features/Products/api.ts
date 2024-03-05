@@ -53,3 +53,11 @@ export const addDislikefetch = async (id: number): Promise<{ message: string }> 
 
   return data
 }
+
+export const deleteProductImageFetch = async (id: number): Promise<{ message: string, id: number }> => {
+  const res = await fetch(`/api/productImages/${id}`, {
+    method: 'DELETE'
+  })
+  const data = await res.json()
+  return data
+}
