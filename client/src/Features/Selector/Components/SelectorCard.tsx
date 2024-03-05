@@ -1,7 +1,7 @@
 import React from 'react'
 import { type UserProduct } from '../../Products/type'
 
-function SelectorCard ({ product, currentProduct, changeCurrentProduct }: { product: UserProduct, currentProduct: string, changeCurrentProduct: (value: string) => void }): JSX.Element {
+function SelectorCard ({ product, changeCurrentProduct }: { product: UserProduct, currentProduct: string, changeCurrentProduct: (value: string) => void }): JSX.Element {
   function handeClick (): void {
     changeCurrentProduct(product.title)
   }

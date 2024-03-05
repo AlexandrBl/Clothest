@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { object, ref, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-// import * as api from '../api'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import type { UserAndCpassword } from '../type'
 import { authRegistration } from '../authSlice'
@@ -31,7 +31,9 @@ function RegLog (): JSX.Element {
   const [viewMessage, setMessage] = useState('')
 
   useEffect(() => {
-    setMessage(message)
+    if (message !== undefined) {
+      setMessage(message)
+    }
     setTimeout(() => { setMessage('') }, 1000)
   }, [message])
 
@@ -43,7 +45,7 @@ function RegLog (): JSX.Element {
     resolver: yupResolver(schema)
   })
 
-  const registration: SubmitHandler<UserAndCpassword> = (data: UserAndCpassword) => {
+  const registration: SubmitHandler<UserAndCpassword> = async (data: UserAndCpassword) => {
     dispatch(authRegistration(data)).catch(console.log)
     if (data !== null) {
       navigate('/')

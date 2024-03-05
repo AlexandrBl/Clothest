@@ -4,7 +4,6 @@ import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { object, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-// import * as api from '../api'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import type { UserWithoutName } from '../type'
 import { authLogin } from '../authSlice'
@@ -23,7 +22,9 @@ function RegLog (): JSX.Element {
   const [viewMessage, setMessage] = useState('')
 
   useEffect(() => {
-    setMessage(message)
+    if (message !== undefined) {
+      setMessage(message)
+    }
     setTimeout(() => { setMessage('') }, 1000)
   }, [message])
 
