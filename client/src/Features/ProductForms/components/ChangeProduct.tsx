@@ -70,10 +70,10 @@ function ChangeProduct (): JSX.Element {
   }
 
   const deleteImageFromDb = (image: ProductImage): void => {
-    if (product?.ProductImages.length > 0) {
-      dispatch(deleteProductImage(image.id))
-        .catch(console.log)
-    }
+    // if (product?.ProductImages.length > 0) {
+    //   dispatch(deleteProductImage(image.id))
+    //     .catch(console.log)
+    // }
   }
 
   return (
