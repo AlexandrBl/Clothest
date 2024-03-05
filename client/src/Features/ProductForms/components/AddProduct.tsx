@@ -48,7 +48,6 @@ function AddProduct (): JSX.Element {
     formData.append('title', data.title)
     formData.append('description', data.description)
     formData.append('category', data.category)
-    console.log(formData)
     dispatch(addProduct(formData))
       .catch(console.log)
   }
