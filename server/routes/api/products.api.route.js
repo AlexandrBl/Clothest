@@ -13,7 +13,6 @@ const {
 router.get('/', async (req, res) => {
   try {
     if (res.locals.user) {
-      console.log(1111111111111);
       const userLikes = await UserProductLike.findAll({ where: { userId: res.locals.user.id } });
       const userDislike = await UserProductDislike.findAll({ where: { userId: res.locals.user.id } });
 
