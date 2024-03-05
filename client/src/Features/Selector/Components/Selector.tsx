@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React from 'react'
 import SelectorCard from '../Components/SelectorCard'
 import { useSelector } from 'react-redux'

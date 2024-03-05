@@ -14,7 +14,6 @@ import { delProd, dislikeProduct } from '../productSlice'
 import { delFavProd, newFavoriteProduct } from '../../Favorite/favoriteSlice'
 import SwiperComponent from '../../Swiper/Components/Swiper'
 
-
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()
 
@@ -27,8 +26,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
   const [modal, setModal] = useState(false)
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (user) {
+    if (user !== null) {
       setCurrentProduct(user.defaultProduct)
     }
   }, [user])
@@ -51,8 +49,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
 
   const matchPost = (): void => {
     const userProduct = userProducts.find((product) => product.title === currentProduct)
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (userProduct) {
+    if (userProduct !== undefined) {
       dispatch(delProd(product.id))
       dispatch(delFavProd(product.id))
       const id = userProduct.id
@@ -67,8 +64,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
   }
 
   const dislike = (): void => {
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (user) {
+    if (user !== null) {
       const id = product.id
 
       dispatch(dislikeProduct(id)).catch(console.log)
@@ -90,7 +86,6 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
 
       <p className="product-card__city">{product.User.City.name}</p>
       <div className="pic-container">
-      {/* <img src="/img/placeholder.jpeg" alt="placeholder" className="product-pic" /> */}
       <SwiperComponent img={product.ProductImages}></SwiperComponent>
       </div>
       <div className="product-card__text">

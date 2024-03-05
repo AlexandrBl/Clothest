@@ -12,6 +12,7 @@ router.post('/addFavorite', async (req, res) => {
     const favorite = await Favorite.create({ userId: idUser, productId: idProduct });
     const product = await Product.findOne({
       include: [
+        { model: ProductImage },
         { model: User, include: { model: City } },
       ],
       where: {
@@ -54,7 +55,7 @@ router.get('/', async (req, res) => {
         id: { [Op.in]: favsId },
       },
     });
-
+    products.forEach((el) => el.ProductImages.sort((a, b) => a.id - b.id));
     res.status(201).json(products);
   } catch ({ message }) {
     res.status(500).json({ message });

@@ -66,14 +66,12 @@ function App (): JSX.Element {
   useEffect(() => {
     const container = document.querySelector('.products__list')
 
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (container) {
+    if (container !== null) {
       container.addEventListener('scroll', scrollHendler)
     }
 
     return function () {
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      if (container) {
+      if (container !== null) {
         container.removeEventListener('scroll', scrollHendler)
       }
     }

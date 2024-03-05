@@ -10,7 +10,7 @@ import MessageNotification from './MessageNotification'
 function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
   const [isMatchDivShown, setIsMatchDivShown] = useState(false)
   const messageMatch = useSelector((store: RootState) => store.matches.message)
-  const messageAuth = useSelector((store: RootState) => store.auth.message)
+  // const messageAuth = useSelector((store: RootState) => store.auth.message)
   const messageProducts = useSelector((store: RootState) => store.products.message)
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
     <main className="main">
       <Outlet/>
       {isMatchDivShown && <Match />}
-      {isNotifyAlive && <MessageNotification message={messageProducts} />}
+      {isNotifyAlive && messageProducts !== undefined && <MessageNotification message={messageProducts} />}
     </main>
     </div>
 
