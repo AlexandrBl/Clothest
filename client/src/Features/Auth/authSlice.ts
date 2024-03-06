@@ -46,7 +46,7 @@ const authSlice = createSlice({
       .addCase(authLogin.rejected, (state, action) => {
         state.message = action.error.message
       })
-      .addCase(authLogout.fulfilled, (state, action) => {
+      .addCase(authLogout.fulfilled, (state) => {
         state.user = null
         state.message = ''
         window.location.reload()

@@ -1,11 +1,13 @@
+
 /* eslint-disable @typescript-eslint/no-misused-promises */
+
 import React, { useState, useCallback, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { object, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { type CustomFileType, type Product } from '../type'
+import { type Product } from '../type'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
 import { addProduct } from '../../Products/productSlice'
@@ -16,11 +18,18 @@ const schema = object().shape({
   category: string().required('Необходимо указать категорию')
 })
 
+export interface SomeType extends File {
+  path: string
+  pic: string
+}
+
 function AddProduct (): JSX.Element {
   const dispatch = useAppDispatch()
 
+
   const [images, setImages] = useState<File[]>([])
   const [previews, setPreviews] = useState<CustomFileType[]>([])
+
 
   const message = useSelector((store: RootState) => store.products.message)
   const categories = useSelector((store: RootState) => store.products.categories)
@@ -29,14 +38,17 @@ function AddProduct (): JSX.Element {
     resolver: yupResolver(schema)
   })
 
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
+
     setImages((images) => [...images, ...acceptedFiles])
     setPreviews((previewfiles) => {
       const newFiles = acceptedFiles.map(file => Object.assign(file, { pic: URL.createObjectURL(file) }))
       return [...previewfiles, ...newFiles]
     }
     )
-  }, [images])
+  }
+
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
@@ -60,9 +72,12 @@ function AddProduct (): JSX.Element {
     }
   }, [message])
 
+
   const deleteImage = (preview: CustomFileType): void => {
     setImages((images) => images.filter((image) => image.name !== preview.name))
     setPreviews((previewfiles) => previewfiles.filter((file) => file.name !== preview.name))
+
+ 
   }
 
   return (

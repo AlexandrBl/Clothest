@@ -1,5 +1,5 @@
-import { FullUser } from '../Products/type'
-import type { UserAndId, UserWithoutName, UserWithProduct, UserAndCpassword, User } from './type'
+import { type FullUser } from '../Products/type'
+import type { UserWithoutName, UserAndCpassword, User } from './type'
 
 export const registrationFetch = async (obj: UserAndCpassword): Promise<FullUser> => {
   const res = await fetch('/api/auth/registration', {

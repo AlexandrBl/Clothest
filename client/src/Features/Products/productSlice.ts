@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { StateProducts } from './type'
 import * as api from './api'
 
+
 import { addProductFetch, updateProductFetch } from '../ProductForms/api'
+
 
 const initialState: StateProducts = { products: [], userProducts: [], categories: [], message: '' }
 
@@ -43,6 +45,7 @@ export const dislikeProduct = createAsyncThunk(
 
 export const deleteProductImage = createAsyncThunk(
   'userProductImage/delete',
+  // eslint-disable-next-line @typescript-eslint/return-await
   async (id: number) => await api.deleteProductImageFetch(id)
 )
 
