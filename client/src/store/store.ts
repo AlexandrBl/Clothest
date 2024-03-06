@@ -11,7 +11,8 @@ const store = configureStore({
     auth: authSlice,
     products: productSlice,
     matches: matchSlice,
-    favorites: favoriteSlice
+    favorites: favoriteSlice,
+
   }
 })
 

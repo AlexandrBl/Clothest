@@ -1,0 +1,112 @@
+.chats-container {
+    width: 80rem;
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.512);
+    display: flex;
+}
+
+.chatslist-container {
+    width: 20%;
+    height: 100%;
+    background-color: rgba(255, 214, 214, 0.711);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chatlist-container__title {
+    width: 100%;
+    background-color: rgba(255, 160, 160, 0.711);
+    display: flex;
+    align-items: center;
+    height: 5rem;
+}
+
+.chatlist-container__title_text {
+    width: 100%;
+    text-align: center;
+}
+
+.chatslist-container__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chatslist-container__list_element {
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.295);
+    transition: 0.2s;
+}
+
+.chatslist-container__list_element:hover {
+    background-color: rgba(255, 255, 255, 0.573);
+
+}
+
+.chatslist-container__list_element-text {
+    width: 100%;
+    text-align: center;
+}
+
+.currentchat-container {
+    width: 68%;
+}
+
+.currentchat-container__title {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+}
+
+.currentchat-container__title-text {
+    width: 100%;
+    text-align: center;
+}
+
+.chat-history-container {
+    height: 60%;
+    background-color: rgba(182, 255, 255, 0.326);
+    padding: 1rem;
+}
+
+.sendmessage-container {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    text-align: center;
+    justify-content: space-between
+}
+
+.sendmessage-container__input {
+    width: 100%;
+}
+
+.sendmessage-container__button {
+    background-color: rgba(115, 149, 111, 0.496);
+    transition: 0.2s;
+}
+
+.sendmessage-container__button:hover {
+    background-color: rgba(129, 216, 119, 0.637);
+}
+
+.message-container {
+    width: 40%;
+    height: 2rem;
+    margin: 1rem;
+    background-color: rgba(255, 255, 255, 0.389);
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.message-container-text {
+    margin-left: 1rem;
+}

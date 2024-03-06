@@ -2,9 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { StateProducts } from './type'
 import * as api from './api'
 
-
 import { addProductFetch, updateProductFetch } from '../ProductForms/api'
-
 
 const initialState: StateProducts = { products: [], userProducts: [], categories: [], message: '' }
 
