@@ -5,7 +5,7 @@ function MessageNotification ({ message }: { message: string }): JSX.Element {
 
   return (
     <>
-    {coverDiv && <div className='statemessage-notification notification' onClick={() => { setCoverDiv(false) }}>
+    {coverDiv && message !== 'success' && <div className='statemessage-notification notification' onClick={() => { setCoverDiv(false) }}>
         <p className='statemessage-notification__text'>
             {message}
         </p>

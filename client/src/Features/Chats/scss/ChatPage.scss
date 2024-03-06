@@ -90,6 +90,8 @@
     height: 60%;
     background-color: rgba(182, 255, 255, 0.326);
     padding: 1rem;
+    overflow-y: scroll;
+    overflow-anchor: auto;
 }
 
 .sendmessage-container {

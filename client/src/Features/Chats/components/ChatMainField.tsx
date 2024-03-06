@@ -17,9 +17,11 @@ function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.El
   const chats = useSelector((store: RootState) => store.chats.chats)
   const chat = currentChat !== null ? chats.find((el) => el.id === currentChat) : undefined
 
-  if (currentChat === null) {
-    dispatch(switchChat(chats[0].id))
-  }
+  useEffect(() => {
+    if (currentChat === null) {
+      dispatch(switchChat(chats[0].id))
+    }
+  }, [currentChat, dispatch, chats])
 
   useEffect(() => {
     if (chat !== undefined && chat.ChatMessages.length !== 0) {
@@ -37,21 +39,35 @@ function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.El
     }
   }, [chat, user])
 
-  const sendMessage = (): void => {
+  const sendMessage = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
     socket.emit('send_message', { chatId: currentChat, authorId: user?.id, message: messageText })
     setMessagesHistory((prev) => [...prev, { text: messageText, author: 'me' }])
     setMessageText('')
   }
 
   useEffect(() => {
-    const handleReceiveMessage = (data: Message): void => {
-      setMessagesHistory((prev) => [...prev, data])
+    const handleReceiveMessage = (data: { text: string, author: number }): void => {
+      if (data.author !== user?.id && user !== null && user !== undefined) {
+        setMessagesHistory((prev) => [...prev, { text: data.text, author: 'roommate' }])
+      }
     }
-    socket.on('recieve_message', handleReceiveMessage)
+    socket.on('receive_message', handleReceiveMessage)
     return () => {
-      socket.off('recieve_message', handleReceiveMessage)
+      socket.off('receive_message', handleReceiveMessage)
     }
   }, [])
+
+  useEffect(() => {
+    if (currentChat !== null && user !== null) {
+      socket.emit('join_room', currentChat)
+    }
+    return () => {
+      if (currentChat !== null && user !== null) {
+        socket.emit('leave_room', currentChat)
+      }
+    }
+  }, [currentChat, user])
 
   return (
     <div className='currentchat-container'>
@@ -65,12 +81,12 @@ function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.El
             <MessageContainer key={index} message={message} />
           ))}
         </div>
-        <div className='sendmessage-container'>
+          <form className='sendmessage-container' onSubmit={(e) => { sendMessage(e) }}>
           <input className='sendmessage-container__input' placeholder='Просто начните печатать здесь...' value={messageText} onChange={(e) => { setMessageText(e.target.value) }}/>
-          <button className='sendmessage-container__button' onClick={sendMessage}>
+          <button type='submit' className='sendmessage-container__button'>
             Отправить
           </button>
-        </div>
+          </form>
       </>)
       : (<p>Откройте чат</p>)}
   </div>
