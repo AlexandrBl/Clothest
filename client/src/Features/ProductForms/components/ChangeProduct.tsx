@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import React, { useState, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { object, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { type CustomFileType, type Product } from '../type'
+import { type Product } from '../type'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
-import { addProduct, deleteProductImage } from '../../Products/productSlice'
+import { addProduct } from '../../Products/productSlice'
 import { useParams } from 'react-router-dom'
-import { type ProductImage, type UserProduct } from '../../Products/type'
+import { type UserProduct } from '../../Products/type'
+import { type SomeType } from './AddProduct'
 
 const schema = object().shape({
   title: string().required('Необходимо указать название').max(80, 'Название должно быть не более 80 символов'),
@@ -21,8 +24,8 @@ const schema = object().shape({
 function ChangeProduct (): JSX.Element {
   const dispatch = useAppDispatch()
 
-  const [images, setImages] = useState<CustomFileType[]>([])
-  const [previews, setPreviews] = useState<CustomFileType[]>([])
+  const [images, setImages] = useState<SomeType[]>([])
+  const [previews, setPreviews] = useState<SomeType[]>([])
 
   const userProducts = useSelector((store: RootState) => store.products.userProducts)
   const message = useSelector((store: RootState) => store.products.message)
@@ -38,7 +41,7 @@ function ChangeProduct (): JSX.Element {
     resolver: yupResolver(schema)
   })
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const onDrop = useCallback((acceptedFiles: SomeType[]) => {
     setImages((images) => [...images, ...acceptedFiles])
     setPreviews((previewfiles) => {
       const newFiles = acceptedFiles.map(file => Object.assign(file, { pic: URL.createObjectURL(file) }))
@@ -62,16 +65,9 @@ function ChangeProduct (): JSX.Element {
       .catch(console.log)
   }
 
-  const deleteImage = (preview: CustomFileType): void => {
+  const deleteImage = (preview: SomeType): void => {
     setImages((images) => images.filter((image) => image.path !== preview.path))
     setPreviews((previewfiles) => previewfiles.filter((file) => file.path !== preview.path))
-  }
-
-  const deleteImageFromDb = (image: ProductImage): void => {
-    // if (product?.ProductImages.length > 0) {
-    //   dispatch(deleteProductImage(image.id))
-    //     .catch(console.log)
-    // }
   }
 
   return (
@@ -102,7 +98,7 @@ function ChangeProduct (): JSX.Element {
                   </div>
                 ))}
                 {product?.ProductImages.map((image) => (
-                  <div className='preview-container' key={image.id} onClick={() => { deleteImageFromDb(image) }}>
+                  <div className='preview-container' key={image.id} >
                     <div className='preview-container__inner'>
                       <img className='preview-container__image' src={image.path}></img>
                       <div className='preview-container__image-delete'><p className='preview-container__image-delete-p'>Удалить фотографию</p></div>

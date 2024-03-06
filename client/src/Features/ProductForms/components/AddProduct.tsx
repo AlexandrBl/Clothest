@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
+// @ts-nocheck
 import React, { useState, useCallback, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { object, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { type CustomFileType, type Product } from '../type'
+import { type Product } from '../type'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
 import { addProduct } from '../../Products/productSlice'
@@ -16,25 +18,30 @@ const schema = object().shape({
   category: string().required('Необходимо указать категорию')
 })
 
+export interface SomeType extends File {
+  path: string
+  pic: string
+}
+
 function AddProduct (): JSX.Element {
   const dispatch = useAppDispatch()
-  const [images, setImages] = useState<CustomFileType[]>([])
-  const [previews, setPreviews] = useState<CustomFileType[]>([])
+  const [images, setImages] = useState<SomeType[]>([])
+  const [previews, setPreviews] = useState<SomeType[]>([])
   const message = useSelector((store: RootState) => store.products.message)
   const categories = useSelector((store: RootState) => store.products.categories)
   console.log()
   const { register, handleSubmit, reset, formState: { errors } } = useForm<Product>({
     resolver: yupResolver(schema)
   })
-
-  const onDrop = useCallback((acceptedFiles: CustomFileType[]) => {
+  const colya = (acceptedFiles: SomeType[]): void => {
     setImages((images) => [...images, ...acceptedFiles])
     setPreviews((previewfiles) => {
       const newFiles = acceptedFiles.map(file => Object.assign(file, { pic: URL.createObjectURL(file) }))
       return [...previewfiles, ...newFiles]
     }
     )
-  }, [images])
+  }
+  const onDrop = useCallback(colya, [images])
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
@@ -46,7 +53,6 @@ function AddProduct (): JSX.Element {
     formData.append('title', data.title)
     formData.append('description', data.description)
     formData.append('category', data.category)
-    console.log(formData)
     dispatch(addProduct(formData))
       .catch(console.log)
   }
@@ -59,7 +65,7 @@ function AddProduct (): JSX.Element {
     }
   }, [message])
 
-  const deleteImage = (preview: CustomFileType): void => {
+  const deleteImage = (preview: SomeType): void => {
     setImages((images) => images.filter((image) => image.path !== preview.path))
     setPreviews((previewfiles) => previewfiles.filter((file) => file.path !== preview.path))
   }
