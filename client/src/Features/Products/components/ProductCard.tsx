@@ -13,7 +13,6 @@ import { delProd, dislikeProduct } from '../productSlice'
 
 import { delFavProd, newFavoriteProduct } from '../../Favorite/favoriteSlice'
 import SwiperComponent from '../../Swiper/Components/Swiper'
-import { updateUser } from '../../Auth/authSlice'
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()

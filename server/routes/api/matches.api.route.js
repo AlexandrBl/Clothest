@@ -1,15 +1,24 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 const router = require('express').Router();
-const { Match, UserProductLike } = require('../../db/models');
+const { Match, UserProductLike, Favorite } = require('../../db/models');
 
 router.post('/', async (req, res) => {
   try {
     const { productId1, productId2 } = req.body;
 
+    await UserProductLike.create({ userId: res.locals.user.id, productId: productId2 });
+
+    const favorite = await Favorite.findOne({ where: { userId: res.locals.user.id, productId: productId2 } });
+
+    if (favorite) {
+      await Favorite.destroy({ where: { userId: res.locals.user.id, productId: productId2 } });
+    }
+
     const updateMutualField = async (match) => {
       match.isMutual = true;
       await match.save();
+
       res.status(201).json({ message: 'confirm', match });
       return true;
     };
@@ -46,7 +55,7 @@ router.post('/', async (req, res) => {
 
     if (!(firstResult && secondResult)) {
       const newPotentialMatch = await Match.create({ productId1, productId2 });
-      await UserProductLike.create({ userId: res.locals.user.id, productId: productId2 });
+
       res.status(201).json({ message: 'confirm', match: newPotentialMatch });
     } else {
       res.status(404).json({ message: 'Что-то пошло не так' });

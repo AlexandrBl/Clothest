@@ -6,12 +6,14 @@ import { useSelector } from 'react-redux'
 import { type RootState } from '../../../store/store'
 import Match from './Match'
 import MessageNotification from './MessageNotification'
+import Modal from 'react-modal'
 
 function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
   const [isMatchDivShown, setIsMatchDivShown] = useState(false)
   const messageMatch = useSelector((store: RootState) => store.matches.message)
   // const messageAuth = useSelector((store: RootState) => store.auth.message)
   const messageProducts = useSelector((store: RootState) => store.products.message)
+  console.log(messageMatch)
 
   useEffect(() => {
     if (messageMatch === 'matchanimation') {
@@ -28,6 +30,9 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
     <div className="center-container">
     <main className="main">
       <Outlet/>
+      <Modal ariaHideApp={false} className='selector-modal' isOpen={isMatchDivShown} onRequestClose={() => { setIsMatchDivShown(false) }}>
+      <Match />
+    </Modal>
       {isMatchDivShown && <Match />}
       {isNotifyAlive && messageProducts !== undefined && <MessageNotification message={messageProducts} />}
     </main>

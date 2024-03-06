@@ -5,7 +5,7 @@ const fileupload = require('../../utils/fileUpload');
 
 const {
 
-  Category, Product, ProductImage, User, City, UserProductLike, UserProductDislike,
+  Category, Product, ProductImage, User, City, UserProductLike, UserProductDislike, Favorite,
 
 } = require('../../db/models');
 
@@ -191,6 +191,12 @@ router.post('/dislike', async (req, res) => {
 
       if (!dislike) {
         dislike = await UserProductDislike.create({ userId: res.locals.user.id, productId: id });
+
+        const favorite = await Favorite.findOne({ where: { userId: res.locals.user.id, productId: id } });
+
+        if (favorite) {
+          await Favorite.destroy({ where: { userId: res.locals.user.id, productId: id } });
+        }
         res.status(201).json({ message: 'success' });
       }
     }
