@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from 'react'
-
 import { type Product } from '../type'
 import Selector from '../../Selector/Components/Selector'
 import Modal from 'react-modal'
 import { useSelector } from 'react-redux'
 import { type RootState, useAppDispatch } from '../../../store/store'
 import { useNavigate } from 'react-router-dom'
-
 import { addMatch } from '../matchSlice'
-
 import { delProd, dislikeProduct } from '../productSlice'
-
 import { delFavProd, newFavoriteProduct } from '../../Favorite/favoriteSlice'
 import SwiperComponent from '../../Swiper/Components/Swiper'
-import { updateUser } from '../../Auth/authSlice'
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()
