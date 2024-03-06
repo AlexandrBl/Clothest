@@ -118,7 +118,6 @@
 .message-container {
     width: 40%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.389);
     border-radius: 2rem;
     display: flex;
     align-items: center;
@@ -131,6 +130,14 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+}
+
+.message-container__bubble_me {
+    background-color: rgba(128, 198, 255, 0.389);
+}
+
+.message-container__bubble_roommate {
+    background-color: rgba(216, 216, 216, 0.567);
 }
 
 .message-container-text {
