@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
 
   socket.on('send_message', (data) => {
-    socket.broadcast.emit('recieve_message', data);
+    socket.broadcast.emit('recieve_message', { text: data, author: 'roommate' });
   });
 });
 

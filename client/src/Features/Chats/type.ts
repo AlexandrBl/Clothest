@@ -1,3 +1,8 @@
 export interface StateChats {
-  messagesHistory: string[]
+  messagesHistory: Message[]
+}
+
+export interface Message {
+  text: string
+  author: string
 }
