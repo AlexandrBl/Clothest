@@ -4,13 +4,18 @@ import { useAppDispatch } from '../../../store/store'
 import { userProductDelete } from '../../Products/productSlice'
 import { useNavigate } from 'react-router-dom'
 import SwiperComponent from '../../Swiper/Components/Swiper'
+import { updateUser } from '../../Auth/authSlice'
 
 function UserProductCard ({ userProduct }: { userProduct: UserProduct }): JSX.Element {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
+  console.log(userProduct.id)
+
   const deleteProduct = (id: number): void => {
-    dispatch(userProductDelete(id)).catch(console.log)
+    dispatch(userProductDelete(id)).then((data) => {
+      dispatch(updateUser(data.payload))
+    }).catch(console.log)
   }
 
   const editProduct = (): void => {

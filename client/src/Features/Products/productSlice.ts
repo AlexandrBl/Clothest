@@ -2,9 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { StateProducts } from './type'
 import * as api from './api'
 
-
 import { addProductFetch, updateProductFetch } from '../ProductForms/api'
-
 
 const initialState: StateProducts = { products: [], userProducts: [], categories: [], message: '' }
 
@@ -35,6 +33,7 @@ export const addProduct = createAsyncThunk(
 
 export const updateProduct = createAsyncThunk(
   'product/upd',
+  // eslint-disable-next-line @typescript-eslint/return-await
   async ({ obj, id }: { obj: FormData, id: number }) => await updateProductFetch({ obj, id })
 )
 
