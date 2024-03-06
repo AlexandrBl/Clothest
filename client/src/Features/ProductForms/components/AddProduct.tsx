@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 /* eslint-disable @typescript-eslint/no-misused-promises */
-// @ts-nocheck
+
 import React, { useState, useCallback, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import type { SubmitHandler } from 'react-hook-form'
@@ -25,15 +25,22 @@ export interface SomeType extends File {
 
 function AddProduct (): JSX.Element {
   const dispatch = useAppDispatch()
-  const [images, setImages] = useState<SomeType[]>([])
-  const [previews, setPreviews] = useState<SomeType[]>([])
+
+
+  const [images, setImages] = useState<File[]>([])
+  const [previews, setPreviews] = useState<CustomFileType[]>([])
+
+
   const message = useSelector((store: RootState) => store.products.message)
   const categories = useSelector((store: RootState) => store.products.categories)
-  console.log()
+
   const { register, handleSubmit, reset, formState: { errors } } = useForm<Product>({
     resolver: yupResolver(schema)
   })
-  const colya = (acceptedFiles: SomeType[]): void => {
+
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+
     setImages((images) => [...images, ...acceptedFiles])
     setPreviews((previewfiles) => {
       const newFiles = acceptedFiles.map(file => Object.assign(file, { pic: URL.createObjectURL(file) }))
@@ -41,7 +48,7 @@ function AddProduct (): JSX.Element {
     }
     )
   }
-  const onDrop = useCallback(colya, [images])
+
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
@@ -65,9 +72,12 @@ function AddProduct (): JSX.Element {
     }
   }, [message])
 
-  const deleteImage = (preview: SomeType): void => {
-    setImages((images) => images.filter((image) => image.path !== preview.path))
-    setPreviews((previewfiles) => previewfiles.filter((file) => file.path !== preview.path))
+
+  const deleteImage = (preview: CustomFileType): void => {
+    setImages((images) => images.filter((image) => image.name !== preview.name))
+    setPreviews((previewfiles) => previewfiles.filter((file) => file.name !== preview.name))
+
+ 
   }
 
   return (

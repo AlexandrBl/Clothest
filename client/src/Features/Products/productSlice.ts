@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { StateProducts } from './type'
 import * as api from './api'
 
-import { addProductFetch } from '../ProductForms/api'
+
+import { addProductFetch, updateProductFetch } from '../ProductForms/api'
+
 
 const initialState: StateProducts = { products: [], userProducts: [], categories: [], message: '' }
 
@@ -30,6 +32,12 @@ export const addProduct = createAsyncThunk(
   'product/add',
   async (obj: FormData) => await addProductFetch(obj)
 )
+
+export const updateProduct = createAsyncThunk(
+  'product/upd',
+  async ({ obj, id }: { obj: FormData, id: number }) => await updateProductFetch({ obj, id })
+)
+
 export const dislikeProduct = createAsyncThunk(
   'product/dislike',
   async (id: number) => await api.addDislikefetch(id)
@@ -98,6 +106,12 @@ const productsSlice = createSlice({
         })
       })
       .addCase(deleteProductImage.rejected, (state, action) => {
+        state.message = action.error.message
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.message = action.payload.message
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         state.message = action.error.message
       })
   }

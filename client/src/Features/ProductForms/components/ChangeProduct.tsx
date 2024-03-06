@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
+
+
 import React, { useState, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import type { SubmitHandler } from 'react-hook-form'
@@ -10,7 +10,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { type Product } from '../type'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
-import { addProduct } from '../../Products/productSlice'
+
+import { deleteProductImage, updateProduct } from '../../Products/productSlice'
+
 import { useParams } from 'react-router-dom'
 import { type UserProduct } from '../../Products/type'
 import { type SomeType } from './AddProduct'
@@ -24,8 +26,10 @@ const schema = object().shape({
 function ChangeProduct (): JSX.Element {
   const dispatch = useAppDispatch()
 
-  const [images, setImages] = useState<SomeType[]>([])
-  const [previews, setPreviews] = useState<SomeType[]>([])
+
+  const [images, setImages] = useState<File[]>([])
+  const [previews, setPreviews] = useState<CustomFileType[]>([])
+
 
   const userProducts = useSelector((store: RootState) => store.products.userProducts)
   const message = useSelector((store: RootState) => store.products.message)
@@ -46,13 +50,12 @@ function ChangeProduct (): JSX.Element {
     setPreviews((previewfiles) => {
       const newFiles = acceptedFiles.map(file => Object.assign(file, { pic: URL.createObjectURL(file) }))
       return [...previewfiles, ...newFiles]
-    }
-    )
+    })
   }, [images])
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
-  const productPost: SubmitHandler<Product> = (data: Product) => {
+  const productUpdate: SubmitHandler<Product> = (data: Product) => {
     const formData = new FormData()
     for (const image of images) {
       formData.append('images', image)
@@ -60,19 +63,29 @@ function ChangeProduct (): JSX.Element {
     formData.append('title', data.title)
     formData.append('description', data.description)
     formData.append('category', data.category)
-    console.log(formData)
-    dispatch(addProduct(formData))
-      .catch(console.log)
+    if (id !== undefined) {
+      dispatch(updateProduct({ obj: formData, id: +id }))
+        .catch(console.log)
+    }
   }
 
-  const deleteImage = (preview: SomeType): void => {
-    setImages((images) => images.filter((image) => image.path !== preview.path))
-    setPreviews((previewfiles) => previewfiles.filter((file) => file.path !== preview.path))
+
+  const deleteImage = (preview: File): void => {
+    setImages((images) => images.filter((image) => image.name !== preview.name))
+    setPreviews((previewfiles) => previewfiles.filter((file) => file.name !== preview.name))
   }
+
+  const deleteImageFromDb = (image: ProductImage): void => {
+    if (product?.ProductImages !== undefined && product.ProductImages.length > 0) {
+      dispatch(deleteProductImage(image.id))
+        .catch(console.log)
+    }
+  }
+
 
   return (
     <div className='center-container addProduct-container'>
-      <form className='addProduct-container__form' onSubmit={handleSubmit(productPost)}>
+      <form className='addProduct-container__form' onSubmit={handleSubmit(productUpdate)}>
         <input type="text" placeholder='Название' defaultValue={product?.title} {...register('title')} />
         <span>{errors.title?.message}</span>
         <input type="text" placeholder='Описание' defaultValue={product?.description} {...register('description')} />

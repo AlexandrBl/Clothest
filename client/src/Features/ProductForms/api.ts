@@ -12,3 +12,16 @@ export const addProductFetch = async (obj: FormData): Promise<{ message: string,
   const { message } = await res.json()
   throw message
 }
+
+export const updateProductFetch = async ({ obj, id }: { obj: FormData, id: number }): Promise<{ message: string }> => {
+  const res = await fetch(`/api/products/${id}`, {
+    method: 'PUT',
+    body: obj
+  })
+  if (res.ok) {
+    const data = await res.json()
+    return data
+  }
+  const { message } = await res.json()
+  throw message
+}

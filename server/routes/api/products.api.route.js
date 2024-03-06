@@ -183,4 +183,89 @@ router.post('/dislike', async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      res.status(400).json({ message: 'Продукт не найден' });
+      return;
+    }
+
+    let {
+      title, description, category,
+    } = req.body;
+
+    if (!res.locals.user) {
+      res.status(400).json({ message: 'Необходимо зарегистрироваться, чтобы изменить карточку' });
+      return;
+    }
+
+    if (!(title && description && category)) {
+      res.status(400).json({ message: 'Заполните все поля' });
+      return;
+    }
+    title = title.trim();
+    description = description.trim();
+    category = category.trim();
+
+    const prod = await Product.findOne({ where: { userId: res.locals.user.id, id: +id } });
+
+    if (!prod) {
+      res.status(400).json({ message: 'Продукт не найден' });
+      return;
+    }
+
+    const newCategory = await Category.findOne({ where: { title: category } });
+
+    if (!newCategory) {
+      res.status(400).json({ message: 'Категория не найдена' });
+      return;
+    }
+
+    prod.title = title;
+    prod.description = description;
+    prod.categoryId = newCategory.id;
+    await prod.save();
+
+    const olgImgs = await ProductImage.findAll({ where: { productId: id } });
+
+    let file = [];
+    if (!(req.files || olgImgs.length > 0)) {
+      res.status(400).json({ message: 'Необходимо добавить хотя бы одну фотографию' });
+      return;
+    }
+
+    if (req.files) {
+      file = req.files.images;
+
+      let imgPaths = [];
+      if (Array.isArray(file)) {
+        const uploadPromises = file.map(async (el) => fileupload(el, res.locals.user.id));
+        imgPaths = await Promise.allSettled(uploadPromises);
+      } else {
+        const uploadPromises = [];
+        uploadPromises.push(await fileupload(file, res.locals.user.id));
+        imgPaths = await Promise.allSettled(uploadPromises);
+      }
+
+      const rejected = imgPaths.find((el) => el.status === 'rejected');
+
+      if (rejected) {
+        res.status(400).json({ message: rejected.reason });
+        return;
+      }
+
+      if (imgPaths.length > 0) {
+        imgPaths.forEach(async (img) => {
+          await ProductImage.create({ path: img.value, productId: id });
+        });
+      }
+    }
+    res.status(201).json({ message: 'Продукт успешно изменен' });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
 module.exports = router;
