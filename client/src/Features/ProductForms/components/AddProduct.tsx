@@ -10,6 +10,7 @@ import { type CustomFileType, type Product } from '../type'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
 import { addProduct } from '../../Products/productSlice'
+import { updateUser } from '../../Auth/authSlice'
 
 const schema = object().shape({
   title: string().required('Необходимо указать название').max(80, 'Название должно быть не более 80 символов'),
@@ -25,6 +26,7 @@ function AddProduct (): JSX.Element {
 
   const message = useSelector((store: RootState) => store.products.message)
   const categories = useSelector((store: RootState) => store.products.categories)
+  const user = useSelector((store: RootState) => store.auth.user)
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<Product>({
     resolver: yupResolver(schema)
@@ -49,7 +51,11 @@ function AddProduct (): JSX.Element {
     formData.append('title', data.title)
     formData.append('description', data.description)
     formData.append('category', data.category)
-    dispatch(addProduct(formData))
+    dispatch(addProduct(formData)).then((data) => {
+      if (user !== null && user.defaultProduct === 'Добавьте продукт') {
+        dispatch(updateUser(data.payload))
+      }
+    })
       .catch(console.log)
   }
 

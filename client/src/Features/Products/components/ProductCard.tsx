@@ -13,6 +13,7 @@ import { delProd, dislikeProduct } from '../productSlice'
 
 import { delFavProd, newFavoriteProduct } from '../../Favorite/favoriteSlice'
 import SwiperComponent from '../../Swiper/Components/Swiper'
+import { updateUser } from '../../Auth/authSlice'
 
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()
@@ -49,6 +50,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
 
   const matchPost = (): void => {
     const userProduct = userProducts.find((product) => product.title === currentProduct)
+
     if (userProduct !== undefined) {
       dispatch(delProd(product.id))
       dispatch(delFavProd(product.id))

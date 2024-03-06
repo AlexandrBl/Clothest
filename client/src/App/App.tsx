@@ -61,7 +61,7 @@ function App (): JSX.Element {
       dispatch(initProducts(products.length)).catch(console.log)
       setFetching(false)
     }
-  }, [fetching])
+  }, [fetching, userProducts])
 
   useEffect(() => {
     const container = document.querySelector('.products__list')

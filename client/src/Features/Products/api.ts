@@ -24,6 +24,7 @@ export const deleteUserProductsFetch = async (id: number): Promise<{ message: st
     method: 'DELETE'
   })
   const data = await res.json()
+
   return data
 }
 

@@ -14,6 +14,7 @@ import { deleteProductImage, updateProduct } from '../../Products/productSlice'
 
 import { useParams } from 'react-router-dom'
 import { type ProductImage, type UserProduct } from '../../Products/type'
+import { updateUser } from '../../Auth/authSlice'
 
 const schema = object().shape({
   title: string().required('Необходимо указать название').max(80, 'Название должно быть не более 80 символов'),
@@ -61,6 +62,9 @@ function ChangeProduct (): JSX.Element {
     formData.append('category', data.category)
     if (id !== undefined) {
       dispatch(updateProduct({ obj: formData, id: +id }))
+        .then((data) => {
+          dispatch(updateUser(data.payload))
+        })
         .catch(console.log)
     }
   }

@@ -68,9 +68,26 @@ router.get('/userProducts', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
+    const productFromDelete = await Product.findOne({ where: { id } });
+    const productTitle = productFromDelete.title;
+
     const data = await Product.destroy({ where: { id } });
     if (data) {
-      res.status(201).json({ message: 'ok', id: +id });
+      const products = await Product.findAll({ where: { userId: res.locals.user.id } });
+      const user = await User.findOne({ where: { id: res.locals.user.id } });
+      if (products.length === 0) {
+        user.defaultProduct = 'Добавьте продукт';
+        user.save();
+        res.status(201).json({ message: 'ok', id: +id, defaultProduct: user.defaultProduct });
+        return;
+      }
+      if (user.defaultProduct === productTitle) {
+        user.defaultProduct = products[0].title;
+        user.save();
+        res.status(201).json({ message: 'ok', id: +id, defaultProduct: user.defaultProduct });
+        return;
+      }
+      res.status(201).json({ message: 'ok', id: +id, defaultProduct: user.defaultProduct });
     }
   } catch ({ message }) {
     res.status(500).json({ message });
@@ -142,6 +159,14 @@ router.post('/', async (req, res) => {
 
     const categoryId = categoryFromDb.id;
 
+    const userProducts = await Product.findOne({ where: { userId: res.locals.user.id } });
+
+    const dbUser = await User.findOne({ where: { id: res.locals.user.id } });
+    if (!userProducts) {
+      dbUser.defaultProduct = title;
+      await dbUser.save();
+    }
+
     const product = await Product.create({
       title, description, categoryId, userId: res.locals.user.id,
     });
@@ -151,16 +176,7 @@ router.post('/', async (req, res) => {
         await ProductImage.create({ path: img.value, productId: product.id });
       });
     }
-
-    const userProducts = await Product.findOne({ where: { userId: res.locals.user.id } });
-
-    if (!userProducts) {
-      const dbUser = await User.findOne({ where: { id: res.locals.user.id } });
-      dbUser.defaultProduct = title;
-      await dbUser.save();
-    }
-
-    res.status(201).json({ message: 'Продукт успешно добавлен', product });
+    res.status(201).json({ message: 'Продукт успешно добавлен', product, defaultProduct: dbUser.defaultProduct });
   } catch ({ message }) {
     res.status(500).json({ message });
   }
@@ -223,10 +239,21 @@ router.put('/:id', async (req, res) => {
       return;
     }
 
-    prod.title = title;
-    prod.description = description;
-    prod.categoryId = newCategory.id;
-    await prod.save();
+    const user = await User.findOne({ where: { id: res.locals.user.id } });
+
+    if (user.defaultProduct === prod.title) {
+      prod.title = title;
+      prod.description = description;
+      prod.categoryId = newCategory.id;
+      await prod.save();
+      user.defaultProduct = title;
+      await user.save();
+    } else {
+      prod.title = title;
+      prod.description = description;
+      prod.categoryId = newCategory.id;
+      await prod.save();
+    }
 
     const olgImgs = await ProductImage.findAll({ where: { productId: id } });
 
@@ -262,7 +289,7 @@ router.put('/:id', async (req, res) => {
         });
       }
     }
-    res.status(201).json({ message: 'Продукт успешно изменен' });
+    res.status(201).json({ message: 'Продукт успешно изменен', defaultProduct: user.defaultProduct });
   } catch ({ message }) {
     res.status(500).json({ message });
   }
