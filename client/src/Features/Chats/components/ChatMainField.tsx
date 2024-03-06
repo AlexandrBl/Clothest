@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import io from 'socket.io-client'
 import MessageContainer from './MessageContainer'
 import { type Message } from '../type'
-import { type RootState } from '../../../store/store'
+import { useAppDispatch, type RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
+import { switchChat } from '../chatsSlice'
 
 const socket = io('ws://localhost:4000', { transports: ['websocket'] })
 
 function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.Element {
+  const dispatch = useAppDispatch()
   const [messageText, setMessageText] = useState('')
   const [messagesHistory, setMessagesHistory] = useState<Message[]>([])
 
@@ -15,8 +17,12 @@ function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.El
   const chats = useSelector((store: RootState) => store.chats.chats)
   const chat = currentChat !== null ? chats.find((el) => el.id === currentChat) : undefined
 
+  if (currentChat === null) {
+    dispatch(switchChat(chats[0].id))
+  }
+
   useEffect(() => {
-    if (chat !== undefined) {
+    if (chat !== undefined && chat.ChatMessages.length !== 0) {
       const messagesFromDb = chat.ChatMessages.map((chatMessage) => {
         if (chatMessage.authorId === user?.id) {
           return { text: chatMessage.message, author: 'me' }
@@ -25,6 +31,9 @@ function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.El
         }
       })
       setMessagesHistory(messagesFromDb)
+    }
+    if (chat !== undefined && chat.ChatMessages.length === 0) {
+      setMessagesHistory([])
     }
   }, [chat, user])
 
@@ -49,7 +58,7 @@ function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.El
     {chat !== undefined
       ? (<>
         <div className='currentchat-container__title'>
-          <p className='currentchat-container__title-text'>Chat 1</p>
+          <p className='currentchat-container__title-text'>Чат с пользователем: {chat.User1?.id === user?.id ? chat.User2?.name : chat.User1?.name }</p>
         </div>
         <div className='chat-history-container'>
           {messagesHistory?.map((message, index) => (
@@ -57,13 +66,13 @@ function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.El
           ))}
         </div>
         <div className='sendmessage-container'>
-          <input className='sendmessage-container__input' placeholder='type message here...' value={messageText} onChange={(e) => { setMessageText(e.target.value) }}/>
+          <input className='sendmessage-container__input' placeholder='Просто начните печатать здесь...' value={messageText} onChange={(e) => { setMessageText(e.target.value) }}/>
           <button className='sendmessage-container__button' onClick={sendMessage}>
-            Send message
+            Отправить
           </button>
         </div>
       </>)
-      : (<p>no chat</p>)}
+      : (<p>Откройте чат</p>)}
   </div>
   )
 }

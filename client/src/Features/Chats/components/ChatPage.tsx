@@ -9,6 +9,7 @@ function ChatPage (): JSX.Element {
   const dispatch = useAppDispatch()
 
   const currentChat = useSelector((store: RootState) => store.chats.currentChat)
+  const chats = useSelector((store: RootState) => store.chats.chats)
 
   useEffect(() => {
     dispatch(initChats())
@@ -16,15 +17,22 @@ function ChatPage (): JSX.Element {
   }, [])
 
   return (
-    <div className='chats-container center-container'>
-    <div className='chatslist-container'>
-        <div className='chatlist-container__title'>
-            <p className='chatlist-container__title_text'>Chats:</p>
+        <div className='chats-container center-container'>
+      {chats?.length > 0
+        ? (
+        <>
+          <div className='chatslist-container'>
+            <div className='chatlist-container__title'>
+              <p className='chatlist-container__title_text'>Chats:</p>
+            </div>
+            <ChatList />
+          </div>
+          <ChatMainField currentChat={currentChat} />
+          </>
+          )
+        : <div className='chatslist-nochats'>У вас нет ещё чатов😔</div>
+      }
         </div>
-        <ChatList />
-    </div>
-     <ChatMainField currentChat={currentChat} />
-    </div>
   )
 }
 

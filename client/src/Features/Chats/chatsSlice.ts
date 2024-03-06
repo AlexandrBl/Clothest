@@ -30,6 +30,22 @@ const chatsSlice = createSlice({
       .addCase(initChats.rejected, (state, action) => {
         state.message = action.error.message
       })
+      .addCase(updateChat.fulfilled, (state, action) => {
+        console.log(action.payload[0] !== undefined)
+        if (action.payload[0] !== undefined) {
+          state.chats = state.chats.map((chat) => {
+            if (chat.id === action.payload[0].chatId) {
+              chat.ChatMessages = action.payload
+              return chat
+            } else {
+              return chat
+            }
+          })
+        }
+      })
+      .addCase(updateChat.rejected, (state, action) => {
+        state.message = action.error.message
+      })
   }
 })
 

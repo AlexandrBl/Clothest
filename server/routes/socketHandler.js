@@ -7,7 +7,6 @@ const handleSocketConnection = async (io) => {
     socket.on('send_message', async (data) => {
       const { chatId, authorId, message } = data;
       if (chatId && authorId && message) {
-        console.log(chatId, authorId, message);
         const chatMessage = await ChatMessage.create({ chatId, authorId, message });
       }
       socket.broadcast.emit('recieve_message', { text: data.message, author: 'roommate' });

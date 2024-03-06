@@ -1,5 +1,4 @@
 .chats-container {
-    width: 80rem;
     height: 80vh;
     background-color: rgba(255, 255, 255, 0.512);
     display: flex;
@@ -46,12 +45,25 @@
 
 .chatslist-container__list_element:hover {
     background-color: rgba(255, 255, 255, 0.573);
+}
 
+.chatslist-container__list_element-name {
+    width: 100%;
+    padding-left: 1rem;
+    padding-top: 0.2rem;
+}
+
+.chatslist-container__list_element-userpic {
+    width: 2rem;
+    margin-left: 1rem;
+    border-radius: 10rem;
 }
 
 .chatslist-container__list_element-text {
     width: 100%;
-    text-align: center;
+    padding-left: 1rem;
+    padding-top: 0.2rem;
+    color: gray;
 }
 
 .currentchat-container {
@@ -68,6 +80,10 @@
 .currentchat-container__title-text {
     width: 100%;
     text-align: center;
+}
+
+.selected-chat {
+    background-color: rgba(255, 255, 255, 0.573);
 }
 
 .chat-history-container {
@@ -143,4 +159,8 @@
 .message-container-text {
     margin-left: 1rem;
     width: 100%;
+}
+
+.chatslist-nochats {
+    margin: auto;
 }
