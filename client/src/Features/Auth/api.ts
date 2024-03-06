@@ -1,4 +1,3 @@
-import { string } from 'yup'
 import { type FullUser } from '../Products/type'
 import type { UserWithoutName, UserAndCpassword, User } from './type'
 

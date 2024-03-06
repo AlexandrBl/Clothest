@@ -56,7 +56,17 @@ router.get('/userProducts', async (req, res) => {
     let products = [];
     if (res.locals.user) {
       products = await Product.findAll({ where: { userId: res.locals.user.id }, include: [{ model: ProductImage }] });
-      res.json(products);
+      const user = await User.findOne({ where: { id: res.locals.user.id } });
+      console.log(user.defaultProduct, 1111);
+
+      const result = products.sort((a, b) => {
+        if (a.title === user.defaultProduct) return -1;
+        if (b.title === user.defaultProduct) return 1;
+        return a.dataValues.title.localeCompare(b.title);
+      });
+      console.log(result, '------');
+
+      res.json(result);
     } else {
       res.json(products);
     }

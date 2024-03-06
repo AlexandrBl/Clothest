@@ -66,6 +66,7 @@ const authSlice = createSlice({
         state.message = action.error.message
       })
       .addCase(changeDefault.fulfilled, (state, action) => {
+
         state.message = action.payload.message
       })
       .addCase(changeDefault.rejected, (state, action) => {

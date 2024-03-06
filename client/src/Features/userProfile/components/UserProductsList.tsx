@@ -4,7 +4,10 @@ import { type RootState } from '../../../store/store'
 import UserProductCard from './UserProductCard'
 
 function UserProductsList (): JSX.Element {
+  const user = useSelector((store: RootState) => store.auth.user)
+
   const userProductsArray = useSelector((store: RootState) => store.products.userProducts)
+
   return (
     <>
     {userProductsArray.length > 0
