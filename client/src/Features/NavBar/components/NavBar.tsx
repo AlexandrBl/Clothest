@@ -31,6 +31,9 @@ function NavBar (): JSX.Element {
           <NavLink to={'/newproduct'}>Разместить объявление</NavLink>
           </li>
           <li className="nav__item">
+          <NavLink to={'/matches'} >Matches</NavLink>
+          </li>
+          <li className="nav__item">
           <NavLink to={'/profile'} >Profile</NavLink>
           </li>
           <li className="nav__item">

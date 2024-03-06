@@ -12,11 +12,13 @@ import AddProduct from '../Features/ProductForms/components/AddProduct'
 import ChangeProduct from '../Features/ProductForms/components/ChangeProduct'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
+import MatchesPage from '../Features/Mathces/Components/MathcesPage'
 
 import { userProducts, initProducts, initCategories, clearMessage } from '../Features/Products/productSlice'
 import FavoritesList from '../Features/Favorite/components/FavoritesList'
 
 import { initFavorites } from '../Features/Favorite/favoriteSlice'
+import { initMatch } from '../Features/Products/matchSlice'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -32,6 +34,7 @@ function App (): JSX.Element {
 
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
+    dispatch(initMatch()).then((data => { console.log(data) })).catch(console.log)
   }, [])
 
   useEffect(() => {
@@ -91,7 +94,7 @@ function App (): JSX.Element {
           <Route index element={<MainPage/>}/>
           <Route path='auth' element={<RegLog/>}/>
           <Route path='profile' element={<UserProfile/>}/>
-
+          <Route path='matches' element={<MatchesPage/>}/>
           <Route path='profile/edit' element={<UserProducts/>}/>
           <Route path='profile/myproducts' element={<UserProducts/>}/>
           <Route path='profile/myproducts/:id/edit' element={<ChangeProduct />}/>

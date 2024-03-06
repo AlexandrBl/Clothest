@@ -10,8 +10,6 @@ function UserProductCard ({ userProduct }: { userProduct: UserProduct }): JSX.El
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  console.log(userProduct.id)
-
   const deleteProduct = (id: number): void => {
     dispatch(userProductDelete(id)).then((data) => {
       dispatch(updateUser(data.payload))
