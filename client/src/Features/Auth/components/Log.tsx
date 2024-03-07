@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import type { SubmitHandler } from 'react-hook-form'

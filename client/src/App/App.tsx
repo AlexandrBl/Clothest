@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { authCheck } from '../Features/Auth/authSlice'
 import { Route, Routes } from 'react-router-dom'
 import Main from '../Features/Main/components/Main'
-import MainPage from '../Features/Main/components/MainPage'
 import RegLog from '../Features/Auth/components/RegLog'
 import { type RootState, useAppDispatch } from '../store/store'
 
@@ -22,7 +21,6 @@ import { initFavorites } from '../Features/Favorite/favoriteSlice'
 import ProductsList from '../Features/Products/components/ProductsList'
 
 import ChatPage from '../Features/Chats/components/ChatPage'
-
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -69,8 +67,6 @@ function App (): JSX.Element {
       setFetching(false)
     }
   }, [fetching, userProducts])
-
-  
 
   const scrollHendler = (e: any): void => {
     if (e.target.scrollHeight - (e.target.scrollTop + e.target.offsetHeight * scrollCount) <= 1) {
