@@ -25,6 +25,16 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
   const [modal, setModal] = useState(false)
   const [modalReg, setModalReg] = useState(false)
 
+  const favorites = useSelector((store: RootState) => store.favorites.products)
+
+  useEffect(() => {
+    favorites.forEach(el => {
+      if (product.id === el.id) {
+        setSvg(true)
+      }
+    })
+  }, [favorites])
+
   const modalChange = (): void => {
     if (user === null) {
       setModalReg(true)

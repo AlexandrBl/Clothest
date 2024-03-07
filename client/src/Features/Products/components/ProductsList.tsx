@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { type RootState } from '../../../store/store'
 import ProductCard from '../components/ProductCard'
@@ -23,10 +23,12 @@ function ProductsList ({ scrollHendler }: { scrollHendler: (e: any) => void }): 
   return (
     <section className='products'>
       <div className="products-container">
+      <div className="products-inner-container">
       <div className="products__list">
         {
         products.map(el => <ProductCard product={el} key={el.id }/>)
       }
+      </div>
       </div>
       </div>
     </section>
