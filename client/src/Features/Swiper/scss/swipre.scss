@@ -2,11 +2,11 @@
   z-index: 0;
   width: 100%;
   height: 100%;
-  --swiper-pagination-color: rgb(255, 0, 0);
+  --swiper-pagination-color: white;
   --swiper-pagination-bullet-size: 0.09rem;
   --swiper-pagination-bullet-width: 2rem;
   --swiper-pagination-bullet-border-radius:1rem; 
-  --swiper-pagination-bullet-inactive-color: rgba(255, 0, 0, 0.631);
+  --swiper-pagination-bullet-inactive-color: rgb(255, 255, 255);
   --swiper-pagination-bullet-inactive-opacity: 0.2;
   --swiper-pagination-bullet-opacity: 1;
   --swiper-pagination-bullet-horizontal-gap: 0.4rem;
@@ -21,14 +21,14 @@
 
 .swiper-button-prev,
 .swiper-button-next {
-    color: rgba(255, 0, 0, 0.601);
+    color: rgba(255, 255, 255, 0.653);
     transition: all 0.3s ease; 
 }
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
     scale :1.5; 
-    color: rgb(255, 0, 0);
+    color: white;
 }
 
 .swiper-pagination-bullet {

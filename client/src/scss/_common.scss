@@ -2,6 +2,12 @@
 html {
   font-size: 1.2vw;
   height: 100vh;
+
+  color: $blue_color;
+
+  font-family: "Ubuntu", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .visually-hidden {
@@ -42,8 +48,12 @@ button {
 
 .disabled {
   pointer-events: none;
-  background-color:  #568c9cb8;;
+  background-color:  $peach_color;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border: 0.5rem;
 }
+
+
 
 ::-webkit-scrollbar{
   // height: 0.3rem;
@@ -58,6 +68,13 @@ button {
 
 ::-webkit-scrollbar-thumb{
   border-radius: 0.4rem;
-  background-color: $peach_color;
+  background-color: rgba(121, 121, 121, 0.641);
 }
 
+input {
+    margin-bottom: 0.5rem;
+    padding: 0.4rem;
+    outline: none;
+    border-radius: 0.3rem;
+    border: none;
+}

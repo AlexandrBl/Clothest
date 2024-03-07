@@ -3,16 +3,16 @@
 }
 
 .product-card{
-  width: 15rem;
+  width: 15.4rem;
   height: 22rem;
   margin: 0rem 0 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   overflow: hidden;
-  background-color: $dark-blue-opacity_color;
+  background-color: $white_color-opacity;
   scroll-snap-align: center;
   flex-shrink: 0;
 }
@@ -22,11 +22,12 @@
   z-index: 0;
   padding: 0.15rem;
   border-radius: 0.2rem;
-  background-color:$peach_color;
+  background-color:$peach_color-opacity;
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
   z-index: 1;
+  display: none;
 }
 
 .pic-container{
@@ -44,18 +45,15 @@
 
 .product-card__text{
   position: absolute;
-  top: 13.5rem;
+  top: 14.5rem;
   left: 0.5rem;
-  width: 71%;
+  width: 70%;
+  
 }
 
 .product-card__title{
   font-weight: 800;
-  
-}
-
-.product-card__desc{
-  
+  margin-bottom: 0.1rem;
 }
 
 .seller {
@@ -94,43 +92,125 @@
   border-radius: 50%;
 }
 
-.product-card__button{
-  position: absolute;
-}
 
-.product-card__fav-button {
-  right: 1rem;
-  bottom: 4.5rem;
-  background-color: $beige_color;
-  padding: 0.3rem;
-  width: 3rem;
-  border-radius: 2rem;
-}
+
+
 
 .product-card__like-button {
   right: 1rem;
   bottom: 1rem;
-  background-color: $peach_color;
+  background-color: $peach_color-opacity;
   padding: 0.3rem;
   width: 6rem;
   border-radius: 2rem;
-  color: white;
+  
 }
 
-.product-card__dislike-button {
-  left: 1rem;
-  bottom: 1rem;
-  background-color: $blue_color;
+.product-card__button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 2.1rem;
+  border-radius: 1rem;
+
+}
+
+.product-card__fav-button{
+  background-color: rgba(255, 255, 255, 0.337);
   padding: 0.3rem;
-  width: 6rem;
-  border-radius: 2rem;
-  color: white;
+  width: 3rem;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 19rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  transition: 0.1s;
+}
+
+.product-card__fav-button:hover{
+  background-color: $peach_color-opacity;
+}
+
+
+.product-card__fav-button-active{
+  background-color: rgba(255, 171, 141, 0.507)
+}
+
+.product-card__dislike-button{
+  right: -0.8rem;
+  bottom: 5rem;
+  background-color: transparent;
+}
+
+.svg__dislike{
+  fill: $pink_color;
+  height: 2.5rem;
+  transition: 0.1s;
+}
+
+.svg__dislike:hover{
+fill: rgb(247, 68, 77);
+}
+
+.product-card__like-button{
+  background-color: transparent;
+  right: -0.75rem;
+  bottom: 1rem;
+  
 }
 
 .product-card__select-container{
   display: flex;
   flex-direction: column;
   position: absolute;
-  bottom: 3rem;
-  left: 1rem;
+  bottom: 19.7rem;
+  left: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.797);
+  border-radius: 0.3rem;
+  transition: 0.1s;
+}
+
+.selector__button{
+  font-size: 0.8rem;
+  padding: 0.2rem;
+  color: black;
+ 
+}
+
+.product-card__select-container:hover{
+  transition: 0.1s;
+  background-color: $peach_color-opacity;
+}
+
+.svg__star{
+  width: 3rem;
+  height: 3rem;
+  padding-bottom: 0.1rem;
+  transition: 0.1s;
+  fill: white;
+}
+
+.svg__star:hover {
+  fill: $purple_color
+}
+
+.starActive {
+  fill: $white_color-opacity;
+}
+
+.svg__like{
+  fill: $peach_color;
+  width: 4rem;
+  height: 3rem;
+  transition: 0.1s;
+}
+
+.svg__like:hover{
+fill: rgb(12, 191, 131);
 }

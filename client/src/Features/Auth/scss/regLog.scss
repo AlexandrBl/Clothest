@@ -1,42 +1,93 @@
 .modal {
     position: absolute;
-    left: 50%;
+    z-index: 100000;
     top: 50%;
-    width: 20rem;
-    margin-left: -10rem;
-    margin-top: -1rem;
-    background-color: $beige_color;
-    border-radius: 0.5rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40rem;
+    height: 20rem;
+    background-color: $peach_color-opacity;
+    border-radius: 0.3rem;
 
 }
+
+.close-modal-auth__button{
+    
+    width: 3rem;
+    height: 1rem;
+    position: absolute;
+    right:0.5rem ;
+    top: 0.5rem;
+    transition: transform 0.1s;
+}
+
+.close-modal-auth__button:hover{
+    transform: scale(1.2);
+}
+
+.contAuth {
+    display: flex;
+    height: 19rem;
+}
+
+.button-container {
+    position: absolute;
+    width: 10rem;
+    height: 2rem;
+}
+
+.log-reg-button{
+    height: 100%;
+    width: 50%;
+    // border-radius: 0.3rem;
+    transition: background-color 0.1s;
+}
+
+.log-reg-button:hover{
+    background-color: $peach_color;
+}
+
 
 .form {
+    margin-top: 5rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1rem;
     border-radius: 2rem;
 }
-.form-reg {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-    border-radius: 2rem;
+
+.form-log{
+    margin-top: 7rem;
 }
+
+.form__input {
+    width: 20rem;
+    margin-bottom: 0.5rem;
+    padding: 0.4rem;
+    outline: none;
+}
+
+.form__button{
+    height: 2rem;
+    width: 25%;
+    border-radius: 0.3rem;
+    transition: background-color 0.1s;
+} 
+
+.form__button{
+    background-color: $peach_color;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+}
+
 .contAuth {
     display: flex;
     flex-direction: column;
     
 }
 
-.form-log {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-    border-radius: 2rem;
-}
+
 .form-input {
     display: flex;
     flex-direction: column;
