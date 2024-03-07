@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import io from 'socket.io-client'
 import MessageContainer from './MessageContainer'
 import { type Message } from '../type'
@@ -22,6 +22,14 @@ function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.El
       dispatch(switchChat(chats[0].id))
     }
   }, [currentChat, dispatch, chats])
+
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (containerRef.current?.scrollHeight !== null) {
+      containerRef.current?.scrollTo(0, containerRef.current?.scrollHeight)
+    }
+  }, [messagesHistory])
 
   useEffect(() => {
     if (chat !== undefined && chat.ChatMessages.length !== 0) {
@@ -76,7 +84,7 @@ function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.El
         <div className='currentchat-container__title'>
           <p className='currentchat-container__title-text'>Чат с пользователем: {chat.User1?.id === user?.id ? chat.User2?.name : chat.User1?.name }</p>
         </div>
-        <div className='chat-history-container'>
+        <div className='chat-history-container' ref={containerRef}>
           {messagesHistory?.map((message, index) => (
             <MessageContainer key={index} message={message} />
           ))}
