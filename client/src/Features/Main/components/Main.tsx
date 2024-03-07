@@ -13,10 +13,10 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
   const [isMatchDivShown, setIsMatchDivShown] = useState(false)
   const messageMatch = useSelector((store: RootState) => store.matches.message)
   const messageProducts = useSelector((store: RootState) => store.products.message)
-  const dispatch = useAppDispatch()
-  const matches = useSelector((store: RootState) => store.matches.matches)
 
-  /// /// Мэтчи для user 2
+  const dispatch = useAppDispatch()
+
+  /// /// Мэтчи для user 1
   useEffect(() => {
     if (messageMatch === 'matchanimation') {
       setIsMatchDivShown(true)
@@ -26,37 +26,47 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
   useEffect(() => {
     if (messageMatch !== '') { dispatch(initMatch()).catch(console.log) }
   }, [messageMatch])
-  /// ////////////////
 
   /// ///// Init мэтч и user 2
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('matches') === null) {
-  //     dispatch(initMatch()).catch(console.log)
-  //     if (matches.length !== 0) {
-  //       const matchesJson = JSON.stringify(matches)
-  //       localStorage.setItem('matches', matchesJson)
-  //     } else if (matches.length === 0) {
-  //       localStorage.setItem('matches', '[]')
-  //     }
-  //   }
-  //   if (JSON.parse(localStorage.getItem('matches')).length !== 0) {
-  //     console.log(1111111)
+  useEffect(() => {
+    dispatch(initMatch()).catch(console.log)
+  }, [])
 
-  //     dispatch(initMatch()).catch(console.log)
-  //     setInterval(() => {
-  //       dispatch(initMatch()).catch(console.log)
-  //       const matchesJson = localStorage.getItem('matches')
-  //       if (matchesJson !== null) {
-  //         const matchesArray = JSON.parse(matchesJson)
-  //         if (matchesArray.length < matches.length) {
-  //           setIsMatchDivShown(true)
+  // const matches = useSelector((store: RootState) => store.matches.matches)
+  // const [matchesStatus, setMatchesStatus] = useState(false)
+  // useEffect(() => {
+  //   if (matches.length !== 0) {
+  //     const matchesString = JSON.stringify(matches)
+  //     localStorage.setItem('matches', matchesString)
+  //   } else if (matches.length === 0) {
+  //     localStorage.setItem('matches', '[]')
+  //   }
+
+  //   setInterval(() => {
+  //     dispatch(initMatch()).then(() => {
+  //       if (matches.length !== 0) {
+  //         const matchesString = localStorage.getItem('matches')
+  //         if (matchesString === null) {
+  //           localStorage.setItem('matches', '[]')
+  //         }
+
+  //         if (matchesString !== null) {
+  //           const matchesArray = JSON.parse(matchesString)
+  //           console.log(matchesArray.length, matches.length, 1111111)
+
+  //           if (matchesArray.length < matches.length) {
+  //             console.log(2222222)
+  //             console.log(matchesArray)
+  //             setIsMatchDivShown(true)
+  //             const matchesString = JSON.stringify(matches)
+  //             localStorage.setItem('matches', matchesString)
+  //           }
   //         }
   //       }
-  //     }, 100000)
-  //   }
-  // }, [])
-  /// ////////////////////////////
+  //     }).catch(console.log)
+  //   }, 5000)
+  // }, [matchesStatus])
 
   return (
     <>
