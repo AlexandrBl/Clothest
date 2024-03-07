@@ -4,7 +4,7 @@ import * as api from './api'
 
 import { addProductFetch, updateProductFetch } from '../ProductForms/api'
 
-const initialState: StateProducts = { products: [], userProducts: [], categories: [], message: '' }
+const initialState: StateProducts = { products: [], userProducts: [], categories: [], message: '', scrollCount: 1 }
 
 export const initProducts = createAsyncThunk(
   'products/init',
@@ -57,6 +57,12 @@ const productsSlice = createSlice({
     },
     clearMessage (state) {
       state.message = ''
+    },
+    clearScrollCount (state) {
+      state.scrollCount = 1
+    },
+    increaseScrollCount (state) {
+      state.scrollCount += 1
     }
   },
   extraReducers: (builder) => {
@@ -116,5 +122,5 @@ const productsSlice = createSlice({
   }
 })
 
-export const { delProd, clearMessage } = productsSlice.actions
+export const { delProd, clearMessage, clearScrollCount, increaseScrollCount } = productsSlice.actions
 export default productsSlice.reducer

@@ -13,16 +13,18 @@ import ChangeProduct from '../Features/ProductForms/components/ChangeProduct'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
 
-import { userProducts, initProducts, initCategories, clearMessage } from '../Features/Products/productSlice'
+import { userProducts, initProducts, initCategories, clearMessage, increaseScrollCount } from '../Features/Products/productSlice'
 import FavoritesList from '../Features/Favorite/components/FavoritesList'
 
 import { initFavorites } from '../Features/Favorite/favoriteSlice'
+import ProductsList from '../Features/Products/components/ProductsList'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
   const message = useSelector((store: RootState) => store.products.message)
   const products = useSelector((store: RootState) => store.products.products)
   const user = useSelector((store: RootState) => store.auth.user)
+  const scrollCount = useSelector((store: RootState) => store.products.scrollCount)
 
   useEffect(() => {
     if (products.length < 9) {
@@ -43,7 +45,7 @@ function App (): JSX.Element {
   }, [message, user])
 
   const [fetching, setFetching] = useState(false)
-  const [scrollCount, setscrollCount] = useState(1)
+  // const [scrollCount, setscrollCount] = useState(1)
   const [isNotifyAlive, setNotifyAlive] = useState(false)
 
   useEffect(() => {
@@ -63,24 +65,13 @@ function App (): JSX.Element {
     }
   }, [fetching, userProducts])
 
-  useEffect(() => {
-    const container = document.querySelector('.products__list')
-
-    if (container !== null) {
-      container.addEventListener('scroll', scrollHendler)
-    }
-
-    return function () {
-      if (container !== null) {
-        container.removeEventListener('scroll', scrollHendler)
-      }
-    }
-  }, [])
+  
 
   const scrollHendler = (e: any): void => {
     if (e.target.scrollHeight - (e.target.scrollTop + e.target.offsetHeight * scrollCount) <= 1) {
       setFetching(true)
-      setscrollCount((prev) => prev + 1)
+      // setscrollCount((prev) => prev + 1)
+      dispatch(increaseScrollCount())
     }
   }
 
@@ -88,7 +79,7 @@ function App (): JSX.Element {
     <div className="App">
       <Routes>
         <Route path='/' element={<Main isNotifyAlive={isNotifyAlive} />}>
-          <Route index element={<MainPage/>}/>
+          <Route index element={<ProductsList scrollHendler = {scrollHendler} />}/>
           <Route path='auth' element={<RegLog/>}/>
           <Route path='profile' element={<UserProfile/>}/>
 
