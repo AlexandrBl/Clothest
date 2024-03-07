@@ -15,3 +15,11 @@
   align-items: center;
   height: calc(100vh - 6rem);
 }
+
+.products-inner-container {
+  display: flex;
+  height: 80%;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.318);
+  border-radius: 1rem;
+}
