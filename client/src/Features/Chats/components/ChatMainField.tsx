@@ -56,7 +56,7 @@ function ChatMainField ({ currentChat }: { currentChat: number | null }): JSX.El
     return () => {
       socket.off('receive_message', handleReceiveMessage)
     }
-  }, [])
+  }, [user])
 
   useEffect(() => {
     if (currentChat !== null && user !== null) {

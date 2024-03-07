@@ -20,6 +20,18 @@ const chatsSlice = createSlice({
   reducers: {
     switchChat (state, action) {
       state.currentChat = action.payload
+    },
+    includeHistoryInStore (state, action) {
+      if (action.payload.chatId !== undefined) {
+        state.chats = state.chats.map((chat) => {
+          if (chat.id === action.payload.chatId) {
+            chat.ChatMessages = action.payload.messagesHistory
+            return chat
+          } else {
+            return chat
+          }
+        })
+      }
     }
   },
   extraReducers: (builder) => {
@@ -48,5 +60,5 @@ const chatsSlice = createSlice({
   }
 })
 
-export const { switchChat } = chatsSlice.actions
+export const { switchChat, includeHistoryInStore } = chatsSlice.actions
 export default chatsSlice.reducer
