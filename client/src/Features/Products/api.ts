@@ -41,6 +41,14 @@ export const addMatchFetch = async (obj: MatchWithoutIdAndMutual): Promise<{ mes
   return data
 }
 
+export const initMatchesFetch = async (): Promise<{ message: string, matches: Product[][] }> => {
+  const res = await fetch('/api/matches/init')
+
+  const data = await res.json()
+
+  return data
+}
+
 export const addDislikefetch = async (id: number): Promise<{ message: string }> => {
   const res = await fetch('/api/products/dislike', {
     method: 'POST',

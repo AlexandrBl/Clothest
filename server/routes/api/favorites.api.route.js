@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Op } = require('sequelize');
 const {
 
-  Favorite, Product, User, City, ProductImage, UserProductLike, UserProductDislike,
+  Favorite, Product, User, City, ProductImage,
 
 } = require('../../db/models');
 
@@ -34,17 +34,8 @@ router.get('/', async (req, res) => {
       res.status(500).json({ message: 'Favorites not found' });
       return;
     }
-    const userLikes = await UserProductLike.findAll({ where: { userId: res.locals.user.id } });
-    const userDislike = await UserProductDislike.findAll({ where: { userId: res.locals.user.id } });
 
-    const likesArr = userLikes.map((el) => el.productId);
-    const dislikeArr = userDislike.map((el) => el.productId);
-    const newSet = new Set([...likesArr, ...dislikeArr]);
-    const resultArr = Array.from(newSet);
-
-    let favsId = favorites.map((el) => el.productId);
-
-    favsId = favsId.filter((el) => !resultArr.includes(el));
+    const favsId = favorites.map((el) => el.productId);
 
     const products = await Product.findAll({
       include: [

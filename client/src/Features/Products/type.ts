@@ -58,6 +58,7 @@ export interface Match {
 export type MatchWithoutIdAndMutual = Omit<Match, 'id' | 'isMutual'>
 
 export interface StateMatches {
-  matches: Match[]
+  match: Match[]
+  matches: Product[][]
   message: string | undefined
 }

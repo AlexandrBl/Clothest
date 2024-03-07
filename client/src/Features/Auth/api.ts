@@ -48,3 +48,20 @@ export const logoutFetch = async (): Promise<User> => {
   const { message } = await res.json()
   throw message
 }
+
+export const changeDefaultProductFetch = async (obj: { defProd: string }): Promise <{ message: string, defaultProduct: string } > => {
+  const res = await fetch('/api/auth/updDefault', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  })
+  if (res.ok) {
+    const data = await res.json()
+    console.log(data)
+    return data
+  }
+  const { message } = await res.json()
+  throw message
+}

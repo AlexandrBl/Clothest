@@ -5,7 +5,7 @@ const fileupload = require('../../utils/fileUpload');
 
 const {
 
-  Category, Product, ProductImage, User, City, UserProductLike, UserProductDislike,
+  Category, Product, ProductImage, User, City, UserProductLike, UserProductDislike, Favorite,
 
 } = require('../../db/models');
 
@@ -56,7 +56,15 @@ router.get('/userProducts', async (req, res) => {
     let products = [];
     if (res.locals.user) {
       products = await Product.findAll({ where: { userId: res.locals.user.id }, include: [{ model: ProductImage }] });
-      res.json(products);
+      const user = await User.findOne({ where: { id: res.locals.user.id } });
+
+      const result = products.sort((a, b) => {
+        if (a.title === user.defaultProduct) return -1;
+        if (b.title === user.defaultProduct) return 1;
+        return a.dataValues.title.localeCompare(b.title);
+      });
+
+      res.json(result);
     } else {
       res.json(products);
     }
@@ -191,6 +199,12 @@ router.post('/dislike', async (req, res) => {
 
       if (!dislike) {
         dislike = await UserProductDislike.create({ userId: res.locals.user.id, productId: id });
+
+        const favorite = await Favorite.findOne({ where: { userId: res.locals.user.id, productId: id } });
+
+        if (favorite) {
+          await Favorite.destroy({ where: { userId: res.locals.user.id, productId: id } });
+        }
         res.status(201).json({ message: 'success' });
       }
     }

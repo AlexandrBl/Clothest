@@ -12,12 +12,17 @@ import AddProduct from '../Features/ProductForms/components/AddProduct'
 import ChangeProduct from '../Features/ProductForms/components/ChangeProduct'
 import UserProfile from '../Features/userProfile/components/UserPage'
 import UserProducts from '../Features/userProfile/components/UserProductsList'
+import MatchesPage from '../Features/Mathces/Components/MathcesPage'
 
 import { userProducts, initProducts, initCategories, clearMessage, increaseScrollCount } from '../Features/Products/productSlice'
 import FavoritesList from '../Features/Favorite/components/FavoritesList'
 
 import { initFavorites } from '../Features/Favorite/favoriteSlice'
+
 import ProductsList from '../Features/Products/components/ProductsList'
+
+import ChatPage from '../Features/Chats/components/ChatPage'
+
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -82,11 +87,13 @@ function App (): JSX.Element {
           <Route index element={<ProductsList scrollHendler = {scrollHendler} />}/>
           <Route path='auth' element={<RegLog/>}/>
           <Route path='profile' element={<UserProfile/>}/>
-
+          <Route path='matches' element={<MatchesPage/>}/>
           <Route path='profile/edit' element={<UserProducts/>}/>
           <Route path='profile/myproducts' element={<UserProducts/>}/>
           <Route path='profile/myproducts/:id/edit' element={<ChangeProduct />}/>
           <Route path='favorites' element={<FavoritesList/>}/>
+
+          <Route path='matches/chats' element={<ChatPage />}/>
 
           <Route path='/newproduct' element={<AddProduct/>}/>
           <Route path='*' element={<IncorrectPage/>}/>
