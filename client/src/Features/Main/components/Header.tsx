@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from '../../NavBar/components/NavBar'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function Header (): JSX.Element {
   return (
@@ -8,9 +8,9 @@ function Header (): JSX.Element {
 
      <div className="center-container header-center-container">
 <div className="header-container">
-     <NavLink to={'/'} className={'logo-link link'}>
+     <Link to={'/'} className={'logo-link link'}>
         <div className="logo">LOGO</div>
-      </NavLink>
+      </Link>
       <div className="search-form">SEARCH-FORM</div>
       <NavBar/>
      </div>

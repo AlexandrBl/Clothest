@@ -48,7 +48,9 @@ button {
 
 .disabled {
   pointer-events: none;
-  background-color:  $pink_color;
+  background-color:  $peach_color;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border: 0.5rem;
 }
 
 
@@ -66,7 +68,7 @@ button {
 
 ::-webkit-scrollbar-thumb{
   border-radius: 0.4rem;
-  background-color: rgba(243, 146, 111, 0.534);
+  background-color: rgba(121, 121, 121, 0.641);
 }
 
 input {
