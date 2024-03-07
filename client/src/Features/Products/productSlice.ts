@@ -58,12 +58,16 @@ const productsSlice = createSlice({
     clearMessage (state) {
       state.message = ''
     },
+
+    clear: (state) => { state.userProducts = [] },
+
     clearScrollCount (state) {
       state.scrollCount = 1
     },
     increaseScrollCount (state) {
       state.scrollCount += 1
     }
+
   },
   extraReducers: (builder) => {
     builder
@@ -122,5 +126,9 @@ const productsSlice = createSlice({
   }
 })
 
-export const { delProd, clearMessage, clearScrollCount, increaseScrollCount } = productsSlice.actions
+
+
+
+export const { delProd, clearMessage, clearScrollCount, increaseScrollCount, clear } = productsSlice.actions
+
 export default productsSlice.reducer

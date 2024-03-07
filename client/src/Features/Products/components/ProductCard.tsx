@@ -11,7 +11,6 @@ import { delFavProd, newFavoriteProduct } from '../../Favorite/favoriteSlice'
 import SwiperComponent from '../../Swiper/Components/Swiper'
 import RegLog from '../../Auth/components/RegLog'
 
-
 function ProductCard ({ product }: { product: Product }): JSX.Element {
   const dispatch = useAppDispatch()
 
@@ -114,7 +113,9 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
         modalChange()
       }}>Fav</button>
       <button type='button' className='product-card__button product-card__like-button' onClick={() => {
-        matchPost()
+        if (user !== null) {
+          matchPost()
+        }
         modalChange()
       }}>Like</button>
       <button type='button' onClick={() => {
