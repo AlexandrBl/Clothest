@@ -29,7 +29,7 @@ function ChatPage (): JSX.Element {
         <>
           <div className='chatslist-container'>
             <div className='chatlist-container__title'>
-              <p className='chatlist-container__title_text'>Chats:</p>
+              <p className='chatlist-container__title_text'>Список чатов</p>
             </div>
             <ChatList />
           </div>
