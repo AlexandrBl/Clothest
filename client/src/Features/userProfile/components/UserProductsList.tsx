@@ -8,10 +8,16 @@ function UserProductsList (): JSX.Element {
 
   return (
     <>
+     <section className='products'>
+      <div className="products-container">
+      <div className="products__list">
     {userProductsArray.length > 0
       ? userProductsArray.map((userProduct) => <UserProductCard userProduct={userProduct} key={userProduct.id}/>)
       : <p>У вас пока нет товаров</p>
     }
+     </div>
+      </div>
+    </section>
     </>
   )
 }
