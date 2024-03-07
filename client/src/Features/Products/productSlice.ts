@@ -126,9 +126,6 @@ const productsSlice = createSlice({
   }
 })
 
-
-
-
 export const { delProd, clearMessage, clearScrollCount, increaseScrollCount, clear } = productsSlice.actions
 
 export default productsSlice.reducer

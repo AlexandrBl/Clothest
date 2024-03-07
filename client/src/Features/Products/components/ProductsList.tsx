@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { type RootState } from '../../../store/store'
 import ProductCard from '../components/ProductCard'
 
-function ProductsList ({ scrollHendler }: { scrollHendler: () => void }): JSX.Element {
+function ProductsList ({ scrollHendler }: { scrollHendler: (e: any) => void }): JSX.Element {
   const products = useSelector((store: RootState) => store.products.products)
 
   useEffect(() => {
