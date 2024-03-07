@@ -45,7 +45,6 @@ export const initMatchesFetch = async (): Promise<{ message: string, matches: Pr
   const res = await fetch('/api/matches/init')
 
   const data = await res.json()
-  console.log(data)
 
   return data
 }

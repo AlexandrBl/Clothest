@@ -93,41 +93,44 @@ router.get('/init', async (req, res) => {
       });
 
       const resultMatches = [...matches1, ...matches2];
-
-      const resultMatchesPromise = resultMatches.map(async (obj) => {
-        const matchesCouple = [];
-        for (const key in obj.dataValues) {
-          if (key === 'productId1') {
-            const prod1 = await Product.findOne({
-              include: [
-                { model: ProductImage },
-                { model: User, include: { model: City } },
-              ],
-              where: {
-                id: obj[key],
-              },
-            });
-            matchesCouple.push(prod1);
+      if (resultMatches !== 0) {
+        const resultMatchesPromise = resultMatches.map(async (obj) => {
+          const matchesCouple = [];
+          for (const key in obj.dataValues) {
+            if (key === 'productId1') {
+              const prod1 = await Product.findOne({
+                include: [
+                  { model: ProductImage },
+                  { model: User, include: { model: City } },
+                ],
+                where: {
+                  id: obj[key],
+                },
+              });
+              matchesCouple.push(prod1);
+            }
+            if (key === 'productId2') {
+              const prod2 = await Product.findOne({
+                include: [
+                  { model: ProductImage },
+                  { model: User, include: { model: City } },
+                ],
+                where: {
+                  id: obj[key],
+                },
+              });
+              matchesCouple.push(prod2);
+            }
           }
-          if (key === 'productId2') {
-            const prod2 = await Product.findOne({
-              include: [
-                { model: ProductImage },
-                { model: User, include: { model: City } },
-              ],
-              where: {
-                id: obj[key],
-              },
-            });
-            matchesCouple.push(prod2);
-          }
-        }
-        return matchesCouple;
-      });
-      const preResult = await Promise.allSettled(resultMatchesPromise);
+          return matchesCouple;
+        });
+        const preResult = await Promise.allSettled(resultMatchesPromise);
 
-      const result = preResult.map((el) => el.value.map((product) => product.dataValues));
-      res.status(201).json({ message: 'ok', matches: result });
+        const result = preResult.map((el) => el.value.map((product) => product.dataValues));
+        res.status(201).json({ message: 'ok', matches: result });
+      } else {
+        res.status(201).json({ message: 'ok', matches: [] });
+      }
     }
   } catch ({ message }) {
     res.status(500).json({ message });

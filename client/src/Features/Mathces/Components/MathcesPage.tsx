@@ -8,7 +8,10 @@ export default function MatchesPage (): JSX.Element {
 
   return (
     <>
-    {matches.map((el, index) => <MatchesCard key={index} matches={el}/>)}
+  <section className='matches'>
+  <h2 className='matches__title'>{matches.length === 0 ? 'У вас нет мэтчей' : 'Ваши мэтчи'}</h2>
+    {matches.map((el, index) => <MatchesCard key={index} matches={el}/>) }
+  </section>
     </>
 
   )

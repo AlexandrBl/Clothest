@@ -18,7 +18,6 @@ import { userProducts, initProducts, initCategories, clearMessage } from '../Fea
 import FavoritesList from '../Features/Favorite/components/FavoritesList'
 
 import { initFavorites } from '../Features/Favorite/favoriteSlice'
-import { initMatch } from '../Features/Products/matchSlice'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -34,7 +33,6 @@ function App (): JSX.Element {
 
   useEffect(() => {
     dispatch(authCheck()).catch(console.log)
-    dispatch(initMatch()).then((data => { console.log(data) })).catch(console.log)
   }, [])
 
   useEffect(() => {
