@@ -32,6 +32,9 @@ const chatsSlice = createSlice({
           }
         })
       }
+    },
+    clear3: (state) => {
+      state = initialState
     }
   },
   extraReducers: (builder) => {
@@ -60,5 +63,5 @@ const chatsSlice = createSlice({
   }
 })
 
-export const { switchChat, includeHistoryInStore } = chatsSlice.actions
+export const { switchChat, includeHistoryInStore, clear3 } = chatsSlice.actions
 export default chatsSlice.reducer

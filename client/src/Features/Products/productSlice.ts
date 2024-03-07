@@ -57,7 +57,8 @@ const productsSlice = createSlice({
     },
     clearMessage (state) {
       state.message = ''
-    }
+    },
+    clear: (state) => { state.userProducts = [] }
   },
   extraReducers: (builder) => {
     builder
@@ -116,5 +117,5 @@ const productsSlice = createSlice({
   }
 })
 
-export const { delProd, clearMessage } = productsSlice.actions
+export const { delProd, clearMessage, clear } = productsSlice.actions
 export default productsSlice.reducer

@@ -3,8 +3,11 @@ import Modal from 'react-modal'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { authLogout } from '../../Auth/authSlice'
+import { authLogout} from '../../Auth/authSlice'
 import RegLog from '../../Auth/components/RegLog'
+import { clear } from '../../Products/productSlice'
+import { clear2 } from '../../Products/matchSlice'
+import { clear3 } from '../../Chats/chatsSlice'
 
 function NavBar (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -15,6 +18,9 @@ function NavBar (): JSX.Element {
 
   const logOut = (): void => {
     dispatch(authLogout()).catch(console.log)
+    dispatch(clear())
+    dispatch(clear2())
+    dispatch(clear3())
     navigate('/')
   }
 

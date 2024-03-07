@@ -20,7 +20,12 @@ const matchesSlice = createSlice({
   reducers: {
     clearMatchMessage (state) {
       state.message = ''
+    },
+    clear2: (state) => {
+      state.match = []
+      state.matches = []
     }
+
   },
   extraReducers: (builder) => {
     builder
@@ -44,4 +49,4 @@ const matchesSlice = createSlice({
 
 export default matchesSlice.reducer
 
-export const { clearMatchMessage } = matchesSlice.actions
+export const { clearMatchMessage, clear2 } = matchesSlice.actions
