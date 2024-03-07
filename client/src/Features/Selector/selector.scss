@@ -66,10 +66,16 @@
 }
 
 .product-card__switch-button {
+  color: $white_color-opacity;
   background-color: $peach_color;
   position: absolute;
   bottom: 1rem;
   border-radius: 1rem;
   padding: 0.5rem;
   width: 4rem;
+  transition: 0.1s;
+}
+
+.product-card__switch-button:hover{
+  scale:1.03
 }

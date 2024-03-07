@@ -1,3 +1,42 @@
 .empty {
     display: flex;
 }
+
+.svg__change {
+    fill: $peach_color;
+    transition: 0.1s;
+}
+
+.product-user-card__switch-button {
+    position: absolute;
+    width: 7rem;
+  right: 2.3rem;
+  bottom: -3.5rem;
+}
+
+.svg__delete {
+    fill: $pink_color;
+    transition: 0.1s;
+}
+
+.product-card__delete-button{
+    position: absolute;
+    right: -3.5rem;
+    bottom: -0.6rem;
+    background-color: transparent;
+}
+
+.product-card__change-button{
+    position: absolute;
+    background-color: transparent;
+  right: -3.5rem;
+  bottom: -4rem;
+}
+
+.svg__change:hover{
+    fill: rgb(247, 68, 77);
+}
+
+.svg__delete:hover{
+    fill: $purple_color;
+}
