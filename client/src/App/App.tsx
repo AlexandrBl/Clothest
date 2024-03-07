@@ -18,6 +18,7 @@ import { userProducts, initProducts, initCategories, clearMessage } from '../Fea
 import FavoritesList from '../Features/Favorite/components/FavoritesList'
 
 import { initFavorites } from '../Features/Favorite/favoriteSlice'
+import ChatPage from '../Features/Chats/components/ChatPage'
 
 function App (): JSX.Element {
   const dispatch = useAppDispatch()
@@ -97,6 +98,8 @@ function App (): JSX.Element {
           <Route path='profile/myproducts' element={<UserProducts/>}/>
           <Route path='profile/myproducts/:id/edit' element={<ChangeProduct />}/>
           <Route path='favorites' element={<FavoritesList/>}/>
+
+          <Route path='matches/chats' element={<ChatPage />}/>
 
           <Route path='/newproduct' element={<AddProduct/>}/>
           <Route path='*' element={<IncorrectPage/>}/>

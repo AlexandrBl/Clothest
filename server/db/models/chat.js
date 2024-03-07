@@ -5,8 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Chat extends Model {
     static associate({ User, ChatMessage }) {
-      this.belongsTo(User, { foreignKey: 'userId1' });
-      this.belongsTo(User, { foreignKey: 'userId2' });
+      this.belongsTo(User, { foreignKey: 'userId1', as: 'User1' });
+      this.belongsTo(User, { foreignKey: 'userId2', as: 'User2' });
       this.hasMany(ChatMessage, { foreignKey: 'chatId' });
     }
   }

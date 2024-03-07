@@ -4,6 +4,7 @@ import authSlice from '../Features/Auth/authSlice'
 import productSlice from '../Features/Products/productSlice'
 import matchSlice from '../Features/Products/matchSlice'
 import favoriteSlice from '../Features/Favorite/favoriteSlice'
+import chatsSlice from '../Features/Chats/chatsSlice'
 
 const store = configureStore({
 
@@ -11,7 +12,8 @@ const store = configureStore({
     auth: authSlice,
     products: productSlice,
     matches: matchSlice,
-    favorites: favoriteSlice
+    favorites: favoriteSlice,
+    chats: chatsSlice
   }
 })
 

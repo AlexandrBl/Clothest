@@ -110,4 +110,18 @@ router.get('/user', async (req, res) => {
   }
 });
 
+router.put('/updDefault', async (req, res) => {
+  try {
+    if (res.locals.user) {
+      const { defProd } = req.body;
+      const user = await User.findOne({ where: { id: res.locals.user.id } });
+      user.defaultProduct = defProd;
+      await user.save();
+      res.status(201).json({ message: 'success', defaultProduct: user.defaultProduct });
+    }
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
 module.exports = router;
