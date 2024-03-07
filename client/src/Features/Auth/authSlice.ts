@@ -20,6 +20,11 @@ export const authLogout = createAsyncThunk(
   'auth/logout',
   async () => await api.logoutFetch())
 
+export const changeDefault = createAsyncThunk(
+  'defaultProduct/upd',
+  async (obj: { defProd: string }) => await api.changeDefaultProductFetch(obj)
+)
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -58,6 +63,12 @@ const authSlice = createSlice({
         window.location.reload()
       })
       .addCase(authLogout.rejected, (state, action) => {
+        state.message = action.error.message
+      })
+      .addCase(changeDefault.fulfilled, (state, action) => {
+        state.message = action.payload.message
+      })
+      .addCase(changeDefault.rejected, (state, action) => {
         state.message = action.error.message
       })
   }
