@@ -23,7 +23,6 @@ function ChatList (): JSX.Element {
             <img className='chatslist-container__list_element-userpic' src={chat.User1?.id === user?.id ? chat.User2?.userpic : chat.User1?.userpic} />
             <div className='chatslist-container__list_element-userdata'>
             <p className='chatslist-container__list_element-name'>{chat.User1?.id === user?.id ? chat.User2?.name : chat.User1?.name }</p>
-            <p className='chatslist-container__list_element-text'>{chat.ChatMessages[chat.ChatMessages.length - 1] !== undefined ? chat.ChatMessages[chat.ChatMessages.length - 1].message : 'Нет сообщений 😔'}</p>
             </div>
         </div>
        )}

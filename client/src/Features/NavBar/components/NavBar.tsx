@@ -48,17 +48,17 @@ function NavBar (): JSX.Element {
           <li className="nav__item">
           <NavLink className={({ isActive, isPending }) =>
             isPending ? 'pending' : isActive ? 'active' : ''
-  } to={'/profile'} >Profile</NavLink>
+  } to={'/profile'} >Профиль</NavLink>
           </li>
           <li className="nav__item">
             <button onClick={logOut} type='button' className='button logout-button'>
-            LOGOUT
+            Выйти
             </button>
         </li>
 
         </>
           : <li className="nav__item">
-                <button className='button auth-button' onClick={() => { setModal(true) }}>AUTH</button>
+                <button className='button auth-button' onClick={() => { setModal(true) }}>Войти</button>
                 <Modal ariaHideApp={false} className='modal' isOpen={modal} onRequestClose={() => { setModal(false) }}>
                   <button className='close-modal-auth__button' onClick={() => { setModal(false) }}>x</button>
                    <RegLog/>
