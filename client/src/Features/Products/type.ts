@@ -45,6 +45,7 @@ export interface StateProducts {
   products: Product[]
   categories: Category[]
   message: string | undefined
+  scrollCount: number
 }
 
 export interface Match {
