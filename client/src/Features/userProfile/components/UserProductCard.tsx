@@ -12,6 +12,7 @@ function UserProductCard ({ userProduct }: { userProduct: UserProduct }): JSX.El
   const navigate = useNavigate()
   const user = useSelector((store: RootState) => store.auth.user)
 
+
   const deleteProduct = (id: number): void => {
     dispatch(userProductDelete(id)).then((data) => {
       dispatch(updateUser(data.payload))

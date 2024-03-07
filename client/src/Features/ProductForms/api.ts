@@ -7,8 +7,7 @@ export const addProductFetch = async (obj: FormData): Promise<{ message: string,
   })
   if (res.ok) {
     const data = await res.json()
-    console.log(data);
-    
+
     return data
   }
   const { message } = await res.json()
