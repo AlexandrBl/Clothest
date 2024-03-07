@@ -40,7 +40,9 @@ const chatsSlice = createSlice({
       }
     },
     clear3: (state) => {
-      state = initialState
+      state.chats = []
+      state.message = ''
+      state.currentChat = null
     }
   },
   extraReducers: (builder) => {

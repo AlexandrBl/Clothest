@@ -51,6 +51,8 @@ function FavoriteCard ({ favorite }: { favorite: Product }): JSX.Element {
       const id = userProduct.id
       dispatch(addMatch({ productId1: id, productId2: favorite.id }))
         .catch(console.log)
+    } else {
+      navigate('/newproduct')
     }
   }
 
