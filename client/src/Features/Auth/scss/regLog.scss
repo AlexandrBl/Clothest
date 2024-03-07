@@ -6,7 +6,7 @@
     transform: translate(-50%, -50%);
     width: 40rem;
     height: 20rem;
-    background-color: $peach_color;
+    background-color: $peach_color-opacity;
     border-radius: 0.3rem;
 
 }
@@ -18,6 +18,11 @@
     position: absolute;
     right:0.5rem ;
     top: 0.5rem;
+    transition: transform 0.1s;
+}
+
+.close-modal-auth__button:hover{
+    transform: scale(1.2);
 }
 
 .contAuth {
@@ -39,7 +44,7 @@
 }
 
 .log-reg-button:hover{
-    background-color: $pink_color;
+    background-color: $peach_color;
 }
 
 
@@ -71,7 +76,9 @@
 } 
 
 .form__button{
-    background-color: $pink_color;
+    background-color: $peach_color;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
 }
 
 .contAuth {
