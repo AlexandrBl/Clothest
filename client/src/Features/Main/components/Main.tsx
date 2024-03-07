@@ -13,7 +13,6 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
   const [isMatchDivShown, setIsMatchDivShown] = useState(false)
   const messageMatch = useSelector((store: RootState) => store.matches.message)
   const messageProducts = useSelector((store: RootState) => store.products.message)
-  const matches = useSelector((store: RootState) => store.matches.matches)
 
   const dispatch = useAppDispatch()
 
@@ -34,6 +33,7 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
     dispatch(initMatch()).catch(console.log)
   }, [])
 
+  // const matches = useSelector((store: RootState) => store.matches.matches)
   // const [matchesStatus, setMatchesStatus] = useState(false)
   // useEffect(() => {
   //   if (matches.length !== 0) {
