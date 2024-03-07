@@ -90,8 +90,9 @@ function AddProduct (): JSX.Element {
           <input className='input-form' {...getInputProps()} />
           <p className='drag-n-drop-p'>Drag and drop some files here, or click to select files</p>
         </div>
+        <div className='previews-container'>
         {images.length > 0 && (
-          <div className='previews-container'>
+          <>
             <p className='previews-container-p'>Прикрепленные файлы:</p>
               <div className='preview-common-container'>
               {previews.map(preview => (
@@ -103,8 +104,9 @@ function AddProduct (): JSX.Element {
                 </div>
               ))}
               </div>
-          </div>
+              </>
         )}
+        </div>
         <button className='form-button' type='submit'>Добавить</button>
       </form>
     </div>
