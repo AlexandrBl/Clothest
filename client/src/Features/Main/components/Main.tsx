@@ -70,9 +70,8 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
 
   return (
     <>
-    <div className="center-container">
+
     <Header/>
-    </div>
 
     <div className="center-container">
     <main className="main">

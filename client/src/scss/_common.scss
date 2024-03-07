@@ -2,6 +2,9 @@
 html {
   font-size: 1.2vw;
   height: 100vh;
+
+  color: $blue_color;
+
   font-family: "Ubuntu", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
@@ -45,8 +48,10 @@ button {
 
 .disabled {
   pointer-events: none;
-  background-color:  #568c9cb8;;
+  background-color:  $pink_color;
 }
+
+
 
 ::-webkit-scrollbar{
   // height: 0.3rem;
@@ -61,6 +66,13 @@ button {
 
 ::-webkit-scrollbar-thumb{
   border-radius: 0.4rem;
-  background-color: $peach_color;
+  background-color: rgba(243, 146, 111, 0.534);
 }
 
+input {
+    margin-bottom: 0.5rem;
+    padding: 0.4rem;
+    outline: none;
+    border-radius: 0.3rem;
+    border: none;
+}

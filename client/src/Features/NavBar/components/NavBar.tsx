@@ -31,16 +31,24 @@ function NavBar (): JSX.Element {
         {(user != null)
           ? <>
           <li className="nav__item">
-          <NavLink to={'/favorites'}>Избранное</NavLink>
+          <NavLink className={({ isActive, isPending }) =>
+            isPending ? 'pending' : isActive ? 'active' : ''
+  } to={'/favorites'}>Избранное</NavLink>
           </li>
           <li className="nav__item">
-          <NavLink to={'/newproduct'}>Разместить объявление</NavLink>
+          <NavLink className={({ isActive, isPending }) =>
+            isPending ? 'pending' : isActive ? 'active' : ''
+  } to={'/newproduct'}>Разместить объявление</NavLink>
           </li>
           <li className="nav__item">
-          <NavLink to={'/matches'} >Matches</NavLink>
+          <NavLink className={({ isActive, isPending }) =>
+            isPending ? 'pending' : isActive ? 'active' : ''
+  } to={'/matches'} >Matches</NavLink>
           </li>
           <li className="nav__item">
-          <NavLink to={'/profile'} >Profile</NavLink>
+          <NavLink className={({ isActive, isPending }) =>
+            isPending ? 'pending' : isActive ? 'active' : ''
+  } to={'/profile'} >Profile</NavLink>
           </li>
           <li className="nav__item">
             <button onClick={logOut} type='button' className='button logout-button'>
@@ -52,7 +60,7 @@ function NavBar (): JSX.Element {
           : <li className="nav__item">
                 <button className='button auth-button' onClick={() => { setModal(true) }}>AUTH</button>
                 <Modal ariaHideApp={false} className='modal' isOpen={modal} onRequestClose={() => { setModal(false) }}>
-                  <button onClick={() => { setModal(false) }}>x</button>
+                  <button className='close-modal-auth__button' onClick={() => { setModal(false) }}>x</button>
                    <RegLog/>
                 </Modal>
             </li>
