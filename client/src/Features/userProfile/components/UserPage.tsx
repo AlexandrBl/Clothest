@@ -7,9 +7,8 @@ function UserPage (): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.user)
   return (
 
-    <div className='container'>
-      <div>{`Привет, ${user?.name}!`}</div>
-      <div>{'Вот твои товары:'}</div>
+    <div className='container '>
+      <div className='userPage-container'>{`Привет, ${user?.name}!`}</div>
       <UserProductsList/>
     </div>
   )

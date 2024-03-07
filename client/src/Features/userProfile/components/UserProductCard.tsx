@@ -32,8 +32,8 @@ function UserProductCard ({ userProduct }: { userProduct: UserProduct }): JSX.El
   return (
     <>
 
-    <div className="product-card-container">
-    <div className="product-card">
+    <div className="product-card-container default-product">
+    <div className="product-card ">
     <div className="pic-container">
     <SwiperComponent img={userProduct.ProductImages}></SwiperComponent>
       </div>

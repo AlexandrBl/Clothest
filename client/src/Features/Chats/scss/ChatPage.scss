@@ -1,10 +1,13 @@
 .chats-container {
-    height: 80vh;
+
     width: 80%;
     margin-top: 2rem;
     border-radius: 1.4rem;
     background-color: $beige-opacity_color;
     display: flex;
+    height: 28rem;
+    scroll-snap-type: y mandatory;
+    overflow-y: auto;
 }
 
 .chatslist-container {

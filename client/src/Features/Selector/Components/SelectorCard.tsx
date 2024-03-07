@@ -1,5 +1,6 @@
 import React from 'react'
 import { type UserProduct } from '../../Products/type'
+import SwiperComponent from '../../Swiper/Components/Swiper'
 
 function SelectorCard ({ product, changeCurrentProduct }: { product: UserProduct, currentProduct: string, changeCurrentProduct: (value: string) => void }): JSX.Element {
   function handeClick (): void {
@@ -11,14 +12,14 @@ function SelectorCard ({ product, changeCurrentProduct }: { product: UserProduct
     <div className="product-card-container">
     <div className="product-card">
       <div className="pic-container">
-      <img src="/img/placeholder.jpeg" alt="placeholder" className="product-pic" />
+      <SwiperComponent img={product.ProductImages}></SwiperComponent>
       </div>
       <div className="product-card__text">
       <h2 className='product-card__title'>{product.title}</h2>
       <p className="product-card__desc">{product.description}</p>
       </div>
 
-      <button onClick={handeClick} type='button' className='product-card__button product-card__switch-button'>Switch</button>
+      <button onClick={handeClick} type='button' className='product-card__button product-card__switch-button'>Поменять</button>
     </div>
     </div>
     </>

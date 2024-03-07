@@ -4,8 +4,10 @@ import ChatList from './ChatList'
 import { useSelector } from 'react-redux'
 import { useAppDispatch, type RootState } from '../../../store/store'
 import { initChats } from '../chatsSlice'
+import { useNavigate } from 'react-router'
 
 function ChatPage (): JSX.Element {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const currentChat = useSelector((store: RootState) => store.chats.currentChat)
@@ -24,6 +26,7 @@ function ChatPage (): JSX.Element {
 
   return (
         <div className='chats-container center-container'>
+          <button className='matches-chats-container__button matches-button' onClick={() => { navigate('/matches') }}>Мэчти</button>
       {chats?.length > 0
         ? (
         <>

@@ -3,6 +3,9 @@
     margin-top: 2rem;
     border-radius: 1rem;
     padding: 2rem;
+    height: 28rem;
+    scroll-snap-type: y mandatory;
+    overflow-y: auto;
 }
 
 
@@ -44,4 +47,19 @@
     height: 2rem;
     text-align: center;
     vertical-align: baseline;
+}
+
+
+.matches-chats-container__button{
+    background-color: $peach_color-opacity;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 0.3rem;
+
+}
+
+.matches-button {
+    position: absolute;
+    left: 8.7rem;
+    top: 7.2rem
 }
