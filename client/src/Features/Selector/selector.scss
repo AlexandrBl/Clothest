@@ -73,4 +73,9 @@
   border-radius: 1rem;
   padding: 0.5rem;
   width: 4rem;
+  transition: 0.1s;
+}
+
+.product-card__switch-button:hover{
+  scale:1.03
 }
