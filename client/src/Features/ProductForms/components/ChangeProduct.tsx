@@ -84,9 +84,9 @@ function ChangeProduct (): JSX.Element {
   return (
     <div className='center-container addProduct-container'>
       <form className='addProduct-container__form' onSubmit={handleSubmit(productUpdate)}>
-        <input type="text" placeholder='Название' defaultValue={product?.title} {...register('title')} />
+        <input className='input-form' type="text" placeholder='Название' defaultValue={product?.title} {...register('title')} />
         <span>{errors.title?.message}</span>
-        <input type="text" placeholder='Описание' defaultValue={product?.description} {...register('description')} />
+        <input className='input-form' type="text" placeholder='Описание' defaultValue={product?.description} {...register('description')} />
         <span>{errors.description?.message}</span>
         <select defaultValue={category?.title} {...register('category')}>
                 <option value={category?.title} >{category?.title}</option>
@@ -94,7 +94,7 @@ function ChangeProduct (): JSX.Element {
         </select>
         <span>{errors.category?.message}</span>
         <div {...getRootProps()} className="dropzone">
-          <input {...getInputProps()} />
+          <input className='input-form' {...getInputProps()} />
           <p className='drag-n-drop-p'>Drag and drop some files here, or click to select files</p>
         </div>
           <div className='previews-container'>
@@ -119,7 +119,7 @@ function ChangeProduct (): JSX.Element {
               </div>
           </div>
         <span>{message}</span>
-        <button type='submit'>Добавить</button>
+        <button className='form-button' type='submit'>Добавить</button>
       </form>
     </div>
   )

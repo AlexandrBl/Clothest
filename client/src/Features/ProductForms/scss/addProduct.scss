@@ -1,11 +1,14 @@
 .addProduct-container__form {
     display: flex;
+    align-items: center;
     width: 70rem;
     flex-direction: column;
     align-items: center;
     margin-top: 1rem;
     border-radius: 2rem;
     background-color: rgba(255, 255, 255, 0.698);
+    overflow-y: auto;
+    height: 30rem;
 }
 
 .addProduct-container__form>* {
@@ -105,6 +108,14 @@
     cursor: pointer;
 }
 
+.form-button{
+    margin-bottom: 2rem;
+    background-color: $peach_color-opacity;
+    width: 10%;
+    padding: 0.2rem 0 0.2rem 0;
+}
+
+
 .addProduct-container__input {
     font-size: 0.7rem;
     height: 2rem;
@@ -114,4 +125,5 @@
     outline: none;
     background-color: $purple-opacity_color;
     box-shadow: rgba(177, 177, 177, 0.258) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.208) -3px -3px 6px 1px inset;
+
 }

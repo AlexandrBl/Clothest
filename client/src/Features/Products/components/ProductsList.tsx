@@ -23,9 +23,11 @@ function ProductsList ({ scrollHendler }: { scrollHendler: (e: any) => void }): 
   return (
     <section className='products'>
       <div className="products-container">
-      <div className="products__list">{
+      <div className="products__list">
+        {
         products.map(el => <ProductCard product={el} key={el.id }/>)
-      }</div>
+      }
+      </div>
       </div>
     </section>
 

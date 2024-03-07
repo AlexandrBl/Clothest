@@ -75,9 +75,11 @@ function AddProduct (): JSX.Element {
   return (
     <div className='center-container addProduct-container'>
       <form className='addProduct-container__form' onSubmit={handleSubmit(productPost)}>
+
         <input className='addProduct-container__input' type="text" placeholder='Название' {...register('title')} />
         <span>{errors.title?.message}</span>
         <input className='addProduct-container__input' type="text" placeholder='Описание' {...register('description')} />
+
         <span>{errors.description?.message}</span>
         <select className='addProduct-container__input' defaultValue='default' {...register('category')}>
                 <option value='default'>Выберите категорию</option>
@@ -85,7 +87,7 @@ function AddProduct (): JSX.Element {
         </select>
         <span>{errors.category?.message}</span>
         <div {...getRootProps()} className="dropzone">
-          <input {...getInputProps()} />
+          <input className='input-form' {...getInputProps()} />
           <p className='drag-n-drop-p'>Drag and drop some files here, or click to select files</p>
         </div>
         {images.length > 0 && (
@@ -103,7 +105,7 @@ function AddProduct (): JSX.Element {
               </div>
           </div>
         )}
-        <button type='submit'>Добавить</button>
+        <button className='form-button' type='submit'>Добавить</button>
       </form>
     </div>
   )

@@ -87,9 +87,9 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
     </main>
     </div>
 
-    <div className="center-container">
+    
     <Footer/>
-    </div>
+    
     </>
   )
 }
