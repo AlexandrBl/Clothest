@@ -10,7 +10,7 @@ function UserProductsList (): JSX.Element {
     <>
      <section className='products'>
       <div className="products-container">
-      <div className="products__list">
+      <div className="products__list user-product-list">
     {userProductsArray.length > 0
       ? userProductsArray.map((userProduct) => <UserProductCard userProduct={userProduct} key={userProduct.id}/>)
       : <p>У вас пока нет товаров</p>
