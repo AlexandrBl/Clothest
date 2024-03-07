@@ -1,12 +1,16 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import UserProductsList from './UserProductsList'
+import { useSelector } from 'react-redux'
+import { type RootState } from '../../../store/store'
 
 function UserPage (): JSX.Element {
+  const user = useSelector((store: RootState) => store.auth.user)
   return (
 
     <div className='container'>
-      <NavLink to={'edit'}>Редактировать профиль</NavLink>
-      <NavLink to={'myproducts'}>Мои товары</NavLink>
+      <div>{`Привет, ${user?.name}!`}</div>
+      <div>{'Вот твои товары:'}</div>
+      <UserProductsList/>
     </div>
   )
 }
