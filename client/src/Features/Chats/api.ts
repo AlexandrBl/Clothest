@@ -11,3 +11,13 @@ export const updChatFetch = async (id: number): Promise<ChatMessages[]> => {
   const data = await res.json()
   return data
 }
+
+export const chatCheckFetch = async (userIds: number[]): Promise<{ message: string }> => {
+  const res = await fetch('/api/chats/check', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userIds })
+  })
+  const data = await res.json()
+  return data
+}
