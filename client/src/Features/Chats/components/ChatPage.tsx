@@ -14,7 +14,13 @@ function ChatPage (): JSX.Element {
   useEffect(() => {
     dispatch(initChats())
       .catch(console.log)
+    setTimeout(async () => await dispatch(initChats())
+      .catch(console.log), 3000)
   }, [])
+
+  if (chats === null || chats === undefined) {
+    return <div className='chats-container center-container'>Загружаем чаты... Надо чуть-чуть подождать</div>
+  }
 
   return (
         <div className='chats-container center-container'>

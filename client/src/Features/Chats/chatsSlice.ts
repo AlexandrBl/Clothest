@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { type StateChats } from './type'
-import { initChatsFetch, updChatFetch } from './api'
+import { chatCheckFetch, initChatsFetch, updChatFetch } from './api'
 
 const initialState: StateChats = { chats: [], message: '', currentChat: null }
 
@@ -12,6 +12,12 @@ export const initChats = createAsyncThunk(
 export const updateChat = createAsyncThunk(
   'chat/upd',
   async (id: number) => await updChatFetch(id)
+)
+
+export const checkChat = createAsyncThunk(
+  'chat/check',
+  async (userIds: number[]) => await chatCheckFetch(userIds)
+
 )
 
 const chatsSlice = createSlice({
@@ -58,6 +64,12 @@ const chatsSlice = createSlice({
         }
       })
       .addCase(updateChat.rejected, (state, action) => {
+        state.message = action.error.message
+      })
+      .addCase(checkChat.fulfilled, (state, action) => {
+        state.message = action.payload.message
+      })
+      .addCase(checkChat.rejected, (state, action) => {
         state.message = action.error.message
       })
   }

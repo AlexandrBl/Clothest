@@ -47,8 +47,34 @@ router.get('/:id/newmessages', async (req, res) => {
   }
 });
 
-// router.get('/messages', async (req, res) => {
-
-// });
+router.post('/check', async (req, res) => {
+  try {
+    const { userIds } = req.body;
+    console.log(userIds)
+    const chat = await Chat.findOne({
+      where: {
+        [Op.or]: [
+          { userId1: userIds[0], userId2: userIds[1] },
+          { userId1: userIds[1], userId2: userIds[0] },
+        ],
+      },
+    });
+    if (chat) {
+      res.status(200).json({ message: 'чат уже существует' });
+      return;
+    }
+    console.log(chat)
+    const createdChat = await Chat.create({ userId1: userIds[0], userId2: userIds[1] });
+    if (createdChat) {
+      console.log(createdChat)
+      res.status(201).json({ message: 'Создан новый чат' });
+      return;
+    }
+    console.log(createdChat)
+    res.status(500).json({ message: 'что-то пошло не так' });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
 
 module.exports = router;
