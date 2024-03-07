@@ -17,9 +17,11 @@ export default function MatchContainer ({ matches }: { matches: Product[] }): JS
   }
   return (
     <>
-    <div style={{ backgroundColor: 'red', margin: '1rem' }}>
+    <div className='match-container__main'>
+      <div className='match-container__main_cards'>
     {matches.map(el => <MatchCard product={el} key={el.id}/>)}
-      <button onClick={handleChatButton}>Перейти в чат</button>
+      </div>
+    <button className='match-container__main_chatbutton button' onClick={handleChatButton}>Перейти в чат</button>
     </div>
     </>
   )
