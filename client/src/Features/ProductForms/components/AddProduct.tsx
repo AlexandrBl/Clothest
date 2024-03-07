@@ -75,11 +75,11 @@ function AddProduct (): JSX.Element {
   return (
     <div className='center-container addProduct-container'>
       <form className='addProduct-container__form' onSubmit={handleSubmit(productPost)}>
-        <input type="text" placeholder='Название' {...register('title')} />
+        <input className='addProduct-container__input' type="text" placeholder='Название' {...register('title')} />
         <span>{errors.title?.message}</span>
-        <input type="text" placeholder='Описание' {...register('description')} />
+        <input className='addProduct-container__input' type="text" placeholder='Описание' {...register('description')} />
         <span>{errors.description?.message}</span>
-        <select defaultValue='default' {...register('category')}>
+        <select className='addProduct-container__input' defaultValue='default' {...register('category')}>
                 <option value='default'>Выберите категорию</option>
                {categories.map(el => <option key={el.id} value={el.title}>{el.title}</option>)}
         </select>

@@ -11,7 +11,6 @@ function Header (): JSX.Element {
      <NavLink to={'/'} className={'logo-link link'}>
         <div className="logo">LOGO</div>
       </NavLink>
-      <div className="search-form">SEARCH-FORM</div>
       <NavBar/>
      </div>
      </div>
