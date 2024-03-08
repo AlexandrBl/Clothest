@@ -6,7 +6,7 @@ function MatchCard ({ product }: { product: Product }): JSX.Element {
   return (
     <>
         <div className="product-card-container">
-            <div className="product-card">
+            <div className="product-card product-card-from-match-page">
                 <p className="product-card__city">{product.User.City.name}</p>
                 <div className="pic-container">
                     <SwiperComponent img={product.ProductImages}></SwiperComponent>
