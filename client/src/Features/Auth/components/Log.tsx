@@ -49,11 +49,11 @@ function RegLog (): JSX.Element {
 <>
 
 <form onSubmit={handleSubmit(login)} className='form form-log'>
- <input type='email' placeholder='email' {...register('email')} className='form__input form-log__input'/>
+ <input type='email' placeholder='Почта' {...register('email')} className='form__input form-log__input'/>
  <span>{errors.email?.message}</span>
- <input type='password' placeholder='password' {...register('password')} className='form__input form-log__input'/>
+ <input type='password' placeholder='Пароль' {...register('password')} className='form__input form-log__input'/>
  <span>{errors.password?.message}</span>
- <button type='submit' className='form__button form-log__button'>login</button>
+ <button type='submit' className='form__button form-log__button'>Войти</button>
  </form>
       <div className='form__err' >{viewMessage}</div>
 </>

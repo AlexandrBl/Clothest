@@ -194,6 +194,11 @@
   fill: white;
 }
 
+
+.svg__star:hover {
+  fill: whitesmoke
+}
+
 .starActive {
   fill: $white_color-opacity;
 }
