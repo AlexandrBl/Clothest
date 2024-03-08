@@ -1,10 +1,60 @@
-.match-container {
+.match-modal{
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 50vw;
-    height: 50vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
-    background-color: rgb(128, 128, 128);
+    align-items: center;
+    width: 40rem;
+    height: calc(100vh - 6rem);
+    z-index: 2;
+    animation: select-anim 1s ;
+    transition: animation 1s;
+    // background-color: $peach_color-opacity;
+    border-radius: 0.3rem;
+}
+
+.match-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0.3rem;
+    background-color: $white_color-opacity;
+    height: 100%;
+    width: 100%;
+}
+
+.notice-container{
+    
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $peach_color;
+    height: 3rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 10rem;
+    border-radius: 0.5rem;
+}
+
+.match-notice{
+   display: inline-block;
+    color: white;
+    margin-top: 1rem;
+    height: 1rem;
+    
+}
+
+.match-container__button_open {
+    background-color: $peach_color;
+    position: absolute;
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
 }

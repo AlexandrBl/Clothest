@@ -76,10 +76,11 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
     <div className="center-container">
     <main className="main">
       <Outlet/>
-      <Modal ariaHideApp={false} className='selector-modal' isOpen={isMatchDivShown} onRequestClose={() => {
+      <Modal ariaHideApp={false} className='match-modal' isOpen={isMatchDivShown} onRequestClose={() => {
         setIsMatchDivShown(false)
         dispatch(clearMatchMessage())
       }}>
+       
       <Match />
     </Modal>
       {isMatchDivShown && <Match />}
@@ -87,9 +88,8 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
     </main>
     </div>
 
-    
     <Footer/>
-    
+
     </>
   )
 }
