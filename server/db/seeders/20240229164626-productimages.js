@@ -75,13 +75,13 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        path: 'img/seeders-pics/13.jpeg',
+        path: 'img/seeders-pics/14.jpeg',
         productId: 4,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        path: 'img/seeders-pics/14.jpeg',
+        path: 'img/seeders-pics/13.jpeg',
         productId: 4,
         createdAt: new Date(),
         updatedAt: new Date(),
