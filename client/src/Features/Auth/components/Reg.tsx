@@ -55,15 +55,15 @@ function RegLog (): JSX.Element {
   return (
 <>
       <form onSubmit={handleSubmit(registration)} className='form form-reg'>
-        <input type='text' placeholder='name' {...register('name')} className='form__input form-reg__input'/>
+        <input type='text' placeholder='Имя' {...register('name')} className='form__input form-reg__input'/>
         <span>{errors.name?.message}</span>
-        <input type='email' placeholder='email' {...register('email')} className='form__input form-reg__input'/>
+        <input type='email' placeholder='Почта' {...register('email')} className='form__input form-reg__input'/>
         <span>{errors.email?.message}</span>
-        <input type='password' placeholder='password' {...register('password')} className='form__input form-reg__input'/>
+        <input type='password' placeholder='Пароль' {...register('password')} className='form__input form-reg__input'/>
         <span>{errors.password?.message}</span>
-        <input type='password' placeholder='cpassword' {...register('cpassword')} className='form__input form-reg__input'/>
+        <input type='password' placeholder='Повторите пароль' {...register('cpassword')} className='form__input form-reg__input'/>
         <span>{errors.cpassword?.message}</span>
-        <button type='submit' className='form__button form-reg__button'>registration</button>
+        <button type='submit' className='form__button form-reg__button'>Зарегистрироваться</button>
       </form>
 
       <div className='form__err' >{viewMessage}</div>

@@ -60,7 +60,7 @@ function NavBar (): JSX.Element {
           : <li className="nav__item">
                 <button className='button auth-button' onClick={() => { setModal(true) }}>Войти</button>
                 <Modal ariaHideApp={false} className='modal' isOpen={modal} onRequestClose={() => { setModal(false) }}>
-                  <button className='close-modal-auth__button' onClick={() => { setModal(false) }}>x</button>
+                  <button className='close-modal-auth__button' onClick={() => { setModal(false) }}>Х</button>
                    <RegLog/>
                 </Modal>
             </li>

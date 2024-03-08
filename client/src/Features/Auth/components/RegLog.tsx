@@ -10,8 +10,8 @@ function RegLog (): JSX.Element {
     <div className='contAuth'>
 
       <div className="button-container">
-      <button onClick={() => { setLogReg(true) }} className= { logReg ? 'log-reg-button disabled ' : 'log-reg-button'} type='button'>reg</button>
-      <button onClick={() => { setLogReg(false) }} className={logReg ? 'log-reg-button' : 'log-reg-button disabled'} type='button' >log</button>
+      <button onClick={() => { setLogReg(true) }} className= { logReg ? 'log-reg-button disabled ' : 'log-reg-button'} type='button'>Регистрация</button>
+      <button onClick={() => { setLogReg(false) }} className={logReg ? 'log-reg-button' : 'log-reg-button disabled'} type='button' >Войти</button>
       </div>
 
       { logReg && <Reg/>}
