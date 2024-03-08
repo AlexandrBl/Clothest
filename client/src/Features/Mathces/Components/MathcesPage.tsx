@@ -12,7 +12,7 @@ export default function MatchesPage (): JSX.Element {
     <div className='matches-chats-container'>
       <button className='matches-chats-container__button' onClick={() => { navigate('/matches/chats') }}>Чаты</button>
       <section className='matches'>
-        <h2 className='matches__title'>{matches.length === 0 ? 'У вас нет мэтчей' : 'Ваши мэтчи'}</h2>
+        <h2 className='matches__title'>{matches?.length === 0 ? 'У вас нет мэтчей' : 'Ваши мэтчи'}</h2>
         {matches?.map((el, index) => <MatchesCard key={index} matches={el}/>) }
       </section>
     </div>
