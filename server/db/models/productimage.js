@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     path: {
       allowNull: false,
       type: DataTypes.TEXT,
-      defaultValue: '/img/placeholder.jpeg',
+      defaultValue: '/img/placeholder.png',
     },
     productId: {
       allowNull: false,

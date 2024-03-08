@@ -11,7 +11,7 @@ module.exports = {
       path: {
         allowNull: false,
         type: Sequelize.TEXT,
-        defaultValue: '/img/placeholder.jpeg',
+        defaultValue: '/img/placeholder.png',
       },
       productId: {
         allowNull: false,

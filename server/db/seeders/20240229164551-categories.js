@@ -3,12 +3,12 @@ module.exports = {
   async up(queryInterface) {
     await queryInterface.bulkInsert('Categories', [
       {
-        title: 'Худи',
+        title: 'Штаны',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        title: 'Футболки',
+        title: 'Джинсы',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -18,7 +18,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Джинсы',
+        title: 'Футболки',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -39,6 +39,21 @@ module.exports = {
       },
       {
         title: 'Куртки',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Худи',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Шарфы',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Другое',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
