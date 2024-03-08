@@ -26,7 +26,7 @@ function ChatPage (): JSX.Element {
 
   return (
         <div className='chats-container center-container'>
-          <button className='matches-chats-container__button matches-button' onClick={() => { navigate('/matches') }}>Мэчти</button>
+          {/* <button className='matches-chats-container__button matches-button' onClick={() => { navigate('/matches') }}>Мэчти</button> */}
       {chats?.length > 0
         ? (
         <>

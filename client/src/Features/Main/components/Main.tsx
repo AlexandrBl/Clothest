@@ -80,10 +80,9 @@ function Main ({ isNotifyAlive }: { isNotifyAlive: boolean }): JSX.Element {
         setIsMatchDivShown(false)
         dispatch(clearMatchMessage())
       }}>
-       
-      <Match />
+      <Match setIsMatchDivShown={setIsMatchDivShown} />
     </Modal>
-      {isMatchDivShown && <Match />}
+      {/* {isMatchDivShown && <Match />} */}
       {isNotifyAlive && messageProducts !== undefined && <MessageNotification message={messageProducts} />}
     </main>
     </div>
