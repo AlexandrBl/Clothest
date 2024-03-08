@@ -2,9 +2,10 @@ import React from 'react'
 import { type UserProduct } from '../../Products/type'
 import SwiperComponent from '../../Swiper/Components/Swiper'
 
-function SelectorCard ({ product, changeCurrentProduct }: { product: UserProduct, currentProduct: string, changeCurrentProduct: (value: string) => void }): JSX.Element {
+function SelectorCard ({ product, changeCurrentProduct, setModal }: { product: UserProduct, currentProduct: string, changeCurrentProduct: (value: string) => void, setModal: (a: boolean) => void }): JSX.Element {
   function handeClick (): void {
     changeCurrentProduct(product.title)
+    setModal(false)
   }
 
   return (
