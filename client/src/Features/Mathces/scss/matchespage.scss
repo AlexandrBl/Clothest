@@ -1,0 +1,74 @@
+.matches-chats-container {
+    background-color: rgba(255, 255, 255, 0.537);
+    margin-top: 2rem;
+    border-radius: 1rem;
+    padding: 2rem 2rem 0 2rem;
+    height:28rem;
+    // scroll-snap-type: y mandatory;
+    overflow-y: auto;
+}
+
+
+.match-container__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem;
+    background-color: rgba(255, 113, 165, 0.087);
+    margin: 0 0 1.5rem 0;
+    
+}
+
+.match-container__main_cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+
+.matches {
+    margin: -2.5rem 0 0 0 ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match-container__main_chatbutton {
+    margin: 0 0 1rem 0;
+    width: 10rem;
+    height: 2rem;
+    background-color: $peach_color;
+    border-radius: 1rem;
+    transition: 0.2s;
+    font-size: 1rem;
+    color:  white;
+}
+
+.match-container__main_chatbutton:hover {
+    scale: 1.1;
+}
+.matches__title {
+    width: 100%;
+    height: 2rem;
+    text-align: center;
+    vertical-align: baseline;
+}
+
+
+.matches-chats-container__button{
+    background-color: $peach_color-opacity;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 0.3rem;
+color: white;
+}
+
+.matches-button {
+    position: absolute;
+    left: 8.7rem;
+    top: 7.2rem
+}
+
+.product-card-from-match-page {
+    height: 18rem;
+}

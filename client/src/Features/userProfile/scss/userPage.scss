@@ -1,0 +1,80 @@
+.empty {
+    display: flex;
+}
+
+.svg__change {
+    fill: $peach_color;
+    transition: 0.1s;
+}
+
+.product-user-card__switch-button {
+    color: white;
+    position: absolute;
+    width: 7rem;
+  right: 2.3rem;
+  bottom: -4.1rem;
+}
+
+.svg__delete {
+    fill: $pink_color;
+    transition: 0.1s;
+}
+
+.product-card__delete-button{
+    position: absolute;
+    right: -3.5rem;
+    bottom: -0.6rem;
+    background-color: transparent;
+}
+
+.product-card__change-button{
+    position: absolute;
+    background-color: transparent;
+  right: -3.5rem;
+  bottom: -4rem;
+}
+
+.svg__change:hover{
+    scale: 1.1;
+    fill: rgba(192, 1, 1, 0.752)
+}
+
+.svg__delete:hover{
+    fill: rgb(174, 106, 170);
+    scale: 1.1;
+}
+
+.user-product-list {
+    display: flex;
+    flex-direction: column;
+    height: 87%;
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.537);
+    margin: 0;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.some-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    overflow-x: hidden;
+    width: 70rem;
+    position: absolute;
+    top: 7rem;
+}
+
+.some-container>* {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 4rem;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+}
+
+.userPage-container{
+    margin-top: 3rem;
+}

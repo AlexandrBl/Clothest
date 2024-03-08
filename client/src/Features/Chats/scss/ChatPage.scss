@@ -1,0 +1,201 @@
+.chats-container {
+    height: 75vh;
+    width: 80%;
+    margin-top: 2rem;
+    border-radius: 1.4rem;
+    background-color: $beige-opacity_color;
+    display: flex;
+    height: 28rem;
+    scroll-snap-type: y mandatory;
+    overflow-y: auto;
+}
+
+.chatslist-container {
+    width: 20%;
+    height: 100%;
+    background-color: $purple-light-opacity_color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chatlist-container__title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 6rem;
+}
+
+.chatlist-container__title_text {
+    width: 100%;
+    text-align: center;
+    cursor: default;
+}
+
+.chatslist-container__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chatslist-container__list_element {
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.295);
+    transition: 0.2s;
+}
+
+.chatslist-container__list_element:hover {
+    background-color: rgba(255, 255, 255, 0.573);
+}
+
+.chatslist-container__list_element-name {
+    width: 100%;
+    padding-left: 1rem;
+    padding-top: 0.2rem;
+}
+
+.chatslist-container__list_element-userpic {
+    width: 2rem;
+    margin-left: 1rem;
+    border-radius: 10rem;
+}
+
+.chatslist-container__list_element-text {
+    width: 100%;
+    padding-left: 1rem;
+    padding-top: 0.2rem;
+    color: gray;
+}
+
+.currentchat-container {
+    width: 80%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.currentchat-container__title {
+    width: 100%;
+    height: 4rem;
+    background-color: $purple-light-opacity_color;
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.currentchat-container__title-text {
+    width: 100%;
+    text-align: center;
+    cursor: default;
+}
+
+.selected-chat {
+    background-color: rgba(255, 255, 255, 0.573);
+    box-shadow: rgba(177, 177, 177, 0.258) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.208) -3px -3px 6px 1px inset;
+}
+
+.chat-history-container {
+    height: 100%;
+    background-color: rgba(182, 255, 255, 0.326);
+    padding: 1rem;
+    padding-bottom: 3rem;
+    overflow-y: scroll;
+    overflow-anchor: auto;
+}
+
+.sendmessage-container {
+    width: 80%;
+    height: 5%;
+    position: absolute;
+    bottom: 1rem;  
+    left: 5rem;  
+    right: auto;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.sendmessage-container__input {
+    font-size: 0.7rem;
+    width: 100%;
+    height: 2rem;
+    border: none;
+    padding-left: 1rem;
+    border-radius: 1rem;
+    outline: none;
+    background-color: $purple-opacity_color;
+    box-shadow: rgba(177, 177, 177, 0.258) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.208) -3px -3px 6px 1px inset;
+}
+
+.sendmessage-container__button {
+    font-size: 0.7rem;
+    background-color: rgba(244, 250, 255, 0.51);
+    position: absolute;
+    bottom: 0.2rem;
+    right: 0.5rem;
+    margin: auto 0;
+    width: auto;
+    height: 70%;
+    border-radius: 1rem;
+    transition: 0.2s;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.sendmessage-container__button:hover {
+    background-color: rgba(182, 255, 255, 0.326);
+}
+
+.message-container__me {
+    font-size: 0.86rem;
+    width: 100%;
+    height: 2rem;
+    margin: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.message-container {
+    width: 40%;
+    height: 100%;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.message-container__roommate {
+    font-size: 0.86rem;
+    width: 100%;
+    height: 2rem;
+    margin: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.message-container__bubble_me {
+    background-color: rgba(128, 198, 255, 0.389);
+}
+
+.message-container__bubble_roommate {
+    background-color: rgba(216, 216, 216, 0.567);
+}
+
+.message-container-text {
+    margin-left: 1rem;
+    width: 100%;
+}
+
+.chatslist-nochats {
+    margin: auto;
+}

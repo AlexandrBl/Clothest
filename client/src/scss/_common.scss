@@ -1,0 +1,80 @@
+
+html {
+  font-size: 1.2vw;
+  height: 100vh;
+  color: rgba(49, 49, 49, 0.82);
+  font-family: "Ubuntu", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: rgba(236, 174, 215, 0.218);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+}
+
+.center-container {
+  width: 70rem;
+  height: auto;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.disabled {
+  pointer-events: none;
+  background-color:  $peach_color;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border: 0.5rem;
+  color: white;
+}
+
+
+
+::-webkit-scrollbar{
+  // height: 0.3rem;
+  width: 0.3rem;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track{
+  border-radius: 0.4rem;
+  background-color: rgb(0, 0, 0,0.1);
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius: 0.4rem;
+  background-color: rgba(121, 121, 121, 0.641);
+}
+
+input {
+    margin-bottom: 0.5rem;
+    padding: 0.4rem;
+    outline: none;
+    border-radius: 0.3rem;
+    border: none;
+}

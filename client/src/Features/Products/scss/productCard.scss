@@ -1,0 +1,235 @@
+.product-card-container{
+  padding: 1rem;
+}
+
+.product-card{
+  width: 15.4rem;
+  height: 22rem;
+  margin: 0rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: $white_color-opacity;
+  scroll-snap-align: center;
+  flex-shrink: 0;
+}
+
+.product-card__city {
+  font-size: 0.6rem;
+  z-index: 0;
+  padding: 0.15rem;
+  border-radius: 0.2rem;
+  background-color:$peach_color-opacity;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1;
+  display: none;
+}
+
+.pic-container{
+  margin: 0 0 1rem 0;
+  overflow: hidden;
+  height: 13rem;
+  width: inherit;
+}
+
+.product-pic{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.product-card__text{
+  position: absolute;
+  top: 14.5rem;
+  left: 0.5rem;
+  width: 70%;
+  
+}
+
+.product-card__title{
+  font-weight: 800;
+  margin-bottom: 0.1rem;
+}
+
+.seller {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.seller-container{
+  position: relative;
+}
+
+.seller__pic-container {
+  overflow: hidden;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.seller__pic{
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.seller__rate {
+  font-size: 0.8rem;
+  display: inline-block;
+  text-align: center;
+  width: 0.8rem;
+  height: 0.8rem;
+  position: absolute;
+  left: -0.1rem;
+  background-color: $pink_color;
+  border-radius: 50%;
+}
+
+
+.product-card__like-button {
+  right: 1rem;
+  bottom: 1rem;
+  background-color: $peach_color-opacity;
+  padding: 0.3rem;
+  width: 6rem;
+  border-radius: 2rem;
+  
+}
+
+.product-card__button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 2.1rem;
+  border-radius: 1rem;
+
+}
+
+.product-card__fav-button{
+  background-color: rgba(255, 255, 255, 0.337);
+  padding: 0.3rem;
+  position: absolute;
+  right: 0.3rem;
+  bottom: 19.8rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  transition: 0.1s;
+}
+
+.product-card__fav-button:hover{
+  background-color: rgba(221, 54, 96, 0.801);
+}
+
+
+.product-card__fav-button-active{
+  background-color: $peach_color;
+}
+
+.product-card__dislike-button{
+  right: -0.2rem;
+  bottom: 5rem;
+  background-color: transparent;
+}
+
+.svg__dislike{
+  fill: $pink_color-opacity;
+  height: 2.4rem;
+  transition: 0.2s;
+}
+
+.svg__dislike:hover{
+  fill: $pink_color;
+  scale: 1.1
+}
+
+.product-card__like-button{
+  background-color: transparent;
+  right: -0.2rem;
+  bottom: 1.4rem;
+}
+
+.product-card__select-container{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 19.7rem;
+  left: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.797);
+  border-radius: 0.3rem;
+  transition: 0.1s;
+}
+
+.selector__button{
+  font-size: 0.8rem;
+  padding: 0.2rem;
+  color: black;
+}
+
+.selector__button:hover{
+  color: $white_color-opacity;
+}
+
+.product-card__select-container:hover{
+  transition: 0.1s;
+  background-color: rgba(221, 54, 96, 0.801);
+}
+
+.svg__star{
+  width: 3rem;
+  height: 3rem;
+  padding-bottom: 0.1rem;
+  transition: 0.1s;
+  fill: white;
+}
+
+
+.svg__star:hover {
+  fill: whitesmoke
+}
+
+.starActive {
+  fill: $white_color-opacity;
+}
+
+.svg__like{
+  fill: $peach_color;
+  width: 4rem;
+  height: 3rem;
+  transition: 0.2s;
+}
+
+.svg__like:hover{
+fill: rgba(221, 54, 96, 0.848);
+scale: 1.1;
+}
+
+.default-product:nth-of-type(1){
+  border-radius: 0.5rem;
+  background-color: $peach_color-opacity;
+}
+
+.userPage-container{
+  font-size: 1.4rem;
+  fill: rgba(192, 1, 1, 0.847);
+  scale: 1.1;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.user-product-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
