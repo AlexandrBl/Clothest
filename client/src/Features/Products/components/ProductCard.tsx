@@ -101,7 +101,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
 
     <Modal ariaHideApp={false} className='selector-modal' isOpen={modal} onRequestClose={() => { setModal(false) }}>
       <button className='selector-button' onClick={() => { setModal(false) }}>x</button>
-      <Selector currentProduct={currentProduct} changeCurrentProduct={changeCurrentProduct}/>
+      <Selector currentProduct={currentProduct} setModal={setModal} changeCurrentProduct={changeCurrentProduct}/>
     </Modal>
 
     <div className="product-card-container">
