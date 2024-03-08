@@ -118,7 +118,6 @@ function ChangeProduct (): JSX.Element {
                 ))}
               </div>
           </div>
-        <span>{message}</span>
         <button className='form-button' type='submit'>Добавить</button>
       </form>
     </div>

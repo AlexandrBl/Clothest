@@ -19,7 +19,7 @@ function UserProductCard ({ userProduct }: { userProduct: UserProduct }): JSX.El
   }
 
   const editProduct = (): void => {
-    navigate(`${userProduct.id}/edit`)
+    navigate(`myproducts/${userProduct.id}/edit`)
   }
   function changeCurrentProduct (defProd: string): void {
     if (user !== null) {

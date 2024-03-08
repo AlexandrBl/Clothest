@@ -117,7 +117,7 @@ function ProductCard ({ product }: { product: Product }): JSX.Element {
       </div>
 
       {user !== null && <div className='product-card__select-container '>
-      <button onClick={() => { defaultProdChange() }} type='button' className="selector__button">{`${currentProduct}`}</button>
+      <button onClick={() => { defaultProdChange() }} type='button' className="selector__button selector__button__card">{`${currentProduct}`}</button>
 
     </div>}
 
