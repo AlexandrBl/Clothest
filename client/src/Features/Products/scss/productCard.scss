@@ -134,7 +134,7 @@
 
 
 .product-card__fav-button-active{
-  background-color: rgba(255, 171, 141, 0.507)
+  background-color: $peach_color;
 }
 
 .product-card__dislike-button{
@@ -183,7 +183,7 @@
 
 .product-card__select-container:hover{
   transition: 0.1s;
-  background-color: $peach_color-opacity;
+  background-color: rgba(221, 54, 96, 0.801);
 }
 
 .svg__star{
@@ -222,8 +222,14 @@ scale: 1.1;
 
 .userPage-container{
   font-size: 1.4rem;
-  position: absolute;
-  top: 4.2rem;
   fill: rgba(192, 1, 1, 0.847);
   scale: 1.1;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.user-product-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
